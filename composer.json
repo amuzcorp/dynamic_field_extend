@@ -1,36 +1,47 @@
 {
-  "name": "xpressengine-plugin/dynamic_field_extend",
-  "description": "This Package is Xpressengine Plugin - DynamicFieldExtend plugin.",
-  "keywords": [
-    "xpressengine",
-    "plugin"
-  ],
-  "license": "LGPL-3.0-or-later",
-  "version": "1.0.0",
-  "type": "xpressengine-plugin",
-  "support": {
-    "email": "input@your.email"
-  },
-  "authors": [
-    {
-      "name": "input your name",
-      "email": "input@your.email",
-      "homepage": "http://input.your.site",
-      "role": "Developer"
+    "name": "xpressengine-plugin/dynamic_field_extend",
+    "description": "This Package is Xpressengine Plugin - DynamicFieldExtend plugin.",
+    "keywords": [
+        "xpressengine",
+        "plugin"
+    ],
+    "license": "LGPL-3.0-or-later",
+    "version": "1.0.0",
+    "type": "xpressengine-plugin",
+    "support": {
+        "email": "input@your.email"
+    },
+    "authors": [
+        {
+            "name": "input your name",
+            "email": "input@your.email",
+            "homepage": "http://input.your.site",
+            "role": "Developer"
+        }
+    ],
+    "extra": {
+        "xpressengine": {
+            "title": "DynamicFieldExtend plugin",
+            "component": {
+                "fieldType/dynamic_field_extend@hashtag": {
+                    "name": "Hashtag fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Hashtag\\HashtagField"
+                },
+                "fieldType/dynamic_field_extend@hashtag/fieldSkin/dynamic_field_extend@tag_skin": {
+                    "name": "TagSkin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TagSkin\\TagSkin"
+                }
+            }
+        }
+    },
+    "require": {
+        "xpressengine/xpressengine": "~3.0.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amuz\\XePlugin\\DynamicFieldExtend\\": "src/"
+        }
     }
-  ],
-  "extra": {
-    "xpressengine": {
-      "title": "DynamicFieldExtend plugin",
-      "component": {}
-    }
-  },
-  "require": {
-    "xpressengine/xpressengine": "~3.0.12"
-  },
-  "autoload": {
-    "psr-4": {
-      "Amuz\\XePlugin\\DynamicFieldExtend\\": "src/"
-    }
-  }
 }

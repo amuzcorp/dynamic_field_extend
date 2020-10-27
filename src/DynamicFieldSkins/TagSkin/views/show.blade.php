@@ -1,0 +1,1 @@
+해시태그 : <div>{{$args[$config->get('id').'_column']}}</div>
