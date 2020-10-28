@@ -22,6 +22,12 @@ class Plugin extends AbstractPlugin
     {
         // implement code
 
+        Route::settings(self::getId(), function () {
+            Route::get('/', ['as' => 'manage.dynamic_fieldextend.index', 'uses' => 'ManagerController@index']);
+            Route::post('/', ['as' => 'manage.dynamic_fieldextend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
+            //Route::get('/pointLog', ['as' => 'manage.dynamic_fieldextend.point_log', 'uses' => 'ManagerController@pointLog']);
+        }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
+
         Route::fixed(
             $this->getId(),
             function () {
@@ -89,5 +95,11 @@ class Plugin extends AbstractPlugin
         // implement code
 
         return parent::checkUpdated();
+    }
+
+    public function getSettingsURI()
+    {
+        return route('manage.dynamic_fieldextend.index');
+        //return "";
     }
 }
