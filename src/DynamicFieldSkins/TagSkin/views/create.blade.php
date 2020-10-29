@@ -1,6 +1,7 @@
 {{--해시태그<input type="text" name="{{$config->get('id')}}_column" class="xe-form-control xu-form-group__control __xe_df __xe_df_text __xe_df_text_normal_text" value="" data-valid-name="해시태그" placeholder="해시태그를 입력해주세요.">
 --}}
 
+@if($config_dynamic->get('hash_tag') == 1)
 @if ($args['scriptInit'])
     {{ XeFrontend::js('plugins/dynamic_field_extend/assets/js/BoardTags.js')->appendTo('body')->load() }}
 @endif
@@ -42,3 +43,4 @@
         font-size: 18px;
     }
 </style>
+@endif

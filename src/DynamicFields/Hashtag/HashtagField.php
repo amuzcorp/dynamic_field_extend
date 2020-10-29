@@ -6,7 +6,9 @@ use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
 use Xpressengine\DynamicField\ColumnDataType;
-
+use Xpressengine\Tag\Tag;
+use Xpressengine\Tag\TagHandler;
+use Xpressengine\Tag\TagRepository;
 class HashtagField extends AbstractType
 {
 
@@ -68,4 +70,19 @@ class HashtagField extends AbstractType
     {
         return view('dynamic_field_extend::src/DynamicFields/Hashtag/views/setting');
     }
+/*
+    public function insert(array $args)
+    {
+        //var_dump(TagHandler::class->);exit;
+        $taghandler = TagHandler::class;
+
+        //$tagHandler = new TagHandler(TagRepository::getModel(),);
+        //public function set($taggableId, array $words = [], $instanceId = null)
+        //$tagHandler->set($args['id'], $args['_tags'], $args['instance_id']);
+
+
+
+        //var_dump($args);exit;
+    }
+*/
 }

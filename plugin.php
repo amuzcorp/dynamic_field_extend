@@ -23,8 +23,8 @@ class Plugin extends AbstractPlugin
         // implement code
 
         Route::settings(self::getId(), function () {
-            Route::get('/', ['as' => 'manage.dynamic_fieldextend.index', 'uses' => 'ManagerController@index']);
-            Route::post('/', ['as' => 'manage.dynamic_fieldextend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
+            Route::get('/', ['as' => 'manage.dynamic_field_extend.index', 'uses' => 'ManagerController@index']);
+            Route::post('/', ['as' => 'manage.dynamic_field_extend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
             //Route::get('/pointLog', ['as' => 'manage.dynamic_fieldextend.point_log', 'uses' => 'ManagerController@pointLog']);
         }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
 
@@ -59,6 +59,17 @@ class Plugin extends AbstractPlugin
     public function install()
     {
         // implement code
+
+        //xe_config설정값
+        $configManager = app('xe.config');
+        $config = $configManager->get('dynamic_field_extend');
+
+        if ($config === null) {
+            $config = new ConfigEntity();
+
+            $config->set('hash_tag', 1);
+            $configManager->add('dynamic_field_extend', $config->getPureAll());
+        }
     }
 
     /**
@@ -99,7 +110,7 @@ class Plugin extends AbstractPlugin
 
     public function getSettingsURI()
     {
-        return route('manage.dynamic_fieldextend.index');
+        return route('manage.dynamic_field_extend.index');
         //return "";
     }
 }

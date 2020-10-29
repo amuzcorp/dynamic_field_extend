@@ -57,11 +57,15 @@ class TagSkin extends AbstractSkin
 
         $args['strTags'] = '';
 
+        $configManager = app('xe.config');
+        $config_dynamic = $configManager->get('dynamic_field_extend');
+
         return $viewFactory->make($this->getViewPath('create'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
             'key' => $key,
+            'config_dynamic'=>$config_dynamic,
         ])->render();
     }
 
@@ -88,12 +92,16 @@ class TagSkin extends AbstractSkin
             $args['scriptInit'] = true;
         }
 
+        $configManager = app('xe.config');
+        $config_dynamic = $configManager->get('dynamic_field_extend');
+
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
             'key' => $key,
             'item' => $tag_data,
+            'config_dynamic'=>$config_dynamic,
         ])->render();
     }
 
@@ -122,11 +130,18 @@ class TagSkin extends AbstractSkin
         list($data, $key) = $this->filter($args);
         //var_dump($args);exit;
         $viewFactory = $this->handler->getViewFactory();
+
+        $configManager = app('xe.config');
+        $config_dynamic = $configManager->get('dynamic_field_extend');
+
         return $viewFactory->make($this->getViewPath('edit'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
             'key' => $key,
+            'config_dynamic'=>$config_dynamic,
         ])->render();
     }
+
+
 }

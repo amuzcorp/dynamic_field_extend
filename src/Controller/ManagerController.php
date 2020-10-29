@@ -17,31 +17,28 @@ class ManagerController extends Controller
     {
         //var_dump('index_test');exit;
         /** @var \Xpressengine\Config\ConfigManager $configManager */
-        /*
+
         $configManager = app('xe.config');
-        $config = $configManager->get('openseminar');
+        $config = $configManager->get('dynamic_field_extend');
+
         if ($config === null) {
             $config = new ConfigEntity();
 
-            $config->set('document_point', 2);
-            $config->set('comment_point', 1);
-            $configManager->add('openseminar', $config->getPureAll());
+            $config->set('hash_tag', 1);
+            $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
-*/
-        return XePresenter::make('dynamic_field_extend::views.manager.index', []);
+
+        return XePresenter::make('dynamic_field_extend::views.manager.index', ['config'=>$config, ]);
     }
 
     public function updateConfig(Request $request)
     {
-        var_dump('index_test');exit;
         /** @var \Xpressengine\Config\ConfigManager $configManager */
         $configManager = app('xe.config');
-        $configManager->put('openseminar', [
-            'document_point' => $request->get('document_point'),
-            'comment_point' => $request->get('comment_point'),
+        $configManager->put('dynamic_field_extend', [
+            'hash_tag' => $request->get('hash_tag')
         ]);
-
-        return Redirect::to(route('manage.openseminar_1212.index'));
+        return Redirect::to(route('manage.dynamic_field_extend.index'));
     }
 /*
     public function pointLog()
