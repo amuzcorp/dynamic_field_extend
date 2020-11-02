@@ -6,9 +6,13 @@ use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
 use Xpressengine\DynamicField\ColumnDataType;
+use Xpressengine\Tag\SimpleDecomposer;
 use Xpressengine\Tag\Tag;
 use Xpressengine\Tag\TagHandler;
 use Xpressengine\Tag\TagRepository;
+use Xpressengine\Tag\Decomposer;
+use Xpressengine\DynamicField\DynamicFieldHandler;
+
 class HashtagField extends AbstractType
 {
 
@@ -49,6 +53,8 @@ class HashtagField extends AbstractType
         ];
     }
 
+
+
     /**
      * 다이나믹필스 생성할 때 타입 설정에 적용될 rule 반환
      *
@@ -58,6 +64,8 @@ class HashtagField extends AbstractType
     {
         return [];
     }
+
+
 
     /**
      * Dynamic Field 설정 페이지에서 각 fieldType 에 필요한 설정 등록 페이지 반환
@@ -70,19 +78,66 @@ class HashtagField extends AbstractType
     {
         return view('dynamic_field_extend::src/DynamicFields/Hashtag/views/setting');
     }
-/*
+
     public function insert(array $args)
     {
-        //var_dump(TagHandler::class->);exit;
-        $taghandler = TagHandler::class;
-
-        //$tagHandler = new TagHandler(TagRepository::getModel(),);
-        //public function set($taggableId, array $words = [], $instanceId = null)
-        //$tagHandler->set($args['id'], $args['_tags'], $args['instance_id']);
-
-
-
-        //var_dump($args);exit;
+        $this->set($args['id'], $args['_tags'], $args['instance_id']);
     }
-*/
+
+    public function update(array $args, array $wheres)
+    {
+        $this->set($args['id'], $args['_tags'], $args['instance_id']);
+    }
+
+    public function set($taggableId, array $words = [], $instanceId = null)
+    {
+        $repo = new TagRepository();
+        $decomposer = new SimpleDecomposer();
+        $words = array_unique($words);
+
+        $tags = $repo->query()->where('instance_id', $instanceId)->whereIn('word', $words)->get();
+
+        // 등록되지 않은 단어가 있다면 등록 함
+        foreach (array_diff($words, $tags->pluck('word')->all()) as $word) {
+            $tag = $repo->create([
+                'word' => $word,
+                'decomposed' => $decomposer->execute($word),
+                'instance_id' => $instanceId,
+            ]);
+
+            $tags->push($tag);
+        }
+
+        // 넘겨준 태그와 대상 아이디를 연결
+        $tags = $this->multisort($words, $tags->all());
+        $repo->attach($taggableId, $tags);
+
+        // 이전에 대상 아이디에 연결된 태그중
+        // 전달된 단어 해당하는 태그가 없는경우 연결 해제 처리
+        $olds = $repo->fetchByTaggable($taggableId);
+        $removes = $olds->diff($tags);
+
+        $repo->detach($taggableId, $removes);
+
+        return $repo->newCollection($tags);
+    }
+
+    private function multisort($std, $tags)
+    {
+        $std = array_map([$this, 'nonNumeric'], array_values($std));
+        $words = array_map(function ($tag) {
+            return $this->nonNumeric($tag->word);
+        }, $tags);
+
+        $index = array_merge(array_flip($words), array_flip($std));
+        array_multisort($index, $tags);
+
+        return $tags;
+    }
+
+    private function nonNumeric($v)
+    {
+        return is_numeric($v) ? '_'.$v : $v;
+    }
+
 }
