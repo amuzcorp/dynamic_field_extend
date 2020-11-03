@@ -32,6 +32,16 @@
                     "name": "TagSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TagSkin\\TagSkin"
+                },
+                "fieldType/dynamic_field_extend@media_library": {
+                    "name": "MediaLibrary fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\MediaLibrary\\MediaLibraryField"
+                },
+                "fieldType/dynamic_field_extend@media_library/fieldSkin/dynamic_field_extend@media_skin": {
+                    "name": "MediaSkin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaSkin\\MediaSkin"
                 }
             }
         }

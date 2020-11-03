@@ -81,12 +81,32 @@ class HashtagField extends AbstractType
 
     public function insert(array $args)
     {
-        $this->set($args['id'], $args['_tags'], $args['instance_id']);
+        if(isset($args['_tags'])) {
+            $this->set($args['id'], $args['_tags'], $args['instance_id']);
+        }
     }
 
     public function update(array $args, array $wheres)
     {
-        $this->set($args['id'], $args['_tags'], $args['instance_id']);
+        //var_dump($args);var_dump($wheres);exit;
+        if(isset($args['id'])) {
+            $this->set($args['id'], $args['_tags'], $args['instance_id']);
+        }
+    }
+
+    public function delete(array $wheres)
+    {
+        //$repo = new TagRepository();
+        //$repo->detach()
+        /*
+        foreach ($wheres as $data){
+            $tags = \XeTag::fetchByTaggable($data['value']);
+            \XeTag::detach($data['value'], $tags);
+        }
+        */
+        foreach ($wheres as $data){
+            $this->set($data['value']);
+        }
     }
 
     public function set($taggableId, array $words = [], $instanceId = null)

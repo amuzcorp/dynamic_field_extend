@@ -5,6 +5,7 @@
 {{--@endif--}}
 @if($args['instance_id']!="xe_blog")
 @if($config_dynamic->get('hash_tag') == 1)
+    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
 <div class="xe-list-board-body__article-tag">
     <ul class="xe-list-board-body__article-tag-list">
         @foreach ($item as $tag)

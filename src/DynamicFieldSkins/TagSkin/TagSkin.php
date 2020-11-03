@@ -19,7 +19,7 @@ class TagSkin extends AbstractSkin
      */
     public function name()
     {
-        return 'TagSkin fieldSkin';
+        return '해시태그 fieldSkin';
     }
 
     /**
