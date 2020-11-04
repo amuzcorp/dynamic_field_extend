@@ -42,6 +42,16 @@
                     "name": "MediaSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaSkin\\MediaSkin"
+                },
+                "fieldType/dynamic_field_extend@color_picker": {
+                    "name": "ColorPicker fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\ColorPicker\\ColorPickerField"
+                },
+                "fieldType/dynamic_field_extend@color_picker/fieldSkin/dynamic_field_extend@colorpickerskin": {
+                    "name": "Colorpickerskin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Colorpickerskin\\Colorpickerskin"
                 }
             }
         }
