@@ -83,7 +83,10 @@ class TagSkin extends AbstractSkin
         $viewFactory = $this->handler->getViewFactory();
 
         $tag_model = new TagRepository();
-        $tag_data = $tag_model->fetchByTaggable($args['id'])->all();
+        $tag_data = "";
+        if(isset($args['id'])) {
+            $tag_data = $tag_model->fetchByTaggable($args['id'])->all();
+        }
         //var_dump($tag_data);exit;
         $args['scriptInit'] = false;
         if (self::$loaded === false) {
@@ -94,7 +97,6 @@ class TagSkin extends AbstractSkin
 
         $configManager = app('xe.config');
         $config_dynamic = $configManager->get('dynamic_field_extend');
-
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,

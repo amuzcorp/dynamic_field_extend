@@ -196,5 +196,89 @@ class MediaLibraryField extends AbstractType
         }
     }
 
+    public function update(array $args, array $wheres)
+    {
+        $config = $this->config;
+        $type = $this->handler->getRegisterHandler()->getType($this->handler, $config->get('typeId'));
+
+        $where = $this->getWhere($wheres, $config);
+
+        if (isset($where['target_id']) === false) {
+            return null;
+        }
+
+        foreach ($args as $index => $arg) {
+            if ($arg == null) {
+                $args[$index] = '';
+            }
+        }
+
+
+        $updateParam = [];
+        foreach ($this->getColumns() as $column) {
+            $key = $config->get('id') . '_' . $column->name;
+
+            if (isset($args[$key])) {
+                $updateParam[$column->name] = json_encode($args[$key]);
+            }
+        }
+
+        // event fire
+        $this->handler->getRegisterHandler()->fireEvent(
+            sprintf('dynamicField.%s.%s.before_update', $config->get('group'), $config->get('id'))
+        );
+
+        if (count($updateParam) > 0) {
+            if ($this->handler->connection()->table($type->getTableName())
+                    ->where($where)->first() != null
+            ) {
+                $this->handler->connection()->table($type->getTableName())
+                    ->where($where)->update($updateParam);
+            } else {
+                $insertParam = $updateParam;
+                $insertParam['target_id'] = $where['target_id'];
+                $insertParam['field_id'] = $config->get('id');
+                $insertParam['group'] = $config->get('group');
+
+                $this->handler->connection()->table($type->getTableName())
+                    ->insert($insertParam);
+            }
+        }
+
+        // event fire
+        $this->handler->getRegisterHandler()->fireEvent(
+            sprintf('dynamicField.%s.%s.after_update', $config->get('group'), $config->get('id'))
+        );
+    }
+
+    /**
+     * 생성된 Dynamic Field 테이블에 데이터 삭제
+     *
+     * @param array $wheres Illuminate\Database\Query\Builder's wheres attribute wheres attribute
+     * @return void
+     */
+    public function delete(array $wheres)
+    {
+        $config = $this->config;
+        $type = $this->handler->getRegisterHandler()->getType($this->handler, $config->get('typeId'));
+        $where = $this->getWhere($wheres, $config);
+
+        if (isset($where['target_id']) === false) {
+            throw new RequiredDynamicFieldException;
+        }
+
+        // event fire
+        $this->handler->getRegisterHandler()->fireEvent(
+            sprintf('dynamicField.%s.%s.before_delete', $config->get('group'), $config->get('id'))
+        );
+
+        $this->handler->connection()->table($type->getTableName())->where($where)->delete();
+
+        // event fire
+        $this->handler->getRegisterHandler()->fireEvent(
+            sprintf('dynamicField.%s.%s.after_delete', $config->get('group'), $config->get('id'))
+        );
+    }
+
 
 }

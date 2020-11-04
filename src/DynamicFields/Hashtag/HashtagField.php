@@ -86,6 +86,11 @@ class HashtagField extends AbstractType
         }
     }
 
+    public function insertRevision(array $args)
+    {
+
+    }
+
     public function update(array $args, array $wheres)
     {
         //var_dump($args);var_dump($wheres);exit;

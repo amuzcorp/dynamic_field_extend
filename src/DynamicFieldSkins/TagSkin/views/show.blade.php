@@ -3,6 +3,7 @@
 {{--@if ($scriptInit) --}}
 {{-- XeFrontend::js('plugins/board/assets/js/BoardTags.js')->appendTo('body')->load() --}}
 {{--@endif--}}
+@if(isset($args['instance_id']))
 @if($args['instance_id']!="xe_blog")
 @if($config_dynamic->get('hash_tag') == 1)
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
@@ -15,3 +16,4 @@
 </div>
 @endif
 @endif
+    @endif
