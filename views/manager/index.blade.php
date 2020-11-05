@@ -22,6 +22,13 @@
             <option value="1" @if($config->get('color_picker') == 1) selected @endif>on</option>
         </select>
 
+        <br>
+        테이블에디터
+        <select name="edittable">
+            <option value="0" @if($config->get('edittable') == 0) selected @endif>off</option>
+            <option value="1" @if($config->get('edittable') == 1) selected @endif>on</option>
+        </select>
+
         <br><br>
         {{--<label for="favcolor">색상선택:</label>--}}
         {{--<input type="color" id="favcolor" name="favcolor" value="#ff0000">--}}

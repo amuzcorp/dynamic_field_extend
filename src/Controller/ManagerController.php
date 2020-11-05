@@ -27,6 +27,7 @@ class ManagerController extends Controller
             $config->set('hash_tag', 1);
             $config->set('media_library', 1);
             $config->set('color_picker', 1);
+            $config->set('edittable', 1);
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
 
@@ -40,7 +41,8 @@ class ManagerController extends Controller
         $configManager->put('dynamic_field_extend', [
             'hash_tag' => $request->get('hash_tag'),
             'media_library' => $request->get('media_library'),
-            'color_picker' => $request->get('color_picker')
+            'color_picker' => $request->get('color_picker'),
+            'edittable' => $request->get('edittable')
         ]);
         return Redirect::to(route('manage.dynamic_field_extend.index'));
     }

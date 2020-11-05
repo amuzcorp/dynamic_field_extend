@@ -52,6 +52,16 @@
                     "name": "Colorpickerskin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Colorpickerskin\\Colorpickerskin"
+                },
+                "fieldType/dynamic_field_extend@edittable": {
+                    "name": "Edittable fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Edittable\\EdittableField"
+                },
+                "fieldType/dynamic_field_extend@edittable/fieldSkin/dynamic_field_extend@edittableskin": {
+                    "name": "Edittableskin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Edittableskin\\Edittableskin"
                 }
             }
         }

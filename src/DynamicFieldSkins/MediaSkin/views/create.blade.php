@@ -1,6 +1,6 @@
-<script src="http://xe3.test/assets/vendor/jqueryui/jquery-ui.min.js"></script>
-<script src="http://xe3.test/assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-<script src="http://xe3.test/assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+<script src="/assets/vendor/jqueryui/jquery-ui.min.js"></script>
+<script src="/assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<script src="/assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js"></script>
 @expose_route('auth.admin')
 @expose_route('media_library.index')
 @expose_route('media_library.drop')
