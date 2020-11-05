@@ -4,7 +4,7 @@
     {{--<input type="color" id="my_color" name="{{$config->get('id').'_column'}}" value="{{$args[$config->get('id').'_column']}}">--}}
 
     <input type="color" id="{{$config->get('id').'_column'}}" name="{{$config->get('id').'_column'}}" value="{{$args[$config->get('id').'_column']}}" onchange=color_change("{{$config->get('id').'_column'}}")>
-    <input type="text" style="color:#555;border:1px solid #dcdde0;font-size: 14px; padding: 7px 16px" id="{{$config->get('id').'_column_text'}}"
+    <input type="text" class="color_picker_input" id="{{$config->get('id').'_column_text'}}"
            value="{{$args[$config->get('id').'_column']}}"  placeholder="{{xe_trans($config->get('placeholder',''))}}" >
     <button type="button" class="xe-btn") onclick=color_apply("{{$config->get('id').'_column'}}")>적용</button>
 
@@ -24,3 +24,13 @@
         //console.log(document.getElementById(input_id).value);
     }
 </script>
+
+<style>
+    .color_picker_input{
+        color:#555;
+        border:1px solid #dcdde0;
+        font-size: 14px;
+        padding: 7px 16px;
+        width:100px;
+    }
+</style>

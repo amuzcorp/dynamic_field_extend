@@ -38,6 +38,33 @@ class MediaSkin extends AbstractSkin
     }
 
     /**
+     * 등록 form 에 추가될 html 코드 반환
+     * return html tag string
+     *
+     * @param array $args arguments
+     * @return \Illuminate\View\View
+     */
+    public function create(array $args)
+    {
+        $viewFactory = $this->handler->getViewFactory();
+
+        list($data, $key) = $this->filter($args);
+
+        $configManager = app('xe.config');
+        $config_dynamic = $configManager->get('dynamic_field_extend');
+
+        if($config_dynamic->get('media_library') == 1) {
+            return $viewFactory->make($this->getViewPath('create'), [
+                'args' => $args,
+                'config' => $this->config,
+                'data' => array_merge($data, $this->mergeData),
+                'key' => $key,
+                'config_dynamic' => $config_dynamic,
+            ])->render();
+        }
+    }
+
+    /**
      * 조회할 때 사용 될 html 코드 반환
      * return html tag string
      *
@@ -58,14 +85,19 @@ class MediaSkin extends AbstractSkin
 
         $storage_path = Config::get('filesystems.disks.media.url');
 
-        return $viewFactory->make($this->getViewPath('show'), [
-            'args' => $args,
-            'config' => $this->config,
-            'data' => array_merge($data, $this->mergeData),
-            'key' => $key,
-            'media' => $media_array,
-            'storage_path' => $storage_path,
-        ])->render();
+        $configManager = app('xe.config');
+        $config_dynamic = $configManager->get('dynamic_field_extend');
+        if($config_dynamic->get('media_library') == 1) {
+            return $viewFactory->make($this->getViewPath('show'), [
+                'args' => $args,
+                'config' => $this->config,
+                'data' => array_merge($data, $this->mergeData),
+                'key' => $key,
+                'media' => $media_array,
+                'storage_path' => $storage_path,
+                'config_dynamic' => $config_dynamic,
+            ])->render();
+        }
     }
 
     /**
@@ -80,21 +112,28 @@ class MediaSkin extends AbstractSkin
         list($data, $key) = $this->filter($args);
         $viewFactory = $this->handler->getViewFactory();
 
-        $media_name = $this->config->get('id').'_column';
-        if(asset($args[$media_name])) {
+        $media_name = $this->config->get('id') . '_column';
+        if (asset($args[$media_name])) {
             $media_data = $args[$media_name];
             $media_array = json_decode($media_data);
         }
 
         $storage_path = Config::get('filesystems.disks.media.url');
 
-        return $viewFactory->make($this->getViewPath('edit'), [
-            'args' => $args,
-            'config' => $this->config,
-            'data' => array_merge($data, $this->mergeData),
-            'key' => $key,
-            'media' => $media_array,
-            'storage_path' => $storage_path,
-        ])->render();
+        $configManager = app('xe.config');
+        $config_dynamic = $configManager->get('dynamic_field_extend');
+
+        if ($config_dynamic->get('media_library') == 1) {
+            return $viewFactory->make($this->getViewPath('edit'), [
+                'args' => $args,
+                'config' => $this->config,
+                'data' => array_merge($data, $this->mergeData),
+                'key' => $key,
+                'media' => $media_array,
+                'storage_path' => $storage_path,
+                'config_dynamic' => $config_dynamic,
+
+            ])->render();
+        }
     }
 }

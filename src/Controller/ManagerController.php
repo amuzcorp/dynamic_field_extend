@@ -25,6 +25,8 @@ class ManagerController extends Controller
             $config = new ConfigEntity();
 
             $config->set('hash_tag', 1);
+            $config->set('media_library', 1);
+            $config->set('color_picker', 1);
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
 
@@ -36,7 +38,9 @@ class ManagerController extends Controller
         /** @var \Xpressengine\Config\ConfigManager $configManager */
         $configManager = app('xe.config');
         $configManager->put('dynamic_field_extend', [
-            'hash_tag' => $request->get('hash_tag')
+            'hash_tag' => $request->get('hash_tag'),
+            'media_library' => $request->get('media_library'),
+            'color_picker' => $request->get('color_picker')
         ]);
         return Redirect::to(route('manage.dynamic_field_extend.index'));
     }
