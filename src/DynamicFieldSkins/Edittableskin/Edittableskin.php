@@ -14,7 +14,7 @@ class Edittableskin extends AbstractSkin
      */
     public function name()
     {
-        return '테이블에디터 fieldSkin';
+        return '보통 테이블 에디터 fieldSkin';
     }
 
     /**

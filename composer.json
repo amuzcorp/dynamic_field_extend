@@ -62,6 +62,11 @@
                     "name": "Edittableskin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Edittableskin\\Edittableskin"
+                },
+                "fieldType/dynamic_field_extend@edittable/fieldSkin/dynamic_field_extend@table_check_skin": {
+                    "name": "TableCheckSkin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TableCheckSkin\\TableCheckSkin"
                 }
             }
         }
