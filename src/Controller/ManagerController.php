@@ -28,6 +28,7 @@ class ManagerController extends Controller
             $config->set('media_library', 1);
             $config->set('color_picker', 1);
             $config->set('edittable', 1);
+            $config->set('category_load', 1);
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
 
@@ -42,7 +43,8 @@ class ManagerController extends Controller
             'hash_tag' => $request->get('hash_tag'),
             'media_library' => $request->get('media_library'),
             'color_picker' => $request->get('color_picker'),
-            'edittable' => $request->get('edittable')
+            'edittable' => $request->get('edittable'),
+            'category_load' => $request->get('category_load')
         ]);
         return Redirect::to(route('manage.dynamic_field_extend.index'));
     }

@@ -72,6 +72,7 @@ class Plugin extends AbstractPlugin
             $config->set('media_library', 1);
             $config->set('color_picker', 1);
             $config->set('edittable', 1);
+            $config->set('category_load', 1);
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
     }

@@ -67,6 +67,21 @@
                     "name": "TableCheckSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TableCheckSkin\\TableCheckSkin"
+                },
+                "fieldType/dynamic_field_extend@categoryload": {
+                    "name": "Categoryload fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Categoryload\\CategoryloadField"
+                },
+                "fieldType/dynamic_field_extend@categoryload/fieldSkin/dynamic_field_extend@categoryloadskin": {
+                    "name": "Categoryloadskin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Categoryloadskin\\Categoryloadskin"
+                },
+                "fieldType/dynamic_field_extend@categoryload/fieldSkin/dynamic_field_extend@categoryload_radio": {
+                    "name": "CategoryloadRadio fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryloadRadio\\CategoryloadRadio"
                 }
             }
         }

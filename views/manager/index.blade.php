@@ -29,6 +29,13 @@
             <option value="1" @if($config->get('edittable') == 1) selected @endif>on</option>
         </select>
 
+        <br>
+        카테고리 불러오기
+        <select name="category_load">
+            <option value="0" @if($config->get('category_load') == 0) selected @endif>off</option>
+            <option value="1" @if($config->get('category_load') == 1) selected @endif>on</option>
+        </select>
+
         <br><br>
         {{--<label for="favcolor">색상선택:</label>--}}
         {{--<input type="color" id="favcolor" name="favcolor" value="#ff0000">--}}
