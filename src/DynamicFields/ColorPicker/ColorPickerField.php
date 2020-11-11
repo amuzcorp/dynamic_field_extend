@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\ColorPicker;
+namespace Amuz\XePlugin\DynamicField\DynamicFields\ColorPicker;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -10,7 +10,7 @@ use Xpressengine\DynamicField\ColumnDataType;
 class ColorPickerField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field_extend/src/DynamicFields/ColorPicker';
+    protected static $path = 'dynamic_field/src/DynamicFields/ColorPicker';
 
     /**
      * get field type name
@@ -19,7 +19,8 @@ class ColorPickerField extends AbstractType
      */
     public function name()
     {
-        return 'ColorPicker - 색상';
+        //return 'ColorPicker - 색상';
+        return 'Color picker - 색상';
     }
 
     /**
@@ -29,7 +30,7 @@ class ColorPickerField extends AbstractType
      */
     public function description()
     {
-        return '색상 선택 by Dynamic_field_extend plugin.';
+        return '색상 선택 by Dynamic_field plugin.';
     }
 
     /**
@@ -63,6 +64,6 @@ class ColorPickerField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field_extend::src/DynamicFields/ColorPicker/views/setting');
+        return view('dynamic_field::src/DynamicFields/ColorPicker/views/setting');
     }
 }

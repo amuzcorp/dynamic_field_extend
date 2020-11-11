@@ -1,6 +1,6 @@
 <?php
 //namespace Akasima\OpenSeminar\Controller;
-namespace Amuz\XePlugin\DynamicFieldExtend\Controller;
+namespace Amuz\XePlugin\DynamicField\Controller;
 
 //use Akasima\openseminar_1212\Model\PointLog;
 //use Amuz\XePlugin\DynamicFieldExtend\PointLog;
@@ -19,7 +19,7 @@ class ManagerController extends Controller
         /** @var \Xpressengine\Config\ConfigManager $configManager */
 
         $configManager = app('xe.config');
-        $config = $configManager->get('dynamic_field_extend');
+        $config = $configManager->get('dynamic_field');
 
         if ($config === null) {
             $config = new ConfigEntity();
@@ -29,24 +29,24 @@ class ManagerController extends Controller
             $config->set('color_picker', 1);
             $config->set('edittable', 1);
             $config->set('category_load', 1);
-            $configManager->add('dynamic_field_extend', $config->getPureAll());
+            $configManager->add('dynamic_field', $config->getPureAll());
         }
 
-        return XePresenter::make('dynamic_field_extend::views.manager.index', ['config'=>$config, ]);
+        return XePresenter::make('dynamic_field::views.manager.index', ['config'=>$config, ]);
     }
 
     public function updateConfig(Request $request)
     {
         /** @var \Xpressengine\Config\ConfigManager $configManager */
         $configManager = app('xe.config');
-        $configManager->put('dynamic_field_extend', [
+        $configManager->put('dynamic_field', [
             'hash_tag' => $request->get('hash_tag'),
             'media_library' => $request->get('media_library'),
             'color_picker' => $request->get('color_picker'),
             'edittable' => $request->get('edittable'),
             'category_load' => $request->get('category_load')
         ]);
-        return Redirect::to(route('manage.dynamic_field_extend.index'));
+        return Redirect::to(route('manage.dynamic_field.index'));
     }
 /*
     public function pointLog()

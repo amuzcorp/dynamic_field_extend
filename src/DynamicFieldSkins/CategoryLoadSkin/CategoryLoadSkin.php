@@ -1,11 +1,11 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\Categoryloadskin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryLoadSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
 use Xpressengine\Category\Models\CategoryItem;
 
-class Categoryloadskin extends AbstractSkin
+class CategoryLoadSkin extends AbstractSkin
 {
 
     /**
@@ -16,7 +16,8 @@ class Categoryloadskin extends AbstractSkin
     public function name()
     {
         //return 'Categoryloadskin fieldSkin';
-        return '카테고리 불러오기 셀렉트 박스 fieldSkin';
+        //return '카테고리 불러오기 셀렉트 박스 fieldSkin';
+        return 'Category load default';
     }
 
     /**
@@ -26,7 +27,7 @@ class Categoryloadskin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.Categoryloadskin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadSkin.views';
     }
 
     /**
@@ -57,7 +58,7 @@ class Categoryloadskin extends AbstractSkin
         list($data, $key) = $this->filter($args);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('category_load') == 1) {
             return $viewFactory->make($this->getViewPath('create'), [
@@ -83,7 +84,7 @@ class Categoryloadskin extends AbstractSkin
         ]);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('category_load') == 1) {
             return parent::show($args);
@@ -127,7 +128,7 @@ class Categoryloadskin extends AbstractSkin
         $viewFactory = $this->handler->getViewFactory();
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('category_load') == 1) {
             return $viewFactory->make($this->getViewPath('edit'), [

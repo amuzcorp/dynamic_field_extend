@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\MediaSkin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\MediaSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Config;
@@ -14,7 +14,8 @@ class MediaSkin extends AbstractSkin
      */
     public function name()
     {
-        return '미디어 라이브러리 fieldSkin';
+        //return '미디어 라이브러리 fieldSkin';
+        return 'Media library default';
     }
 
     /**
@@ -24,7 +25,7 @@ class MediaSkin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.MediaSkin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.MediaSkin.views';
     }
 
     /**
@@ -51,7 +52,7 @@ class MediaSkin extends AbstractSkin
         list($data, $key) = $this->filter($args);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('media_library') == 1) {
             return $viewFactory->make($this->getViewPath('create'), [
@@ -86,7 +87,7 @@ class MediaSkin extends AbstractSkin
         $storage_path = Config::get('filesystems.disks.media.url');
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
         if($config_dynamic->get('media_library') == 1) {
             return $viewFactory->make($this->getViewPath('show'), [
                 'args' => $args,
@@ -121,7 +122,7 @@ class MediaSkin extends AbstractSkin
         $storage_path = Config::get('filesystems.disks.media.url');
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if ($config_dynamic->get('media_library') == 1) {
             return $viewFactory->make($this->getViewPath('edit'), [

@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\MediaLibrary;
+namespace Amuz\XePlugin\DynamicField\DynamicFields\MediaLibrary;
 
 use App\Facades\XeStorage;
 use Xpressengine\Config\ConfigEntity;
@@ -12,7 +12,7 @@ use Illuminate\Database\Schema\Blueprint;
 class MediaLibraryField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field_extend/src/DynamicFields/MediaLibrary';
+    protected static $path = 'dynamic_field/src/DynamicFields/MediaLibrary';
 
     /**
      * get field type name
@@ -21,7 +21,7 @@ class MediaLibraryField extends AbstractType
      */
     public function name()
     {
-        return 'MediaLibrary - 미디어 라이브러리';
+        return 'Media library - 미디어 라이브러리';
     }
 
     /**
@@ -31,7 +31,7 @@ class MediaLibraryField extends AbstractType
      */
     public function description()
     {
-        return '미디어 라이브러리 by Dynamic_field_extend plugin.';
+        return '미디어 라이브러리 by Dynamic_field plugin.';
     }
 
     /**
@@ -65,7 +65,7 @@ class MediaLibraryField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field_extend::src/DynamicFields/MediaLibrary/views/setting');
+        return view('dynamic_field::src/DynamicFields/MediaLibrary/views/setting');
     }
 
     public function createTypeTable()

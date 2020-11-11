@@ -1,9 +1,9 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\Colorpickerskin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\ColorPickerSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 
-class Colorpickerskin extends AbstractSkin
+class ColorPickerSkin extends AbstractSkin
 {
 
     /**
@@ -13,8 +13,8 @@ class Colorpickerskin extends AbstractSkin
      */
     public function name()
     {
-        //return 'Colorpickerskin - 색상 선택 스킨';
-        return '색상 선택 fieldSkin';
+        //return '색상 선택 fieldSkin';
+        return 'Color picker default';
     }
 
     /**
@@ -24,7 +24,7 @@ class Colorpickerskin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.Colorpickerskin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.ColorPickerSkin.views';
     }
 
     /**
@@ -51,7 +51,7 @@ class Colorpickerskin extends AbstractSkin
         list($data, $key) = $this->filter($args);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
         if ($config_dynamic->get('color_picker') == 1) {
             return $viewFactory->make($this->getViewPath('create'), [
                 'args' => $args,
@@ -75,7 +75,7 @@ class Colorpickerskin extends AbstractSkin
         $viewFactory = $this->handler->getViewFactory();
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if ($config_dynamic->get('color_picker') == 1) {
             return $viewFactory->make($this->getViewPath('edit'), [
@@ -101,7 +101,7 @@ class Colorpickerskin extends AbstractSkin
         $viewFactory = $this->handler->getViewFactory();
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if ($config_dynamic->get('color_picker') == 1) {
             return $viewFactory->make($this->getViewPath('show'), [

@@ -3,7 +3,7 @@
 
 @if($config_dynamic->get('hash_tag') == 1)
 @if ($args['scriptInit'])
-    {{ XeFrontend::js('plugins/dynamic_field_extend/assets/js/BoardTags.js')->appendTo('body')->load() }}
+    {{ XeFrontend::js('plugins/dynamic_field/assets/js/BoardTags.js')->appendTo('body')->load() }}
 @endif
 <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
 <div id="xeBoardTagWrap" class="xe-select-label __xe-board-tag" data-tags="{{ $args['strTags'] }}" data-url="/editor/hashTag">

@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\TagSkin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\TagSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Tag\Tag;
@@ -19,7 +19,8 @@ class TagSkin extends AbstractSkin
      */
     public function name()
     {
-        return '해시태그 fieldSkin';
+        //return '해시태그 fieldSkin';
+        return 'Tag default';
     }
 
     /**
@@ -29,7 +30,7 @@ class TagSkin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.TagSkin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.TagSkin.views';
     }
 
     /**
@@ -58,7 +59,7 @@ class TagSkin extends AbstractSkin
         $args['strTags'] = '';
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         return $viewFactory->make($this->getViewPath('create'), [
             'args' => $args,
@@ -96,7 +97,7 @@ class TagSkin extends AbstractSkin
         }
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,
@@ -134,7 +135,7 @@ class TagSkin extends AbstractSkin
         $viewFactory = $this->handler->getViewFactory();
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         return $viewFactory->make($this->getViewPath('edit'), [
             'args' => $args,

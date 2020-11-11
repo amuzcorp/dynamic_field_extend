@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Categoryload;
+namespace Amuz\XePlugin\DynamicField\DynamicFields\CategoryLoad;
 
 use App\Facades\XeCategory;
 use Xpressengine\Config\ConfigEntity;
@@ -16,10 +16,10 @@ use Xpressengine\DynamicField\DynamicFieldHandler;
 
 use Xpressengine\Category\Models\Category as CategoryModel;
 
-class CategoryloadField extends AbstractType
+class CategoryLoadField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field_extend/src/DynamicFields/Categoryload';
+    protected static $path = 'dynamic_field_extend/src/DynamicFields/CategoryLoad';
 
     /**
      * get field type name
@@ -28,7 +28,8 @@ class CategoryloadField extends AbstractType
      */
     public function name()
     {
-        return 'Categoryload - 카테고리 불러오기';
+        //return 'Categoryload - 카테고리 불러오기';
+        return 'Category load - 카테고리 불러오기';
     }
 
     /**
@@ -38,7 +39,7 @@ class CategoryloadField extends AbstractType
      */
     public function description()
     {
-        return 'The fieldType supported by Dynamic_field_extend plugin.';
+        return 'The fieldType supported by Dynamic_field plugin.';
     }
 
     /**
@@ -90,7 +91,7 @@ class CategoryloadField extends AbstractType
         XeFrontend::rule('dynamicFieldSection', $this->getSettingsRules());
 
 
-        return view('dynamic_field_extend::src/DynamicFields/Categoryload/views/setting',         [
+        return view('dynamic_field::src/DynamicFields/CategoryLoad/views/setting',         [
             'config' => $config,
             'category' => $category,
             'category_all'=>$category_all,

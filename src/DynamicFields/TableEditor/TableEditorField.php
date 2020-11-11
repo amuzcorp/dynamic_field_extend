@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Edittable;
+namespace Amuz\XePlugin\DynamicField\DynamicFields\TableEditor;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -8,10 +8,10 @@ use Xpressengine\DynamicField\ColumnEntity;
 use Xpressengine\DynamicField\ColumnDataType;
 use Illuminate\Database\Schema\Blueprint;
 
-class EdittableField extends AbstractType
+class TableEditorField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field_extend/src/DynamicFields/Edittable';
+    protected static $path = 'dynamic_field/src/DynamicFields/TableEditor';
 
     /**
      * get field type name
@@ -20,7 +20,7 @@ class EdittableField extends AbstractType
      */
     public function name()
     {
-        return 'Edittable - 테이블에디터';
+        return 'Table editor- 테이블에디터';
     }
 
     /**
@@ -30,7 +30,7 @@ class EdittableField extends AbstractType
      */
     public function description()
     {
-        return 'The fieldType supported by Dynamic_field_extend plugin.';
+        return 'The fieldType supported by Dynamic_field plugin.';
     }
 
     /**
@@ -64,7 +64,7 @@ class EdittableField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field_extend::src/DynamicFields/Edittable/views/setting');
+        return view('dynamic_field::src/DynamicFields/Edittable/views/setting');
     }
 
     /**

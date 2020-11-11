@@ -1,10 +1,10 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\Edittableskin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\TableEditorSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Config;
 
-class Edittableskin extends AbstractSkin
+class TableEditorSkin extends AbstractSkin
 {
 
     /**
@@ -14,7 +14,8 @@ class Edittableskin extends AbstractSkin
      */
     public function name()
     {
-        return '보통 테이블 에디터 fieldSkin';
+        //return '보통 테이블 에디터 fieldSkin';
+        return 'Table editor default';
     }
 
     /**
@@ -24,7 +25,7 @@ class Edittableskin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.Edittableskin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.TableEditorSkin.views';
     }
 
     /**
@@ -51,7 +52,7 @@ class Edittableskin extends AbstractSkin
         list($data, $key) = $this->filter($args);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('edittable') == 1) {
             return $viewFactory->make($this->getViewPath('create'), [
@@ -86,7 +87,7 @@ class Edittableskin extends AbstractSkin
         $storage_path = Config::get('filesystems.disks.media.url');
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
         if($config_dynamic->get('edittable') == 1) {
             return $viewFactory->make($this->getViewPath('show'), [
                 'args' => $args,
@@ -121,7 +122,7 @@ class Edittableskin extends AbstractSkin
         $storage_path = Config::get('filesystems.disks.media.url');
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if ($config_dynamic->get('edittable') == 1) {
             return $viewFactory->make($this->getViewPath('edit'), [

@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Hashtag;
+namespace Amuz\XePlugin\DynamicField\DynamicFields\Tag;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -13,10 +13,10 @@ use Xpressengine\Tag\TagRepository;
 use Xpressengine\Tag\Decomposer;
 use Xpressengine\DynamicField\DynamicFieldHandler;
 
-class HashtagField extends AbstractType
+class TagField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field_extend/src/DynamicFields/Hashtag';
+    protected static $path = 'dynamic_field/src/DynamicFields/Tag';
 
     /**
      * get field type name
@@ -26,7 +26,7 @@ class HashtagField extends AbstractType
     public function name()
     {
         //return 'Hashtag fieldType';
-        return 'Hashtag - 해시태그';
+        return 'Tag - 태그';
         //return "Hashtag -".($this->getId());
 
     }
@@ -38,7 +38,7 @@ class HashtagField extends AbstractType
      */
     public function description()
     {
-        //return 'The fieldType supported by Dynamic_field_extend plugin.';
+        //return 'The fieldType supported by Dynamic_field plugin.';
     }
 
     /**
@@ -76,7 +76,7 @@ class HashtagField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field_extend::src/DynamicFields/Hashtag/views/setting');
+        return view('dynamic_field::src/DynamicFields/Tag/views/setting');
     }
 
     public function insert(array $args)

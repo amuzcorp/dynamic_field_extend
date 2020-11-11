@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend;
+namespace Amuz\XePlugin\DynamicField;
 
 use Route;
 use Xpressengine\Plugin\AbstractPlugin;
@@ -24,16 +24,16 @@ class Plugin extends AbstractPlugin
         // implement code
 
         Route::settings(self::getId(), function () {
-            Route::get('/', ['as' => 'manage.dynamic_field_extend.index', 'uses' => 'ManagerController@index']);
-            Route::post('/', ['as' => 'manage.dynamic_field_extend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
+            Route::get('/', ['as' => 'manage.dynamic_field.index', 'uses' => 'ManagerController@index']);
+            Route::post('/', ['as' => 'manage.dynamic_field.updateConfig', 'uses' => 'ManagerController@updateConfig']);
             //Route::get('/pointLog', ['as' => 'manage.dynamic_fieldextend.point_log', 'uses' => 'ManagerController@pointLog']);
-        }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
+        }, ['namespace' => 'Amuz\XePlugin\DynamicField\Controller']);
 
         Route::fixed(
             $this->getId(),
             function () {
                 Route::get('/', [
-                    'as' => 'dynamic_field_extend::index','uses' => 'Amuz\XePlugin\DynamicFieldExtend\Controller@index'
+                    'as' => 'dynamic_field::index','uses' => 'Amuz\XePlugin\DynamicField\Controller@index'
                 ]);
             }
         );
@@ -63,7 +63,7 @@ class Plugin extends AbstractPlugin
 
         //xe_config설정값
         $configManager = app('xe.config');
-        $config = $configManager->get('dynamic_field_extend');
+        $config = $configManager->get('dynamic_field');
 
         if ($config === null) {
             $config = new ConfigEntity();
@@ -73,7 +73,7 @@ class Plugin extends AbstractPlugin
             $config->set('color_picker', 1);
             $config->set('edittable', 1);
             $config->set('category_load', 1);
-            $configManager->add('dynamic_field_extend', $config->getPureAll());
+            $configManager->add('dynamic_field', $config->getPureAll());
         }
     }
 
@@ -115,7 +115,7 @@ class Plugin extends AbstractPlugin
 
     public function getSettingsURI()
     {
-        return route('manage.dynamic_field_extend.index');
+        return route('manage.dynamic_field.index');
         //return "";
     }
 }

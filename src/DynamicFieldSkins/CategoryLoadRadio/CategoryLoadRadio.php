@@ -1,10 +1,10 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\CategoryloadRadio;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryloadRadio;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
 
-class CategoryloadRadio extends AbstractSkin
+class CategoryLoadRadio extends AbstractSkin
 {
 
     /**
@@ -15,7 +15,8 @@ class CategoryloadRadio extends AbstractSkin
     public function name()
     {
         //return 'CategoryloadRadio fieldSkin';
-        return '카테고리 불러오기 라디오 버튼 fieldSkin';
+        //return '카테고리 불러오기 라디오 버튼 fieldSkin';
+        return 'Category load radiobutton';
     }
 
     /**
@@ -25,7 +26,7 @@ class CategoryloadRadio extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.CategoryloadRadio.views';
+        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadRadio.views';
     }
 
     /**
@@ -50,7 +51,7 @@ class CategoryloadRadio extends AbstractSkin
         list($data, $key) = $this->filter($args);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('category_load') == 1) {
             return $viewFactory->make($this->getViewPath('create'), [
@@ -118,7 +119,7 @@ class CategoryloadRadio extends AbstractSkin
         $this->addMergeData(['selectedItemText' => $selectedItemText]);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('category_load') == 1) {
             return parent::show($args);
@@ -139,7 +140,7 @@ class CategoryloadRadio extends AbstractSkin
         $this->addMergeData(['items' => $this->getCategoryItems()]);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('category_load') == 1) {
             return parent::edit($args);

@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\TableCheckSkin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\TableCheckSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Config;
@@ -15,7 +15,7 @@ class TableCheckSkin extends AbstractSkin
     public function name()
     {
         //return 'TableCheckSkin fieldSkin';
-        return '체크박스 테이블 에디터 fieldSkin';
+        return 'Table editor checkbox';
     }
 
     /**
@@ -25,7 +25,7 @@ class TableCheckSkin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.TableCheckSkin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.TableCheckSkin.views';
     }
 
     /**
@@ -52,7 +52,7 @@ class TableCheckSkin extends AbstractSkin
         list($data, $key) = $this->filter($args);
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if($config_dynamic->get('edittable') == 1) {
             return $viewFactory->make($this->getViewPath('create'), [
@@ -87,7 +87,7 @@ class TableCheckSkin extends AbstractSkin
         $storage_path = Config::get('filesystems.disks.media.url');
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
         if($config_dynamic->get('edittable') == 1) {
             return $viewFactory->make($this->getViewPath('show'), [
                 'args' => $args,
@@ -122,7 +122,7 @@ class TableCheckSkin extends AbstractSkin
         $storage_path = Config::get('filesystems.disks.media.url');
 
         $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
+        $config_dynamic = $configManager->get('dynamic_field');
 
         if ($config_dynamic->get('edittable') == 1) {
             return $viewFactory->make($this->getViewPath('edit'), [
