@@ -1,10 +1,10 @@
 <?php
-namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryloadRadio;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryloadRadioSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
 
-class CategoryLoadRadio extends AbstractSkin
+class CategoryLoadRadioSkin extends AbstractSkin
 {
 
     /**
@@ -26,7 +26,7 @@ class CategoryLoadRadio extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadRadio.views';
+        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadRadioSkin.views';
     }
 
     /**

@@ -78,10 +78,20 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoadSkin\\CategoryLoadSkin"
                 },
-                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_radio": {
-                    "name": "CategoryLoadRadio fieldSkin",
+                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_radio_skin": {
+                    "name": "CategoryLoadRadioSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoadRadio\\CategoryLoadRadio"
+                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoadRadioSkin\\CategoryLoadRadioSkin"
+                },
+                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_multi_skin": {
+                    "name": "CategoryLoadMultiSkin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoadMultiSkin\\CategoryLoadMultiSkin"
+                },
+                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_check_skin": {
+                    "name": "CategoryLoadCheckSkin fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoadCheckSkin\\CategoryLoadCheckSkin"
                 }
             }
         }
