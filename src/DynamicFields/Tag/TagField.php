@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicField\DynamicFields\Tag;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Tag;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -11,12 +11,12 @@ use Xpressengine\Tag\Tag;
 use Xpressengine\Tag\TagHandler;
 use Xpressengine\Tag\TagRepository;
 use Xpressengine\Tag\Decomposer;
-use Xpressengine\DynamicField\DynamicFieldHandler;
+use Xpressengine\DynamicField\DynamicFieldExtendHandler;
 
 class TagField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field/src/DynamicFields/Tag';
+    protected static $path = 'dynamic_field_extend/src/DynamicFields/Tag';
 
     /**
      * get field type name
@@ -76,7 +76,7 @@ class TagField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field::src/DynamicFields/Tag/views/setting');
+        return view('dynamic_field_extend::src/DynamicFields/Tag/views/setting');
     }
 
     public function insert(array $args)

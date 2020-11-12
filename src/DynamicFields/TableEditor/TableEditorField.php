@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicField\DynamicFields\TableEditor;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\TableEditor;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -11,7 +11,7 @@ use Illuminate\Database\Schema\Blueprint;
 class TableEditorField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field/src/DynamicFields/TableEditor';
+    protected static $path = 'dynamic_field_extend/src/DynamicFields/TableEditor';
 
     /**
      * get field type name
@@ -64,7 +64,7 @@ class TableEditorField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field::src/DynamicFields/Edittable/views/setting');
+        return view('dynamic_field_extend::src/DynamicFields/Edittable/views/setting');
     }
 
     /**

@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Amuz\\XePlugin\\DynamicField\\' => array($baseDir . '/src'),
+    'Amuz\\XePlugin\\DynamicFieldExtend\\' => array($baseDir . '/src'),
 );

@@ -1,6 +1,6 @@
 다이나믹 플러그인 설정페이지
 <div>
-    <form method="post" action="{{route('manage.dynamic_field.updateConfig')}}">
+    <form method="post" action="{{route('manage.dynamic_field_extend.updateConfig')}}">
         <input type="hidden" name="_token" value="{{csrf_token()}}" />
         해시태그 :
         <select name="hash_tag">

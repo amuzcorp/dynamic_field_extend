@@ -1,6 +1,6 @@
 {
-    "name": "xpressengine-plugin/dynamic_field",
-    "description": "This Package is Xpressengine Plugin - DynamicField plugin.",
+    "name": "xpressengine-plugin/dynamic_field_extend",
+    "description": "This Package is Xpressengine Plugin - DynamicFieldExtend plugin.",
     "keywords": [
         "xpressengine",
         "plugin"
@@ -23,100 +23,100 @@
         "xpressengine": {
             "title": "다이나믹 필드 Extend",
             "component": {
-                "fieldType/dynamic_field@Tag": {
+                "fieldType/dynamic_field_extend@Tag": {
                     "name": "Tag fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFields\\Tag\\TagField"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Tag\\TagField"
                 },
-                "fieldType/dynamic_field@Tag/fieldSkin/dynamic_field@tag_skin": {
+                "fieldType/dynamic_field_extend@Tag/fieldSkin/dynamic_field_extend@TagDefault": {
                     "name": "TagSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\TagSkin\\TagSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TagDefault\\TagDefault"
                 },
-                "fieldType/dynamic_field@media_library": {
+                "fieldType/dynamic_field_extend@MediaLibrary": {
                     "name": "MediaLibrary fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFields\\MediaLibrary\\MediaLibraryField"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\MediaLibrary\\MediaLibraryField"
                 },
-                "fieldType/dynamic_field@media_library/fieldSkin/dynamic_field@media_skin": {
+                "fieldType/dynamic_field_extend@MediaLibrary/fieldSkin/dynamic_field_extend@MediaDefault": {
                     "name": "MediaSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\MediaSkin\\MediaSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaDefault\\MediaDefault"
                 },
-                "fieldType/dynamic_field@color_picker": {
+                "fieldType/dynamic_field_extend@ColorPicker": {
                     "name": "ColorPicker fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFields\\ColorPicker\\ColorPickerField"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\ColorPicker\\ColorPickerField"
                 },
-                "fieldType/dynamic_field@color_picker/fieldSkin/dynamic_field@color_picker_skin": {
+                "fieldType/dynamic_field_extend@ColorPicker/fieldSkin/dynamic_field_extend@ColorPickerDefault": {
                     "name": "ColorPickerSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\ColorPickerSkin\\ColorPickerSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\ColorPickerDefault\\ColorPickerDefault"
                 },
-                "fieldType/dynamic_field@table_editor": {
+                "fieldType/dynamic_field_extend@TableEditor": {
                     "name": "TableEditor fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFields\\TableEditor\\TableEditorField"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\TableEditor\\TableEditorField"
                 },
-                "fieldType/dynamic_field@table_editor/fieldSkin/dynamic_field@table_editor_skin": {
+                "fieldType/dynamic_field_extend@TableEditor/fieldSkin/dynamic_field_extend@TableEditorDefault": {
                     "name": "TableEditorSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\TableEditorSkin\\TableEditorSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TableEditorDefault\\TableEditorDefault"
                 },
-                "fieldType/dynamic_field@table_editor/fieldSkin/dynamic_field@table_check_skin": {
+                "fieldType/dynamic_field_extend@TableEditor/fieldSkin/dynamic_field_extend@TableCheckBox": {
                     "name": "TableCheckSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\TableCheckSkin\\TableCheckSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TableCheckBox\\TableCheckBox"
                 },
-                "fieldType/dynamic_field@category_load": {
+                "fieldType/dynamic_field_extend@CategoryLoad": {
                     "name": "CategoryLoad fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFields\\CategoryLoad\\CategoryLoadField"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\CategoryLoad\\CategoryLoadField"
                 },
-                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_skin": {
+                "fieldType/dynamic_field_extend@CategoryLoad/fieldSkin/dynamic_field_extend@CategoryLoadDefault": {
                     "name": "CategoryLoadSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadSkin\\CategoryLoadSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadDefault\\CategoryLoadDefault"
                 },
-                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_radio_skin": {
+                "fieldType/dynamic_field_extend@CategoryLoad/fieldSkin/dynamic_field_extend@CategoryLoadRadioButton": {
                     "name": "CategoryLoadRadioSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadRadioSkin\\CategoryLoadRadioSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadRadioButton\\CategoryLoadRadioButton"
                 },
-                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_multi_skin": {
+                "fieldType/dynamic_field_extend@CategoryLoad/fieldSkin/dynamic_field_extend@CategoryLoadMulti": {
                     "name": "CategoryLoadMultiSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadMultiSkin\\CategoryLoadMultiSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadMulti\\CategoryLoadMulti"
                 },
-                "fieldType/dynamic_field@category_load/fieldSkin/dynamic_field@category_load_check_skin": {
+                "fieldType/dynamic_field_extend@CategoryLoad/fieldSkin/dynamic_field_extend@cCtegoryLoadCheckBox": {
                     "name": "CategoryLoadCheckSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadCheckSkin\\CategoryLoadCheckSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadCheckBox\\CategoryLoadCheckBox"
                 },
-                "fieldType/dynamic_field@category_input": {
+                "fieldType/dynamic_field_extend@CategoryInput": {
                     "name": "CategoryInput fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFields\\CategoryInput\\CategoryInputField"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\CategoryInput\\CategoryInputField"
                 },
-                "fieldType/dynamic_field@category_input/fieldSkin/dynamic_field@category_input_skin": {
+                "fieldType/dynamic_field_extend@CategoryInput/fieldSkin/dynamic_field_extend@CategoryInputDefault": {
                     "name": "CategoryInputSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryInput\\CategoryInputSkin\\CategoryInputSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryInput\\CategoryInputDefault\\CategoryInputDefault"
                 },
-                "fieldType/dynamic_field@category_input/fieldSkin/dynamic_field@category_input_radio_skin": {
+                "fieldType/dynamic_field_extend@CategoryInput/fieldSkin/dynamic_field_extend@CategoryInputRadioButton": {
                     "name": "CategoryInputRadioSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryInput\\CategoryInputRadioSkin\\CategoryInputRadioSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryInput\\CategoryInputRadioButton\\CategoryInputRadioButton"
                 },
-                "fieldType/dynamic_field@category_input/fieldSkin/dynamic_field@category_input_multi_skin": {
+                "fieldType/dynamic_field_extend@CategoryInput/fieldSkin/dynamic_field_extend@CategoryInputMulti": {
                     "name": "CategoryInputMultiSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryInput\\CategoryInputMultiSkin\\CategoryInputMultiSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryInput\\CategoryInputMulti\\CategoryInputMulti"
                 },
-                "fieldType/dynamic_field@category_input/fieldSkin/dynamic_field@category_input_check_skin": {
+                "fieldType/dynamic_field_extend@CategoryInput/fieldSkin/dynamic_field_extend@CategoryInputCheckBox": {
                     "name": "CategoryInputCheckSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicField\\DynamicFieldSkins\\CategoryInput\\CategoryInputCheckSkin\\CategoryInputCheckSkin"
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryInput\\CategoryInputCheckBox\\CategoryInputCheckBox"
                 }
             }
         }
@@ -126,7 +126,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Amuz\\XePlugin\\DynamicField\\": "src/"
+            "Amuz\\XePlugin\\DynamicFieldExtend\\": "src/"
         }
     }
 }

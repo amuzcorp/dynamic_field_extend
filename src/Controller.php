@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend;
+namespace Amuz\XePlugin\DynamicFieldExtendExtend;
 
 use XeFrontend;
 use XePresenter;
@@ -9,7 +9,7 @@ class Controller extends BaseController
 {
     public function index()
     {
-        $title = 'DynamicFieldExtend plugin';
+        $title = 'DynamicFieldExtendExtend plugin';
 
         // set browser title
         XeFrontend::title($title);

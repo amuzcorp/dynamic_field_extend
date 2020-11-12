@@ -9,12 +9,12 @@ class ComposerStaticInitbeddad2311d9bf65b7a342c15aef1bee
     public static $prefixLengthsPsr4 = array (
         'A' => 
         array (
-            'Amuz\\XePlugin\\DynamicField\\' => 27,
+            'Amuz\\XePlugin\\DynamicFieldExtend\\' => 33,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Amuz\\XePlugin\\DynamicField\\' => 
+        'Amuz\\XePlugin\\DynamicFieldExtend\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

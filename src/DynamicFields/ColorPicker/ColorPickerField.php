@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicField\DynamicFields\ColorPicker;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\ColorPicker;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -10,7 +10,7 @@ use Xpressengine\DynamicField\ColumnDataType;
 class ColorPickerField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field/src/DynamicFields/ColorPicker';
+    protected static $path = 'dynamic_field_extend/src/DynamicFields/ColorPicker';
 
     /**
      * get field type name
@@ -64,6 +64,6 @@ class ColorPickerField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field::src/DynamicFields/ColorPicker/views/setting');
+        return view('dynamic_field_extend::src/DynamicFields/ColorPicker/views/setting');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicField\DynamicFields\MediaLibrary;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\MediaLibrary;
 
 use App\Facades\XeStorage;
 use Xpressengine\Config\ConfigEntity;
@@ -12,7 +12,7 @@ use Illuminate\Database\Schema\Blueprint;
 class MediaLibraryField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field/src/DynamicFields/MediaLibrary';
+    protected static $path = 'dynamic_field_extend/src/DynamicFields/MediaLibrary';
 
     /**
      * get field type name
@@ -65,7 +65,7 @@ class MediaLibraryField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field::src/DynamicFields/MediaLibrary/views/setting');
+        return view('dynamic_field_extend::src/DynamicFields/MediaLibrary/views/setting');
     }
 
     public function createTypeTable()
@@ -173,7 +173,7 @@ class MediaLibraryField extends AbstractType
     public function insertRevision(array $args)
     {
         if (isset($args['id']) === false) {
-            throw new RequiredDynamicFieldException;
+            throw new RequiredDynamicFieldExtendException;
         }
 
         $insertParam = [];
@@ -264,7 +264,7 @@ class MediaLibraryField extends AbstractType
         $where = $this->getWhere($wheres, $config);
 
         if (isset($where['target_id']) === false) {
-            throw new RequiredDynamicFieldException;
+            throw new RequiredDynamicFieldExtendException;
         }
 
         // event fire

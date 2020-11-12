@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicField\DynamicFields\CategoryInput;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\CategoryInput;
 
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
@@ -11,7 +11,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CategoryInputField extends AbstractType
 {
 
-    protected static $path = 'dynamic_field/src/DynamicFields/CategoryInput';
+    protected static $path = 'dynamic_field_extend/src/DynamicFields/CategoryInput';
 
     /**
      * get field type name
@@ -65,7 +65,7 @@ class CategoryInputField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field::src/DynamicFields/CategoryInput/views/setting');
+        return view('dynamic_field_extend::src/DynamicFields/CategoryInput/views/setting');
     }
 
     /**
@@ -181,7 +181,7 @@ class CategoryInputField extends AbstractType
     public function insertRevision(array $args)
     {
         if (isset($args['id']) === false) {
-            throw new RequiredDynamicFieldException;
+            throw new RequiredDynamicFieldExtendException;
         }
 
         $insertParam = [];

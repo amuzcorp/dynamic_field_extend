@@ -1,6 +1,6 @@
 <?php
 
-namespace Amuz\XePlugin\DynamicField\DynamicFields\CategoryLoad;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\CategoryLoad;
 
 use App\Facades\XeCategory;
 use Xpressengine\Config\ConfigEntity;
@@ -12,7 +12,7 @@ use XeFrontend;
 use View;
 use Xpressengine\Database\VirtualConnectionInterface;
 use XeConfig;
-use Xpressengine\DynamicField\DynamicFieldHandler;
+use Xpressengine\DynamicField\DynamicFieldExtendHandler;
 
 use Xpressengine\Category\Models\Category as CategoryModel;
 
@@ -91,7 +91,7 @@ class CategoryLoadField extends AbstractType
         XeFrontend::rule('dynamicFieldSection', $this->getSettingsRules());
 
 
-        return view('dynamic_field::src/DynamicFields/CategoryLoad/views/setting',         [
+        return view('dynamic_field_extend::src/DynamicFields/CategoryLoad/views/setting',         [
             'config' => $config,
             'category' => $category,
             'category_all'=>$category_all,
@@ -148,7 +148,7 @@ class CategoryLoadField extends AbstractType
     public function insertRevision(array $args)
     {
         if (isset($args['id']) === false) {
-            throw new RequiredDynamicFieldException;
+            throw new RequiredDynamicFieldExtendException;
         }
 
         $insertParam = [];
