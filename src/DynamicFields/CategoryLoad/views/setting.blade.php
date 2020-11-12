@@ -9,6 +9,7 @@
     {{--<input type="hidden" name="category_id" id="my_cate_id" value="{{ $config != null ? $config->get('category_id') : '' }}" />--}}
     @if ($config == null)
         {{--<button type="button" id="btnCreateCategory">{{xe_trans('xe::createCategoryGroup')}}</button> : 버튼으로 카테고리를 생성 후 아래에서 사용할 카테고리 선택.--}}
+    카테고리 선택 :
         <select class="form-control" name="category_load" id="select_cate_id">
             @foreach($category_all as $item)
                 <option value="{{$item['id']}}">{{$item['id'].' : '.xe_trans($item['name'])}}</option>

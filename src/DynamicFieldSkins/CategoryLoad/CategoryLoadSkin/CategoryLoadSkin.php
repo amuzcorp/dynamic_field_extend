@@ -1,11 +1,11 @@
 <?php
-namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryLoadMultiSkin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryLoad\CategoryLoadSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
 use Xpressengine\Category\Models\CategoryItem;
 
-class CategoryLoadMultiSkin extends AbstractSkin
+class CategoryLoadSkin extends AbstractSkin
 {
 
     /**
@@ -15,7 +15,9 @@ class CategoryLoadMultiSkin extends AbstractSkin
      */
     public function name()
     {
-        return 'Category load multiselect';
+        //return 'Categoryloadskin fieldSkin';
+        //return '카테고리 불러오기 셀렉트 박스 fieldSkin';
+        return 'Category load default';
     }
 
     /**
@@ -25,7 +27,7 @@ class CategoryLoadMultiSkin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadMultiSkin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoad.CategoryLoadSkin.views';
     }
 
     /**
@@ -74,10 +76,8 @@ class CategoryLoadMultiSkin extends AbstractSkin
     {
         $item = null;
         if (isset($args[$this->config->get('id') . '_item_id'])) {
-            $my_data = json_decode($args[$this->config->get('id') . '_item_id']);
-            $item = CategoryItem::find($my_data);
+            $item = CategoryItem::find(json_decode($args[$this->config->get('id') . '_item_id']));
         }
-
 
         $this->addMergeData([
             'categoryItem' => $item,
@@ -108,12 +108,9 @@ class CategoryLoadMultiSkin extends AbstractSkin
         $category = Category::find($this->config->get('category_load'));
 
         $item = null;
-        $my_array = null;
         if (isset($args[$this->config->get('id') . '_item_id'])) {
-            $my_array = json_decode($args[$this->config->get('id') . '_item_id']);
-            $item = CategoryItem::find($my_array);
+            $item = CategoryItem::find(json_decode($args[$this->config->get('id') . '_item_id']));
         }
-
         $this->addMergeData([
             'categoryItems' => $category->items,
             'categoryItem' => $item,
@@ -121,9 +118,10 @@ class CategoryLoadMultiSkin extends AbstractSkin
 
         $my_data = $this->mergeData;
         $items = $my_data['categoryItems'];
+
         $itemId = null;
-        if(isset($my_data['categoryItem'])) {
-            $itemId = $my_array;
+        if(isset($my_data['categoryItem']['id'])) {
+            $itemId = $my_data['categoryItem']['id'];
         }
         list($data, $key) = $this->filter($args);
         $viewFactory = $this->handler->getViewFactory();
@@ -144,4 +142,9 @@ class CategoryLoadMultiSkin extends AbstractSkin
 
         //return parent::edit($args);
     }
+
+
+
+
+
 }

@@ -1,6 +1,6 @@
 다이나믹 플러그인 설정페이지
 <div>
-    <form method="post" action="{{route('manage.dynamic_field_extend.updateConfig')}}">
+    <form method="post" action="{{route('manage.dynamic_field.updateConfig')}}">
         <input type="hidden" name="_token" value="{{csrf_token()}}" />
         해시태그 :
         <select name="hash_tag">
@@ -34,6 +34,13 @@
         <select name="category_load">
             <option value="0" @if($config->get('category_load') == 0) selected @endif>off</option>
             <option value="1" @if($config->get('category_load') == 1) selected @endif>on</option>
+        </select>
+
+        <br>
+        카테고리 직접입력
+        <select name="category_input">
+            <option value="0" @if($config->get('category_input') == 0) selected @endif>off</option>
+            <option value="1" @if($config->get('category_input') == 1) selected @endif>on</option>
         </select>
 
         <br><br>

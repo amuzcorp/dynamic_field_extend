@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryLoadCheckSkin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryLoad\CategoryLoadCheckSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
@@ -25,7 +25,7 @@ class CategoryLoadCheckSkin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadCheckSkin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoad.CategoryLoadCheckSkin.views';
     }
 
     /**

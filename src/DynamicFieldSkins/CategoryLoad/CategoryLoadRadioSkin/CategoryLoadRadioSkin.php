@@ -1,5 +1,5 @@
 <?php
-namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryloadRadioSkin;
+namespace Amuz\XePlugin\DynamicField\DynamicFieldSkins\CategoryLoad\CategoryLoadRadioSkin;
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
@@ -26,7 +26,7 @@ class CategoryLoadRadioSkin extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoadRadioSkin.views';
+        return 'dynamic_field::src.DynamicFieldSkins.CategoryLoad.CategoryLoadRadioSkin.views';
     }
 
     /**
@@ -111,7 +111,7 @@ class CategoryLoadRadioSkin extends AbstractSkin
         $selectedCategoryItemId = $args[$this->config->get('id') . '_item_id'];
         $selectedItemText = '';
         foreach ($items as $item) {
-            if ($item['value'] == $selectedCategoryItemId) {
+            if ($item['value'] == json_decode($selectedCategoryItemId)) {
                 $selectedItemText = $item['text'];
             }
         }

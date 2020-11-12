@@ -73,6 +73,7 @@ class Plugin extends AbstractPlugin
             $config->set('color_picker', 1);
             $config->set('edittable', 1);
             $config->set('category_load', 1);
+            $config->set('category_input', 1);
             $configManager->add('dynamic_field', $config->getPureAll());
         }
     }

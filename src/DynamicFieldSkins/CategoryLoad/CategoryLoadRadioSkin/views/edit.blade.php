@@ -3,7 +3,7 @@
     @if ($config->get('skinDescription') !== '')<small>{{$config->get('skinDescription')}}</small>@endif
     @foreach ($data['items'] as $item)
         <label class="xe-label">
-            <input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item['value']}}" @if ($data['item_id'] == $item['value']) checked @endif>
+            <input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item['value']}}" @if (json_decode($data['item_id']) == $item['value']) checked @endif>
             <span class="xe-input-helper"></span>
             <span class="xe-label-text">{{xe_trans($item['text'])}}</span>
         </label>
