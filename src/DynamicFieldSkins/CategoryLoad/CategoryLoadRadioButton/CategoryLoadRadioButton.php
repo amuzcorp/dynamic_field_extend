@@ -3,6 +3,7 @@ namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\CategoryLoad\Catego
 
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
+use Xpressengine\Category\Models\CategoryItem;
 
 class CategoryLoadRadioButton extends AbstractSkin
 {
@@ -105,18 +106,32 @@ class CategoryLoadRadioButton extends AbstractSkin
      */
     public function show(array $args)
     {
-        $this->setCategoryId();
+//        $this->setCategoryId();
+//
+//        $items = $this->getCategoryItems();
+//        $selectedCategoryItemId = $args[$this->config->get('id') . '_item_id'];
+//        $selectedItemText = '';
+//        //var_dump($items);
+//        foreach ($items as $item) {
+//            var_dump($item['value']);
+//            var_dump(json_decode($selectedCategoryItemId));
+//            if ($item['value'] == json_decode($selectedCategoryItemId)) {
+//                $selectedItemText = $item['text'];
+//            }
+//        }
+//
+//        $this->addMergeData(['selectedItemText' => $selectedItemText]);
+        //var_dump(json_decode($args[$this->config->get('id') . '_item_id']));
 
-        $items = $this->getCategoryItems();
-        $selectedCategoryItemId = $args[$this->config->get('id') . '_item_id'];
-        $selectedItemText = '';
-        foreach ($items as $item) {
-            if ($item['value'] == json_decode($selectedCategoryItemId)) {
-                $selectedItemText = $item['text'];
-            }
+        //var_dump($args);
+        $item = null;
+        if (isset($args[$this->config->get('id') . '_item_id'])) {
+            $item = CategoryItem::find(json_decode($args[$this->config->get('id') . '_item_id']));
         }
 
-        $this->addMergeData(['selectedItemText' => $selectedItemText]);
+        $this->addMergeData([
+            'categoryItem' => $item,
+        ]);
 
         $configManager = app('xe.config');
         $config_dynamic = $configManager->get('dynamic_field_extend');

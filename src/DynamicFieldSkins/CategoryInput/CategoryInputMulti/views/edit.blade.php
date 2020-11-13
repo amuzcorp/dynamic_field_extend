@@ -3,8 +3,17 @@
     @if ($config->get('skinDescription') !== '')<small>{{$config->get('skinDescription')}}</small>@endif
     <select name="{{$config->get('id') . '_column[]'}}" class="xe-form-control" style="height: 150px" data-valid-name="{{ xe_trans($config->get('label')) }}" multiple>
         <option value="">{{xe_trans($config->get('label'))}}</option>
-        @foreach ($cate as $item)
-            <option value="{{$item[0]}}" @if($data_array) @if(array_search(trim($item[0]), $data_array) !== false) {{"selected=selected"}} @endif @endif>{{$item[1]}}</option>
-        @endforeach
+
+        @if(gettype($data_array)=='array')
+                @foreach ($cate as $item)
+                    <option value="{{$item[0]}}" @if($data_array) @if(array_search(trim($item[0]), $data_array) !== false) {{"selected=selected"}} @endif @endif>{{$item[1]}}</option>
+
+                @endforeach
+        @elseif(gettype($data_array)=='string')
+                @foreach ($cate as $item)
+                <option value="{{$item[0]}}" @if($data_array) @if($item[0] == $data_array) {{"selected=selected"}} @endif @endif>{{$item[1]}}</option>
+
+                @endforeach
+        @endif
     </select>
 </div>
