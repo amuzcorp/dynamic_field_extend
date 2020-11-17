@@ -8,13 +8,15 @@
         @if(gettype($itemId)=="array")
 
             @foreach ($items as $item)
-                    <li>{{xe_trans($item['word'])}}<input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item['id']}}" @if($itemId){{array_search($item['id'], $itemId) !== false ? 'checked="checked"' : ''}}@endif></li>
+                    {{--<li>{{xe_trans($item['word'])}}<input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item['id']}}" @if($itemId){{array_search($item['id'], $itemId) !== false ? 'checked="checked"' : ''}}@endif></li>--}}
+                <li><input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item[0]}}" @if($itemId){{array_search($item[0], $itemId) !== false ? 'checked="checked"' : ''}}@endif>{{xe_trans($item[1])}}</li>
             @endforeach
 
         @elseif(gettype($itemId)=="string")
 
             @foreach ($items as $item)
-                    <li>{{xe_trans($item['word'])}}<input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item['id']}}" @if($itemId){{$item['id'] == $itemId ? 'checked="checked"' : ''}}@endif></li>
+                    {{--<li>{{xe_trans($item['word'])}}<input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item['id']}}" @if($itemId){{$item['id'] == $itemId ? 'checked="checked"' : ''}}@endif></li>--}}
+                <li><input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item[0]}}" @if($itemId){{$item[0] == $itemId ? 'checked="checked"' : ''}}@endif>{{xe_trans($item[1])}}</li>
             @endforeach
 
         @endif

@@ -4,7 +4,8 @@
     <select name="{{$config->get('id') . '_item_id[]'}}" class="xe-form-control" style="height: 150px" data-valid-name="{{ xe_trans($config->get('label')) }}" multiple>
         <option value="">{{xe_trans($config->get('label'))}}</option>
         @foreach ($items as $item)
-            <option value="{{$item->id}}">{{xe_trans($item->word)}}</option>
+            {{--<option value="{{$item->id}}">{{xe_trans($item->word)}}</option>--}}
+            <option value="{{$item[0]}}">{{xe_trans($item[1])}}</option>
         @endforeach
     </select>
 </div>

@@ -4,9 +4,13 @@ namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\CategoryLoad\Catego
 use Xpressengine\DynamicField\AbstractSkin;
 use Xpressengine\Category\Models\Category;
 use Xpressengine\Category\Models\CategoryItem;
+use Xpressengine\Config\ConfigEntity;
 
 class CategoryLoadRadioButton extends AbstractSkin
 {
+    public $cate_string = "";
+    public $cate_hi = 0;
+    public $cate_array = array();
 
     /**
      * get name of skin
@@ -44,8 +48,13 @@ class CategoryLoadRadioButton extends AbstractSkin
     {
         $this->setCategoryId();
 
-        $this->addMergeData(['items' => $this->getCategoryItems()]);
+        //===============계층 표시해서 카테고리 데이터 가져오기
+        $categories = $this->getCategoryItemsTree($this->config);
+        $this->cate_select($categories);
+        //===============
 
+        //$this->addMergeData(['items' => $this->getCategoryItems()]);
+        $this->addMergeData(['items' => $this->cate_array]);
 
         $viewFactory = $this->handler->getViewFactory();
 
@@ -152,13 +161,112 @@ class CategoryLoadRadioButton extends AbstractSkin
     {
         $this->setCategoryId();
 
-        $this->addMergeData(['items' => $this->getCategoryItems()]);
+        //===============계층 표시해서 카테고리 데이터 가져오기
+        $categories = $this->getCategoryItemsTree($this->config);
+        $this->cate_select($categories);
+        //===============
+
+        //$this->addMergeData(['items' => $this->getCategoryItems()]);
+        $this->addMergeData(['items' => $this->cate_array]);
 
         $configManager = app('xe.config');
         $config_dynamic = $configManager->get('dynamic_field_extend');
 
         if($config_dynamic->get('category_load') == 1) {
             return parent::edit($args);
+        }
+    }
+
+    /**
+     * get category item tree
+     *
+     * @param ConfigEntity $config board config entity
+     * @return array
+     */
+    public function getCategoryItemsTree(ConfigEntity $config)
+    {
+        $items = [];
+        if ($config->get('category_load') !== null) {
+            $categoryItems = CategoryItem::where('category_id', $config->get('category_load'))
+                ->where('parent_id', null)
+                ->orderBy('ordering')->get();
+
+            foreach ($categoryItems as $categoryItem) {
+                $categoryItemData = [
+                    'value' => $categoryItem->id,
+                    'text' => xe_trans($categoryItem->word),
+                    'children' => $this->getCategoryItemChildrenData($categoryItem)
+                ];
+
+                $items[] = $categoryItemData;
+            }
+
+        }
+
+        return $items;
+    }
+
+    /**
+     * get category item data
+     *
+     * @param CategoryItem $categoryItem target category
+     *
+     * @return array
+     */
+    private function getCategoryItemChildrenData(CategoryItem $categoryItem)
+    {
+        $children = $categoryItem->getChildren();
+
+        if ($children->isEmpty() === true) {
+            return [];
+        }
+
+        $childrenData = [];
+        foreach ($children as $child) {
+            $childrenData[] = [
+                'value' => $child->id,
+                'text' => xe_trans($child->word),
+                'children' => $this->getCategoryItemChildrenData($child)
+            ];
+        }
+
+        return $childrenData;
+    }
+
+
+
+    public function cate_select($my_data){
+        for($i=0;$i<count($my_data);$i++){
+            //$this->cate_string .= "<option value=".$my_data[$i]['value'].">".$this->cate_grade_str($this->cate_hi++).$this->child_chk($this->cate_hi).$my_data[$i]['text']."</option>";
+            $temp_array = array($my_data[$i]['value'],$this->cate_grade_str($this->cate_hi++).$this->child_chk($this->cate_hi).$my_data[$i]['text']);
+            array_push($this->cate_array,$temp_array);
+            $temp_array = null;
+            for ($j=0;$j<count($my_data[$i]['children']);$j++){
+                // $this->cate_string .= "<option value=".$my_data[$i]['children'][$j]['value'].">".$this->cate_grade_str($this->cate_hi++).$this->child_chk($this->cate_hi).$my_data[$i]['children'][$j]['text']."</option>";
+                $temp_array = array($my_data[$i]['children'][$j]['value'], $this->cate_grade_str($this->cate_hi++).$this->child_chk($this->cate_hi).$my_data[$i]['children'][$j]['text']);
+                array_push($this->cate_array, $temp_array);
+                $temp_array = null;
+                $this->cate_select($my_data[$i]['children'][$j]['children']);
+                $this->cate_hi--;
+            }
+            $this->cate_hi--;
+        }
+    }
+
+    public function cate_grade_str($my_grade){
+        $my_grade_str = "";
+        for($i=0;$i<$my_grade;$i++){
+            $my_grade_str.="&nbsp;&nbsp;&nbsp;";
+        }
+
+        return $my_grade_str;
+    }
+
+    public function child_chk($my_grade){
+        if($my_grade == 0 or $my_grade == 1){
+            return "";
+        }else{
+            return "ㄴ";
         }
     }
 }

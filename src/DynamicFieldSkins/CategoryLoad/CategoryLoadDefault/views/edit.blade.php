@@ -7,7 +7,8 @@
         <select name="{{$config->get('id') . '_item_id'}}" class="xe-form-control" data-valid-name="{{ xe_trans($config->get('label')) }}">
             <option value="">{{xe_trans($config->get('label'))}}</option>
             @foreach ($items as $item)
-                <option value="{{$item['id']}}" {{$itemId == $item['id'] ? 'selected="selected"' : ''}}>{{xe_trans($item['word'])}}</option>
+                {{--<option value="{{$item['id']}}" {{$itemId == $item['id'] ? 'selected="selected"' : ''}}>{{xe_trans($item['word'])}}</option>--}}
+                <option value="{{$item[0]}}" {{$itemId == $item[0] ? 'selected="selected"' : ''}}>{{xe_trans($item[1])}}</option>
                 {{--{{$item['id']}}--}}
             @endforeach
         </select>
@@ -16,7 +17,8 @@
         <select name="{{$config->get('id') . '_item_id'}}" class="xe-form-control" data-valid-name="{{ xe_trans($config->get('label')) }}">
             <option value="">{{xe_trans($config->get('label'))}}</option>
             @foreach ($items as $item)
-                <option value="{{$item['id']}}" {{ array_search($item['id'], json_decode($data['item_id'])) !== false ? 'selected="selected"' : ''}}>{{xe_trans($item['word'])}}</option>
+                {{--<option value="{{$item['id']}}" {{ array_search($item['id'], json_decode($data['item_id'])) !== false ? 'selected="selected"' : ''}}>{{xe_trans($item['word'])}}</option>--}}
+                <option value="{{$item[0]}}" {{ array_search($item[0], json_decode($data['item_id'])) !== false ? 'selected="selected"' : ''}}>{{xe_trans($item[1])}}</option>
                 {{--{{$item['id']}}--}}
             @endforeach
         </select>

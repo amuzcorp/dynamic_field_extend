@@ -5,7 +5,8 @@
     {{--<div>{{xe_trans($config->get('label'))}}</div>--}}
     <ul>
         @foreach ($items as $item)
-            <li>{{xe_trans($item->word)}}<input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item->id}}"></li>
+            {{--<li>{{xe_trans($item->word)}}<input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item->id}}"></li>--}}
+            <li><input type="checkbox" name="{{$config->get('id') . '_item_id[]'}}" value="{{$item[0]}}">{{xe_trans($item[1])}}</li>
         @endforeach
     </ul>
     {{--</select>--}}

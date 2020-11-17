@@ -10,9 +10,12 @@
         </label>
         @foreach ($data['items'] as $item)
             <label class="xe-label">
-                <input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item['value']}}" @if (json_decode($data['item_id']) == $item['value']) checked @endif>
+                {{--<input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item['value']}}" @if (json_decode($data['item_id']) == $item['value']) checked @endif>--}}
+                {{--<span class="xe-input-helper"></span>--}}
+                {{--<span class="xe-label-text">{{xe_trans($item['text'])}}</span>--}}
+                <input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item[0]}}" @if (json_decode($data['item_id']) == $item[0]) checked @endif>
                 <span class="xe-input-helper"></span>
-                <span class="xe-label-text">{{xe_trans($item['text'])}}</span>
+                <span class="xe-label-text">{{xe_trans($item[1])}}</span>
             </label>
         @endforeach
 
@@ -25,9 +28,12 @@
         </label>
         @foreach ($data['items'] as $item)
             <label class="xe-label">
-                <input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item['value']}}" @if(array_search($item['value'], json_decode($data['item_id']))) checked @endif>
+                {{--<input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item['value']}}" @if(array_search($item['value'], json_decode($data['item_id']))) checked @endif>--}}
+                {{--<span class="xe-input-helper"></span>--}}
+                {{--<span class="xe-label-text">{{xe_trans($item['text'])}}</span>--}}
+                <input type="radio" name="{{$config->get('id') . '_item_id'}}" value="{{$item[0]}}" @if(array_search($item[0], json_decode($data['item_id']))) checked @endif>
                 <span class="xe-input-helper"></span>
-                <span class="xe-label-text">{{xe_trans($item['text'])}}</span>
+                <span class="xe-label-text">{{xe_trans($item[1])}}</span>
             </label>
         @endforeach
 
