@@ -1,4 +1,5 @@
 <div>
+        <label class="xu-form-group__label __xe_df __xe_df_category __xe_df_category_{{$config->get('id')}}">{{xe_trans($config->get('label'))}}</label><br>
     @if(strpos($data['column'], "xi-spinner") !== false)
         <div class="my{{$config->get('id')}}_div {{$data['column']}} xi-3x xi-spin"></div>
     @else
