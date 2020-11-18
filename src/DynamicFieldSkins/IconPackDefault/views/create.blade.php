@@ -123,6 +123,8 @@
         top:50%;
         margin-top: -150px;
         z-index: 2;
+        left:0px;
+        margin-left: 25%;
     }
 
     .layer_in{
