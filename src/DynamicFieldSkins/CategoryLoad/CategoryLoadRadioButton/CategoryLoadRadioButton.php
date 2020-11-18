@@ -266,7 +266,7 @@ class CategoryLoadRadioButton extends AbstractSkin
         if($my_grade == 0 or $my_grade == 1){
             return "";
         }else{
-            return "ㄴ";
+            return "└";
         }
     }
 }

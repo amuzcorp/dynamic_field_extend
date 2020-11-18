@@ -117,6 +117,16 @@
                     "name": "CategoryInputCheckSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryInput\\CategoryInputCheckBox\\CategoryInputCheckBox"
+                },
+                "fieldType/dynamic_field_extend@iconpack": {
+                    "name": "IconPack fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\IconPack\\IconPackField"
+                },
+                "fieldType/dynamic_field_extend@iconpack/fieldSkin/dynamic_field_extend@iconpackdefault": {
+                    "name": "IconPackDefault fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\IconPackDefault\\IconPackDefault"
                 }
             }
         }

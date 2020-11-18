@@ -5,7 +5,6 @@
            value="#ffffff" placeholder="{{xe_trans($config->get('placeholder',''))}}" >
     <button type="button" class="xe-btn") onclick=color_apply("{{$config->get('id').'_column'}}")>적용</button>
 </div>
-
 <script>
     function color_apply(input_id) {
         //console.log(my_data.value);
@@ -28,5 +27,6 @@
         font-size: 14px;
         padding: 7px 16px;
         width:100px;
+        margin: 5px;
     }
 </style>

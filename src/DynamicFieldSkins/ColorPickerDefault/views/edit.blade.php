@@ -32,5 +32,6 @@
         font-size: 14px;
         padding: 7px 16px;
         width:100px;
+        margin: 5px;
     }
 </style>
