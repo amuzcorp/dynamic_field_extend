@@ -117,7 +117,7 @@
     .{{$config->get('id')}}_layer{
         display: none;
         height: 300px;
-        width: 55%;
+        width: 50%;
         background: #b1b5b2;
         position: fixed;
         top:50%;
