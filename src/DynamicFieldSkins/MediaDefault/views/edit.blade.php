@@ -20,7 +20,7 @@
     <button type="button" class="xe-btn" onclick=media_popup("{{$config->get('id')}}")><i class="xi-plus"></i> 미디어 라이브러리</button>
 </div>
 <ul class="thumb_{{$config->get('id')}}" id="thumb_{{$config->get('id')}}" style="padding-left: 0px;">
-<input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}" value="">
+<input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}" value="{{$args[$config->get('id').'_column']}}">
 @if($media)
     @foreach($media as $data)
             @if(XeStorage::find($data))
