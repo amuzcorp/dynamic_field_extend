@@ -6,3 +6,46 @@ div.title {
 	font-size: 30px;
 	padding: 200px;
 }
+
+.map{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.store-list{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
+
+.store-item {
+	border-top: 2px solid #305446;
+	padding: 0 0 20px 0;
+	width: 100%;
+}
+
+.store-item-del{
+	margin: 3px;
+}
+.store-item .store-btn {
+	display: inline-block;
+	padding: 5px 15px;
+	border: 1px solid #ccc;
+	border-radius: 100px;
+	text-decoration:none;
+	color: black;
+}
+
+.store-item h3 {
+	font-size: 16px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.store-item .address-field {
+	display: block;
+	padding: 15px;
+	font-size: 13px;
+	color: #666;
+}

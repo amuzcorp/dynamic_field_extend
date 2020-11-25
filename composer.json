@@ -127,6 +127,16 @@
                     "name": "IconPackDefault fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\IconPackDefault\\IconPackDefault"
+                },
+                "fieldType/dynamic_field_extend@map": {
+                    "name": "Map fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Map\\MapField"
+                },
+                "fieldType/dynamic_field_extend@map/fieldSkin/dynamic_field_extend@kakaomap": {
+                    "name": "KakaoMap fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\KakaoMap\\KakaoMap"
                 }
             }
         }

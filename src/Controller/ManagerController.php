@@ -30,6 +30,8 @@ class ManagerController extends Controller
             $config->set('edittable', 1);
             $config->set('category_load', 1);
             $config->set('category_input', 1);
+            $config->set('kakao_map_key', "");
+            $config->set('naver_map_key', "");
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
 
@@ -46,7 +48,9 @@ class ManagerController extends Controller
             'color_picker' => $request->get('color_picker'),
             'edittable' => $request->get('edittable'),
             'category_load' => $request->get('category_load'),
-            'category_input' => $request->get('category_input')
+            'category_input' => $request->get('category_input'),
+            'kakao_map_key' => $request->get('kakao_map_key'),
+            'naver_map_key' => $request->get('naver_map_key'),
         ]);
         return Redirect::to(route('manage.dynamic_field_extend.index'));
     }
