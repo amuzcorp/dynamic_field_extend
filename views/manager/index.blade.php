@@ -48,8 +48,8 @@
         <input type="text" name="kakao_map_key" value="{{$config->get('kakao_map_key')}}" style="width:400px" placeholder="카카오 맵 appkey를 입력해주세요.">
 
         <br>
-        네이버 맵api 키
-        <input type="text" name="naver_map_key" value="{{$config->get('naver_map_key')}}" style="width:400px" placeholder="네이버 맵 key를 입력해주세요.">
+        네이버 ClientId
+        <input type="text" name="naver_map_key" value="{{$config->get('naver_map_key')}}" style="width:400px" placeholder="네이버 맵 api ClientId를 입력해주세요.">
 
         <br><br>
         {{--<label for="favcolor">색상선택:</label>--}}

@@ -118,12 +118,12 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryInput\\CategoryInputCheckBox\\CategoryInputCheckBox"
                 },
-                "fieldType/dynamic_field_extend@iconpack": {
+                "fieldType/dynamic_field_extend@IconPack": {
                     "name": "IconPack fieldType",
                     "description": "The fieldType supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\IconPack\\IconPackField"
                 },
-                "fieldType/dynamic_field_extend@iconpack/fieldSkin/dynamic_field_extend@iconpackdefault": {
+                "fieldType/dynamic_field_extend@IconPack/fieldSkin/dynamic_field_extend@IconPackDefault": {
                     "name": "IconPackDefault fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\IconPackDefault\\IconPackDefault"
@@ -137,6 +137,11 @@
                     "name": "KakaoMap fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\KakaoMap\\KakaoMap"
+                },
+                "fieldType/dynamic_field_extend@map/fieldSkin/dynamic_field_extend@navermap": {
+                    "name": "NaverMap fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\NaverMap\\NaverMap"
                 }
             }
         }

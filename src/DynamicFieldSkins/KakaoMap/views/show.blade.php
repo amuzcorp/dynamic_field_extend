@@ -20,9 +20,22 @@
     <input type="hidden" id="{{$config->get('id')}}_auto_center" name="{{$config->get('id')}}_auto_center" value="{{$args[$config->get('id')."_auto_center"]}}">
     <input type="hidden" id="{{$config->get('id')}}_center_location" name="{{$config->get('id')}}_center_location" value="{{$args[$config->get('id')."_center_location"]}}">
 
+    <div class="map_wrap" style="width:500px;height:410px;float:left;position: relative;">
+        <div class="map" id="{{$config->get('id')}}_map" style="width:500px;height:400px;float:left; @if(!array_filter(json_decode($args[$config->get('id')."_location_data"]))) display: none; @endif"></div>
+        <!-- 지도타입 컨트롤 div 입니다 -->
+        <div class="custom_typecontrol radius_border">
+            <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+            <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+        </div>
+        <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+        <div class="custom_zoomcontrol radius_border">
+            <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>
+            <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+        </div>
+    </div>
+    <div class="store-list" id="{{$config->get('id')}}_store_list" style="width:400px;height:400px;overflow:auto;">
 
-    <div class="map" id="{{$config->get('id')}}_map" style="width:500px;height:400px;float:left"></div>
-    <div class="store-list" id="{{$config->get('id')}}_store_list" style="width:250px;height:400px;overflow:auto;">
+
 
         <div class="row_map">
             @foreach(json_decode($args[$config->get('id')."_location_data"]) as $location)
@@ -77,6 +90,31 @@
 
     // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
     var {{$config->get('id')}}_bounds = new kakao.maps.LatLngBounds();
+
+    // 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+    function setMapType(maptype) {
+        var roadmapControl = document.getElementById('btnRoadmap');
+        var skyviewControl = document.getElementById('btnSkyview');
+        if (maptype === 'roadmap') {
+            {{$config->get('id')}}_map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+            roadmapControl.className = 'selected_btn';
+            skyviewControl.className = 'btn';
+        } else {
+            {{$config->get('id')}}_map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+            skyviewControl.className = 'selected_btn';
+            roadmapControl.className = 'btn';
+        }
+    }
+
+    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+    function zoomIn() {
+        {{$config->get('id')}}_map.setLevel({{$config->get('id')}}_map.getLevel() - 1);
+    }
+
+    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+    function zoomOut() {
+        {{$config->get('id')}}_map.setLevel({{$config->get('id')}}_map.getLevel() + 1);
+    }
 
 
     // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다

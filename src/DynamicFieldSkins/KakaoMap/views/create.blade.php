@@ -69,7 +69,7 @@
         <p>위치 제목을 입력해주세요.</p>
         <input type="text" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
         <p>위치 주소를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value="부산 남구 용호4동 533-16"><br>
+        <input type="text" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
         <p>나머지 주소를 입력해주세요.</p>
         <input type="text" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
         <p>연락처를 입력해주세요.</p>
@@ -392,6 +392,7 @@
             }
         }
 
+        {{$config->get('id')}}_auto_chk();
         my_col.parentNode.parentNode.parentNode.remove();
     }
 

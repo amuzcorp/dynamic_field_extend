@@ -96,7 +96,7 @@
         <p>위치 제목을 입력해주세요.</p>
         <input type="text" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
         <p>위치 주소를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value="부산 남구 용호4동 533-16"><br>
+        <input type="text" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
         <p>나머지 주소를 입력해주세요.</p>
         <input type="text" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
         <p>연락처를 입력해주세요.</p>
@@ -124,7 +124,7 @@
     var {{$config->get('id')}}_map = new kakao.maps.Map({{$config->get('id')}}_mapContainer, mapOption); // 지도를 생성합니다
 
     // 주소-좌표 변환 객체를 생성합니다
-    var geocoder = new kakao.maps.services.Geocoder();
+    var {{$config->get('id')}}_geocoder = new kakao.maps.services.Geocoder();
 
 
     // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
@@ -293,7 +293,7 @@
 
 
     function {{$config->get('id')}}_center_auto_apply(position) {
-        if("{{$args[$config->get('id').'_auto_center']}}" == "true") {
+        if({{$config->get('id')}}_center_auto_set()) {
 
             {{$config->get('id')}}_bounds = new kakao.maps.LatLngBounds();
             var my_bounds = [];
@@ -312,11 +312,13 @@
             //======중앙 자동 지정 end
         }else {
             var center = document.getElementById("{{$config->get('id')}}_center_location").value.split(",");
-            coords = new kakao.maps.LatLng(center[0], center[1]);
-            //마커 수동 중앙 지정
-            {{$config->get('id')}}_map.setCenter(coords);
-            {{$config->get('id')}}_map.setLevel({{$args[$config->get('id').'_zoom_level']}});
-            //마커 수동 중앙 지정end
+            if(center.length>1) {
+                coords = new kakao.maps.LatLng(center[0], center[1]);
+                //마커 수동 중앙 지정
+                {{$config->get('id')}}_map.setCenter(coords);
+                {{$config->get('id')}}_map.setLevel({{$args[$config->get('id').'_zoom_level']}});
+                //마커 수동 중앙 지정end
+            }
         }
     }
 
@@ -385,7 +387,7 @@
 
 
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch(my_addr_array, function (result, status) {
+        {{$config->get('id')}}_geocoder.addressSearch(my_addr_array, function (result, status) {
             // 정상적으로 검색이 완료됐으면
             if (status === kakao.maps.services.Status.OK) {
                 coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -405,7 +407,7 @@
 
 
         // 주소로 좌표를 검색합니다
-        geocoder.addressSearch(my_addr_array, function (result, status) {
+        {{$config->get('id')}}_geocoder.addressSearch(my_addr_array, function (result, status) {
             // 정상적으로 검색이 완료됐으면
             if (status === kakao.maps.services.Status.OK) {
                 coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -438,7 +440,9 @@
 
         div_str+='<span class="address-field">'+addr+' '+addr_ex+'</span>';
         div_str+= '<div class="btn_area"><a class="store-btn xi-call" href="tel:+82'+phone+'">'+phone+'</a>';
+        @if(isset($location_array[4]) && isset($location_array[5]))
         div_str+=' <a class="store-btn xi-maker" href="javascript:'+'{{$config->get("id")}}'+'_setCenter({{$location_array[4]}},{{$location_array[5]}})" >위치보기</a>';
+        @endif
         div_str+='</div>';
         div_str+='<input type="hidden" name="{{$config->get('id')}}_location_data[]" value=\'{"0":"'+title+'", "1":"'+addr+'", "2":"'+addr_ex+'", "3":"'+phone+'", "4":"'+lat+'", "5":"'+lng+'"}\'>';
         {{--div_str+='<input type="hidden" name="{{$config->get('id')}}_location_data[]" value=\'{"'+title+'","'+addr+'","'+addr_ex+'","'+phone+'",'+lat+','+lng+'}\'>';--}}
@@ -518,13 +522,14 @@
 
     function {{$config->get('id')}}_list_del(my_col, lat, lng) {
         for(var i=0; i<{{$config->get('id')}}_markers.length; i++ ){
-            //console.log({{$config->get('id')}}_markers[i].getPosition().getLng());
-            //console.log(lng);
+            {{--//console.log({{$config->get('id')}}_markers[i].getPosition().getLng());--}}
+            {{--//console.log(lng);--}}
             if(({{$config->get('id')}}_markers[i].getPosition().getLat() == lat) && ({{$config->get('id')}}_markers[i].getPosition().getLng() == lng)) {
                 {{$config->get('id')}}_markers[i].setMap(null);
                 {{$config->get('id')}}_infowindows[i].close();
             }
         }
+        {{$config->get('id')}}_auto_chk();
         my_col.parentNode.parentNode.parentNode.remove();
     }
 
