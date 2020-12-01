@@ -121,10 +121,13 @@ class CategoryLoadDefault extends AbstractSkin
         if (isset($args[$this->config->get('id') . '_item_id'])) {
             $item = CategoryItem::find(json_decode($args[$this->config->get('id') . '_item_id']));
         }
-        $this->addMergeData([
-            'categoryItems' => $category->items,
-            'categoryItem' => $item,
-        ]);
+
+        if(isset($category->items)) {
+            $this->addMergeData([
+                'categoryItems' => $category->items,
+                'categoryItem' => $item,
+            ]);
+        }
 
         $my_data = $this->mergeData;
         //$items = $my_data['categoryItems'];

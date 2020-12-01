@@ -94,15 +94,15 @@
 <div id="input_addr" style="width:250px;height:400px;overflow:auto">
     <div>
         <p>위치 제목을 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
         <p>위치 주소를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
         <p>나머지 주소를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
         <p>연락처를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_phone" id="{{$config->get('id')}}_addr_phone" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_phone" id="{{$config->get('id')}}_addr_phone" value=""><br>
         <p>마우스를 올리면 표시될 내용입니다.</p>
-        <textarea  name="{{$config->get('id')}}_addr_sign" id="{{$config->get('id')}}_addr_sign" value=""></textarea><br>
+        <textarea  class="xe-form-control" name="{{$config->get('id')}}_addr_sign" id="{{$config->get('id')}}_addr_sign" value=""></textarea><br>
     </div>
     <button class="xe-btn" type="button" onclick="{{$config->get('id')}}_search_marks()">위치추가</button>
 </div>
@@ -129,6 +129,22 @@
 
     // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
     var {{$config->get('id')}}_bounds = new kakao.maps.LatLngBounds();
+
+    var visible_chk = true;
+    $(document).scroll(function() {//카카오 지도 맵이 숨겨진 상태에서 로드되면 깨지는 현상에 대한 부분
+        //console.log($(".map").visible());
+        if($(".map").is(":visible"))
+        {
+            if(visible_chk) {
+                {{$config->get('id')}}_map.relayout();
+                visible_chk = false;
+                //alert("노출되고있음.");
+            }
+            //
+        }else{
+            //alert("숨겨져있음.");
+        }
+    });
 
 
     // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
@@ -293,7 +309,7 @@
 
 
     function {{$config->get('id')}}_center_auto_apply(position) {
-        if({{$config->get('id')}}_center_auto_set()) {
+        if({{$config->get('id')}}_center_auto_set() || !document.getElementById("{{$config->get('id')}}_center_val").value) {
 
             {{$config->get('id')}}_bounds = new kakao.maps.LatLngBounds();
             var my_bounds = [];

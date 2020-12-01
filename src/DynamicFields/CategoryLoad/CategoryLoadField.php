@@ -64,8 +64,9 @@ class CategoryLoadField extends AbstractType
      */
     public function getSettingsRules()
     {
-        return [];
+        //return [];
         //return ['category_id' => 'required'];
+        return ['category_load' => 'required'];
     }
 
     /**

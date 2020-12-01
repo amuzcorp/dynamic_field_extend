@@ -94,15 +94,15 @@
 <div id="input_addr" style="width:250px;height:400px;overflow:auto">
     <div>
         <p>위치 제목을 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
         <p>위치 주소를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
         <p>나머지 주소를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
         <p>연락처를 입력해주세요.</p>
-        <input type="text" name="{{$config->get('id')}}_addr_phone" id="{{$config->get('id')}}_addr_phone" value=""><br>
+        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_phone" id="{{$config->get('id')}}_addr_phone" value=""><br>
         <p>마우스를 올리면 표시될 내용입니다.</p>
-        <textarea  name="{{$config->get('id')}}_addr_sign" id="{{$config->get('id')}}_addr_sign" value=""></textarea><br>
+        <textarea  class="xe-form-control" name="{{$config->get('id')}}_addr_sign" id="{{$config->get('id')}}_addr_sign" value=""></textarea><br>
     </div>
 
     <button class="xe-btn" type="button" onclick="{{$config->get('id')}}_searchAddressToCoordinate()">위치추가</button>

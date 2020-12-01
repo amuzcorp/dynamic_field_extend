@@ -106,6 +106,22 @@
         }
     }
 
+    var visible_chk = true;
+    $(document).scroll(function() {//카카오 지도 맵이 숨겨진 상태에서 로드되면 깨지는 현상에 대한 부분
+        //console.log($(".map").visible());
+        if($(".map").is(":visible"))
+        {
+            if(visible_chk) {
+                {{$config->get('id')}}_map.relayout();
+                visible_chk = false;
+                //alert("노출되고있음.");
+            }
+            //
+        }else{
+            //alert("숨겨져있음.");
+        }
+    });
+
     // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
     function zoomIn() {
         {{$config->get('id')}}_map.setLevel({{$config->get('id')}}_map.getLevel() - 1);
@@ -218,7 +234,7 @@
 
 
     function {{$config->get('id')}}_center_auto_apply(position) {
-        if("{{$args[$config->get('id').'_auto_center']}}" == "true") {
+        if("{{$args[$config->get('id').'_auto_center']}}" == "true" || !document.getElementById("{{$config->get('id')}}_center_location").value) {
 
             {{$config->get('id')}}_bounds = new kakao.maps.LatLngBounds();
             var my_bounds = [];
