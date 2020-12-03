@@ -16,6 +16,7 @@
             @endforeach
         </select>
     @else
+        <input type="hidden" name="category_load" value="{{$config->get('category_load')}}">
         <div>원본 카테고리 정보 - 아이디 : {{$config->get('category_load')}}</div>
         {{--<a href="{{ route('manage.category.show', ['id' => $config->get('category_load')]) }}" target="_blank">{{xe_trans('xe::categoryManagement')}}</a>--}}
         <a href="{{ route('manage.category.show', ['id' => $config->get('category_load')]) }}" target="_blank">{{xe_trans('xe::categoryManagement')}}</a>

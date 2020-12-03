@@ -14,23 +14,30 @@
 @expose_route('media_library.move_file')
 @expose_route('media_library.upload')
 @expose_route('media_library.download_file')
-<input type="hidden" name="_column" value="dum">
-<label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
-<div>
-    <button type="button" class="xe-btn" onclick=media_popup("{{$config->get('id')}}")><i class="xi-plus"></i> 미디어 라이브러리</button>
+<div class="xe-form-group xe-dynamicField">
+    <input type="hidden" name="_column" value="dum">
+    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
+    <div>
+        <button type="button" class="xe-btn" onclick=media_popup("{{$config->get('id')}}")><i class="xi-plus"></i> 미디어
+            라이브러리
+        </button>
+    </div>
+    <ul class="thumb_{{$config->get('id')}}" id="thumb_{{$config->get('id')}}" style="padding-left: 0px;">
+        <input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}"
+               value="{{json_encode($media)}}">
+        @if($media)
+            @foreach($media as $data)
+                @if(XeStorage::find($data))
+                    <li class="media_li" onclick="media_del(this)"><img width=100px height=100px
+                                                                        src="{{$storage_path.'/'.XeStorage::find($data)->path.'/'.XeStorage::find($data)->filename}}">
+                        <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}"
+                               value="{{$data}}">
+                    </li>
+                @endif
+            @endforeach
+        @endif
+    </ul>
 </div>
-<ul class="thumb_{{$config->get('id')}}" id="thumb_{{$config->get('id')}}" style="padding-left: 0px;">
-<input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}" value="{{$args[$config->get('id').'_column']}}">
-@if($media)
-    @foreach($media as $data)
-            @if(XeStorage::find($data))
-                <li class="media_li" onclick="media_del(this)"><img width=100px height=100px src="{{$storage_path.'/'.XeStorage::find($data)->path.'/'.XeStorage::find($data)->filename}}" >
-                <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}" value="{{$data}}">
-                </li>
-            @endif
-    @endforeach
-@endif
-</ul>
 <script>
     //id : 유저id
     //rating : 유저권한
@@ -57,9 +64,9 @@
 
                         // console.log(mediaList[cnt]['file']);
 
-                        var over_chk = $('.thumb_'+media_id).find("input."+mediaList[cnt]['file']['id']).val();
+                        var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
 
-                        if(over_chk==null) {
+                        if (over_chk == null) {
                             var img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
                             img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
                             img_string += '</li>';
@@ -81,12 +88,12 @@
 </script>
 
 <style>
-    .media_li{
-         list-style-type: none;
-         display: inline;
-     }
+    .media_li {
+        list-style-type: none;
+        display: inline;
+    }
 
-    .media_li:hover{
+    .media_li:hover {
         cursor: pointer;
     }
 </style>

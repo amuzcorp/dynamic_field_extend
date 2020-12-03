@@ -14,14 +14,17 @@
 @expose_route('media_library.move_file')
 @expose_route('media_library.upload')
 @expose_route('media_library.download_file')
+<div class="xe-form-group xe-dynamicField">
+    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
+    <div>
+        <button type="button" class="xe-btn" onclick=media_popup("{{$config->get('id')}}")><i class="xi-plus"></i> 미디어
+            라이브러리
+        </button>
 
-<label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
-<div>
-    <button type="button" class="xe-btn" onclick=media_popup("{{$config->get('id')}}")><i class="xi-plus"></i> 미디어 라이브러리</button>
-
-</div>
-<ul class="thumb_{{$config->get('id')}}"  style="padding-left: 0px;"></ul>
+    </div>
+    <ul class="thumb_{{$config->get('id')}}" style="padding-left: 0px;"></ul>
     {{--<input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}" value="{{$config->get('id')}}">--}}
+</div>
 <script>
     //id : 유저id
     //rating : 유저권한
@@ -45,15 +48,15 @@
                         //console.log(mediaList[0]['file']);
 
                         {{--for(var key in mediaList) {--}}
-                            {{--//console.log(mediaList[key]);--}}
-                            {{--$('.thumb_{{$config->get('id')}}').append('<img src='+mediaList[key]['file']['url']+'>');--}}
+                        {{--//console.log(mediaList[key]);--}}
+                        {{--$('.thumb_{{$config->get('id')}}').append('<img src='+mediaList[key]['file']['url']+'>');--}}
                         {{--}--}}
                         //console.log(mediaList[cnt]['file']);
 
 
-                        var over_chk = $('.thumb_'+media_id).find("input."+mediaList[cnt]['file']['id']).val();
+                        var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
 
-                        if(over_chk==null) {
+                        if (over_chk == null) {
                             var img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
                             img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
                             img_string += '</li>';
@@ -75,12 +78,12 @@
 </script>
 
 <style>
-    .media_li{
+    .media_li {
         list-style-type: none;
         display: inline;
     }
 
-    .media_li:hover{
+    .media_li:hover {
         cursor: pointer;
     }
 </style>

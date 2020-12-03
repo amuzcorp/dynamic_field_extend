@@ -142,6 +142,16 @@
                     "name": "NaverMap fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\NaverMap\\NaverMap"
+                },
+                "fieldType/dynamic_field_extend@workhours": {
+                    "name": "WorkHours fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\WorkHours\\WorkHoursField"
+                },
+                "fieldType/dynamic_field_extend@workhours/fieldSkin/dynamic_field_extend@workhoursdefault": {
+                    "name": "WorkHoursDefault fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\WorkHoursDefault\\WorkHoursDefault"
                 }
             }
         }

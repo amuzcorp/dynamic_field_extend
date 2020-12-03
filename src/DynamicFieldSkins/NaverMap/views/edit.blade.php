@@ -1,118 +1,155 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/style.css')->load()}}
-        <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    {{--<title>간단한 지도 표시하기</title>--}}
-    <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h><br>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
-</head>
-<body>
-<input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]" value="">
-<input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]" value="">
-<input type="hidden" id="{{$config->get('id')}}_zoom_level" name="{{$config->get('id')}}_zoom_level" value="{{$args[$config->get('id')."_zoom_level"]}}">
-<input type="hidden" id="{{$config->get('id')}}_auto_center" name="{{$config->get('id')}}_auto_center" value="{{$args[$config->get('id')."_auto_center"]}}">
-<input type="hidden" id="{{$config->get('id')}}_center_location" name="{{$config->get('id')}}_center_location" value="{{$args[$config->get('id')."_center_location"]}}">
-<input type="hidden" id="{{$config->get('id')}}_list_display" name="{{$config->get('id')}}_list_display" value="{{$args[$config->get('id')."_list_display"]}}">
+<div class="xe-form-group xe-dynamicField">
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        {{--<title>간단한 지도 표시하기</title>--}}
+        <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
+        <br>
+        <script type="text/javascript"
+                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
+    </head>
+    <body>
+    <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
+           value="">
+    <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
+           value="">
+    <input type="hidden" id="{{$config->get('id')}}_zoom_level" name="{{$config->get('id')}}_zoom_level"
+           value="@if($args[$config->get('id')."_zoom_level"]) {{$args[$config->get('id')."_zoom_level"]}} @else 11 @endif">
+    <input type="hidden" id="{{$config->get('id')}}_auto_center" name="{{$config->get('id')}}_auto_center"
+           value="{{$args[$config->get('id')."_auto_center"]}}">
+    <input type="hidden" id="{{$config->get('id')}}_center_location" name="{{$config->get('id')}}_center_location"
+           value="{{$args[$config->get('id')."_center_location"]}}">
+    <input type="hidden" id="{{$config->get('id')}}_list_display" name="{{$config->get('id')}}_list_display"
+           value="{{$args[$config->get('id')."_list_display"]}}">
 
-<div class="xe-btn-toggle">
-    <label>
-        <span class="sr-only">중앙자동지정</span><br>
-        <input type="checkbox" id="{{$config->get('id')}}_auto_set" name="{{$config->get('id')}}_auto_set" onchange="{{$config->get('id')}}_auto_chk()" @if($args[$config->get('id')."_auto_center"] == "true") checked @endif>
-        <span class="toggle"></span>
-    </label>
-</div>
-<div class="xe-btn-toggle">
-    <label>
-        <span class="sr-only">리스트 표시</span><br>
-        <input type="checkbox" id="{{$config->get('id')}}_list_display_chk" name="{{$config->get('id')}}_list_display_chk" onchange="{{$config->get('id')}}_list_chk()" @if($args[$config->get('id')."_list_display"] == "true") checked @endif>
-        <span class="toggle"></span>
-    </label>
-</div>
-<br>
-<script>
-    function {{$config->get('id')}}_list_chk() {
-        //alert(document.getElementById("{{$config->get('id')}}_list_display_chk").checked);
-        document.getElementById("{{$config->get('id')}}_list_display").value=document.getElementById("{{$config->get('id')}}_list_display_chk").checked;
-    }
-    {{$config->get('id')}}_list_chk();
-</script>
-<div class="{{$config->get('id')}}_auto_settings" style="display: block">
-    <span>확대레벨(수치가 클수록 가까워집니다.) :</span>
-    <input type="text" id="{{$config->get('id')}}_zoom" name="{{$config->get('id')}}_zoom_level" value="{{$args[$config->get('id').'_zoom_level']}}" style="width:30px"><br>
-    <span>중앙위치지정(마우스로 지도 위치를 클릭하면 지정됩니다.)</span>
-    <input type="text" id="{{$config->get('id')}}_center_val" name="{{$config->get('id')}}_center_location" value="{{$args[$config->get('id').'_center_location']}}" style="width: 400px">
+    <div class="xe-btn-toggle">
+        <label>
+            <span class="sr-only">중앙자동지정</span><br>
+            <input type="checkbox" id="{{$config->get('id')}}_auto_set" name="{{$config->get('id')}}_auto_set"
+                   onchange="{{$config->get('id')}}_auto_chk()"
+                   @if($args[$config->get('id')."_auto_center"] == "true") checked @endif>
+            <span class="toggle"></span>
+        </label>
+    </div>
+    <div class="xe-btn-toggle">
+        <label>
+            <span class="sr-only">리스트 표시</span><br>
+            <input type="checkbox" id="{{$config->get('id')}}_list_display_chk"
+                   name="{{$config->get('id')}}_list_display_chk" onchange="{{$config->get('id')}}_list_chk()"
+                   @if($args[$config->get('id')."_list_display"] == "true") checked @endif>
+            <span class="toggle"></span>
+        </label>
+    </div>
     <br>
-</div>
+    <script>
+        function {{$config->get('id')}}_list_chk() {
+            //alert(document.getElementById("{{$config->get('id')}}_list_display_chk").checked);
+            document.getElementById("{{$config->get('id')}}_list_display").value = document.getElementById("{{$config->get('id')}}_list_display_chk").checked;
+        }
 
-{{--<div class="map" id="{{$config->get('id')}}_map" style="width:500px;height:400px;float:left"></div>--}}
+        {{$config->get('id')}}_list_chk();
+    </script>
+    <div class="{{$config->get('id')}}_auto_settings" style="display: block">
+        <span>확대레벨(수치가 클수록 가까워집니다.) :</span>
+        <input type="text" class="zoom_level_input" id="{{$config->get('id')}}_zoom"
+               name="{{$config->get('id')}}_zoom_level"
+               value="@if($args[$config->get('id')."_zoom_level"]) {{$args[$config->get('id')."_zoom_level"]}} @else 11 @endif"
+               style="width:30px"><br>
+        <span>중앙위치지정(마우스로 지도 위치를 클릭하면 지정됩니다.)</span>
+        <input type="text" class="auto_center_location_input" id="{{$config->get('id')}}_center_val"
+               name="{{$config->get('id')}}_center_location" value="{{$args[$config->get('id').'_center_location']}}"
+               style="width: 400px" autocomplete="off">
+        <br>
+    </div>
 
-<div class="map" id="map" style="width:500px;height:400px;float:left"></div>
+    {{--<div class="map" id="{{$config->get('id')}}_map" style="width:500px;height:400px;float:left"></div>--}}
 
-<div class="store-list" id="{{$config->get('id')}}_store_list" style="width:250px;height:400px;overflow:auto;float:left">
-    <div class="row_map">
-        {{--<div class="col">--}}
-        {{--<div class="store-item">--}}
-        {{--<div class="store-item-title">제목</div>--}}
-        {{--<span class="address-field">주소</span>--}}
-        {{--<div class="btn_area">--}}
-        {{--<a class="store-btn" href="tel:+82#">연락처</a>--}}
-        {{--<a href="#">위치보기</a>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        @if(isset($args[$config->get('id')."_location_data"]))
-        @foreach(json_decode($args[$config->get('id')."_location_data"]) as $location)
-            @if($location)
-                @php
-                    $location_array = json_decode($location,true);
-                @endphp
-                <div class="col">
-                    <div class="store-item">
-                        <div>
-                            <h3 class="store-item-title" style="float:left">{{$location_array[0]}}</h3>
-                            <button type="button" class="store-item-del xe-btn xi-trash-o" onclick="{{$config->get('id')}}_list_del(this,'{{json_decode($location,true)[4]}}','{{json_decode($location,true)[5]}}')" style="float:right"></button>
-                        </div><div style="clear: both"></div>
-                        <span class="address-field">{{$location_array[1]}} {{$location_array[2]}}</span>
-                        <div class="btn_area">
-                            <a class="store-btn xi-call" href="tel:+82{{$location_array[3]}}">{{$location_array[3]}}</a>
-                            <a class="store-btn xi-maker" href="javascript:{{$config->get('id')}}_setCenter('{{$location_array[4]}}', '{{$location_array[5]}}')" >위치보기</a>
+    <div class="map" id="map" style="width:500px;height:400px;float:left"></div>
+
+    <div class="store-list" id="{{$config->get('id')}}_store_list"
+         style="width:250px;height:400px;overflow:auto;float:left">
+        <div class="row_map">
+            {{--<div class="col">--}}
+            {{--<div class="store-item">--}}
+            {{--<div class="store-item-title">제목</div>--}}
+            {{--<span class="address-field">주소</span>--}}
+            {{--<div class="btn_area">--}}
+            {{--<a class="store-btn" href="tel:+82#">연락처</a>--}}
+            {{--<a href="#">위치보기</a>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+            @if(isset($args[$config->get('id')."_location_data"]))
+                @foreach(json_decode($args[$config->get('id')."_location_data"]) as $location)
+                    @if($location)
+                        @php
+                            $location_array = json_decode($location,true);
+                        @endphp
+                        <div class="col">
+                            <div class="store-item">
+                                <div>
+                                    <h3 class="store-item-title" style="float:left">{{$location_array[0]}}</h3>
+                                    <button type="button" class="store-item-del xe-btn xi-trash-o"
+                                            onclick="{{$config->get('id')}}_list_del(this,'{{json_decode($location,true)[4]}}','{{json_decode($location,true)[5]}}')"
+                                            style="float:right"></button>
+                                </div>
+                                <div style="clear: both"></div>
+                                <span class="address-field">{{$location_array[1]}} {{$location_array[2]}}</span>
+                                <div class="btn_area">
+                                    <a class="store-btn xi-call"
+                                       href="tel:+82{{$location_array[3]}}">{{$location_array[3]}}</a>
+                                    <a class="store-btn xi-maker"
+                                       href="javascript:{{$config->get('id')}}_setCenter('{{$location_array[4]}}', '{{$location_array[5]}}')">위치보기</a>
+                                </div>
+                            </div>
+                            <input type="hidden" name="{{$config->get('id')}}_location_data[]" value="{{$location}}">
+                            <input type="hidden" name="{{$config->get('id')}}_location_info[]"
+                                   value="{{ json_decode($args[$config->get('id')."_location_info"])[$loop->index]}}">
                         </div>
-                    </div>
-                    <input type="hidden" name="{{$config->get('id')}}_location_data[]" value="{{$location}}">
-                    <input type="hidden" name="{{$config->get('id')}}_location_info[]" value="{{ json_decode($args[$config->get('id')."_location_info"])[$loop->index]}}">
-                </div>
+                    @endif
+                @endforeach
             @endif
-        @endforeach
-            @endif
-    </div>
-</div>
-
-
-<div id="input_addr" style="width:250px;height:400px;overflow:auto">
-    <div>
-        <p>위치 제목을 입력해주세요.</p>
-        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_title" id="{{$config->get('id')}}_addr_title" value=""><br>
-        <p>위치 주소를 입력해주세요.</p>
-        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text" id="{{$config->get('id')}}_addr_text" value=""><br>
-        <p>나머지 주소를 입력해주세요.</p>
-        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text_ex" id="{{$config->get('id')}}_addr_text_ex" value=""><br>
-        <p>연락처를 입력해주세요.</p>
-        <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_phone" id="{{$config->get('id')}}_addr_phone" value=""><br>
-        <p>마우스를 올리면 표시될 내용입니다.</p>
-        <textarea  class="xe-form-control" name="{{$config->get('id')}}_addr_sign" id="{{$config->get('id')}}_addr_sign" value=""></textarea><br>
+        </div>
     </div>
 
-    <button class="xe-btn" type="button" onclick="{{$config->get('id')}}_searchAddressToCoordinate()">위치추가</button>
-    {{--<button type="button" onclick="{{$config->get('id')}}_mark_init()">초기화</button>--}}
+
+    <div id="input_addr" style="width:250px;height:400px;overflow:auto">
+        <div>
+            <p>위치 제목을 입력해주세요.</p>
+            <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_title"
+                   id="{{$config->get('id')}}_addr_title" value="">
+            <p>위치 주소를 입력해주세요.</p>
+            <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text"
+                   id="{{$config->get('id')}}_addr_text" value="" autocomplete="off"
+                   onkeyup="{{$config->get('id')}}_location_search(this.value)">
+            <div class="{{$config->get('id')}}_location_ex location_ex_div"></div>
+            <p>나머지 주소를 입력해주세요.</p>
+            <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_text_ex"
+                   id="{{$config->get('id')}}_addr_text_ex" value="">
+            <p>연락처를 입력해주세요.</p>
+            <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_phone"
+                   id="{{$config->get('id')}}_addr_phone" value="">
+            <p>마우스를 올리면 표시될 내용입니다.</p>
+            <textarea class="xe-form-control" name="{{$config->get('id')}}_addr_sign"
+                      id="{{$config->get('id')}}_addr_sign" value=""></textarea>
+        </div>
+
+        <div class="add_list_btn">
+            <button class="xe-btn" type="button" onclick="{{$config->get('id')}}_searchAddressToCoordinate()">위치추가
+            </button>
+        </div>
+        {{--<button type="button" onclick="{{$config->get('id')}}_mark_init()">초기화</button>--}}
+    </div>
+
+    <div style="clear: both"></div>
+    </body>
+    </html>
 </div>
-
-<div style="clear: both"></div>
-</body>
-</html>
-
 <script>
     // var mapOptions = {
     //     center: new naver.maps.LatLng(37.3595704, 127.105399),
@@ -141,8 +178,8 @@
 
     var once_chk = true;
 
-    for(var i=0; i<{{$config->get('id')}}_location_data.length; i++){
-        if({{$config->get('id')}}_location_data[i].value) {
+    for (var i = 0; i < {{$config->get('id')}}_location_data.length; i++) {
+        if ({{$config->get('id')}}_location_data[i].value) {
             var my_data = JSON.parse({{$config->get('id')}}_location_data[i].value);
             {{$config->get('id')}}_manual_mark_add(my_data[1], {{$config->get('id')}}_location_info_content[i].value);
             //append_list_manual(my_data[0],my_data[1],my_data[2],my_data[3],my_data[4],my_data[5], my_data[1]);
@@ -156,7 +193,7 @@
 
         naver.maps.Service.geocode({
             query: address
-        }, function(status, response) {
+        }, function (status, response) {
             if (status === naver.maps.Service.Status.ERROR) {
                 if (!address) {
                     return alert('Geocode Error, Please check address');
@@ -180,33 +217,29 @@
     }
 
 
-
-
     // 마커를 생성하고 지도위에 표시하는 함수입니다
     function {{$config->get('id')}}_addMarker(position, info) {
 
         // 마커를 생성합니다
         var marker = new naver.maps.Marker({
-            position : position,
+            position: position,
             map: {{$config->get('id')}}_map
         });
-
-
 
 
         var double_chk = true;
         var marker_lat = marker.getPosition().x;
         var marker_lng = marker.getPosition().y;
 
-        for(var i=0; i<{{$config->get('id')}}_markers.length; i++ ){// 이미 등록됐는지 체크
-            if(({{$config->get('id')}}_markers[i].getPosition().x == marker_lat) && ({{$config->get('id')}}_markers[i].getPosition().y == marker_lng)) {
-                if({{$config->get('id')}}_markers[i].getMap()) {
+        for (var i = 0; i < {{$config->get('id')}}_markers.length; i++) {// 이미 등록됐는지 체크
+            if (({{$config->get('id')}}_markers[i].getPosition().x == marker_lat) && ({{$config->get('id')}}_markers[i].getPosition().y == marker_lng)) {
+                if ({{$config->get('id')}}_markers[i].getMap()) {
                     double_chk = false;
                 }
             }
         }
 
-        if(double_chk) {
+        if (double_chk) {
             if ({{$config->get('id')}}_append_list(marker_lat, marker_lng)) {//리스트 추가, 입력창 체크
                 // 마커가 지도 위에 표시되도록 설정합니다
                 {{--marker.setMap({{$config->get('id')}}_map);--}}
@@ -227,9 +260,8 @@
 
 
                 var my_info = infoWin_return(info_str);
-                naver.maps.Event.addListener(marker,"mouseover", {{$config->get('id')}}_makeOverListener({{$config->get('id')}}_map, marker, my_info));
-                naver.maps.Event.addListener(marker,"mouseout", {{$config->get('id')}}_makeOutListener(my_info));
-
+                naver.maps.Event.addListener(marker, "mouseover", {{$config->get('id')}}_makeOverListener({{$config->get('id')}}_map, marker, my_info));
+                naver.maps.Event.addListener(marker, "mouseout", {{$config->get('id')}}_makeOutListener(my_info));
 
 
                 {{--{{$config->get('id')}}_infowindows.push(infowindow);--}}
@@ -240,7 +272,7 @@
                 {{$config->get('id')}}_center_auto_apply(position);
 
             }
-        }else{
+        } else {
             alert("이미 등록된 장소입니다.");
         }
     }
@@ -250,28 +282,26 @@
 
         // 마커를 생성합니다
         var marker = new naver.maps.Marker({
-            position : position,
+            position: position,
             map: {{$config->get('id')}}_map
         });
-
-
 
 
         var double_chk = true;
         var marker_lat = marker.getPosition().x;
         var marker_lng = marker.getPosition().y;
 
-        for(var i=0; i<{{$config->get('id')}}_markers.length; i++ ){// 이미 등록됐는지 체크
-            if(({{$config->get('id')}}_markers[i].getPosition().x == marker_lat) && ({{$config->get('id')}}_markers[i].getPosition().y == marker_lng)) {
-                if({{$config->get('id')}}_markers[i].getMap()) {
+        for (var i = 0; i < {{$config->get('id')}}_markers.length; i++) {// 이미 등록됐는지 체크
+            if (({{$config->get('id')}}_markers[i].getPosition().x == marker_lat) && ({{$config->get('id')}}_markers[i].getPosition().y == marker_lng)) {
+                if ({{$config->get('id')}}_markers[i].getMap()) {
                     double_chk = false;
                 }
             }
         }
 
-        if(double_chk) {
+        if (double_chk) {
             {{--if ({{$config->get('id')}}_append_list(marker_lat, marker_lng)) {//리스트 추가, 입력창 체크--}}
-            if(true){
+            if (true) {
                 // 마커가 지도 위에 표시되도록 설정합니다
                 {{--marker.setMap({{$config->get('id')}}_map);--}}
                 marker.setPosition(position);
@@ -291,9 +321,8 @@
 
 
                 var my_info = infoWin_return(info_str);
-                naver.maps.Event.addListener(marker,"mouseover", {{$config->get('id')}}_makeOverListener({{$config->get('id')}}_map, marker, my_info));
-                naver.maps.Event.addListener(marker,"mouseout", {{$config->get('id')}}_makeOutListener(my_info));
-
+                naver.maps.Event.addListener(marker, "mouseover", {{$config->get('id')}}_makeOverListener({{$config->get('id')}}_map, marker, my_info));
+                naver.maps.Event.addListener(marker, "mouseout", {{$config->get('id')}}_makeOutListener(my_info));
 
 
                 {{--{{$config->get('id')}}_infowindows.push(infowindow);--}}
@@ -304,28 +333,28 @@
                 {{$config->get('id')}}_center_auto_apply(position);
 
             }
-        }else{
+        } else {
             alert("이미 등록된 장소입니다.");
         }
     }
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
     function {{$config->get('id')}}_makeOverListener(map, marker, infowindow) {
-        return function() {
+        return function () {
             infowindow.open(map, marker);
         };
     }
 
     // 인포윈도우를 닫는 클로저를 만드는 함수입니다
     function {{$config->get('id')}}_makeOutListener(infowindow) {
-        return function() {
+        return function () {
             infowindow.close();
         };
     }
 
     function {{$config->get('id')}}_delMarker(my_marker) {
-        for(var i=0; i<{{$config->get('id')}}_markers.length; i++ ){
-            if({{$config->get('id')}}_markers[i] == my_marker) {
+        for (var i = 0; i < {{$config->get('id')}}_markers.length; i++) {
+            if ({{$config->get('id')}}_markers[i] == my_marker) {
                 {{$config->get('id')}}_markers[i].setMap(null);
                 {{--{{$config->get('id')}}_infowindows[i].close();--}}
             }
@@ -339,7 +368,7 @@
 
         naver.maps.Service.geocode({
             query: address
-        }, function(status, response) {
+        }, function (status, response) {
             if (status === naver.maps.Service.Status.ERROR) {
                 if (!address) {
                     return alert('Geocode Error, Please check address');
@@ -362,6 +391,63 @@
         });
     }
 
+    function {{$config->get('id')}}_location_search(my_text) {
+
+        var address = my_text;
+
+        var list_div = document.querySelector(".{{$config->get('id')}}_location_ex");
+
+        if (my_text != "") {
+            if (my_text.length > 1) {
+                naver.maps.Service.geocode({
+                    query: address
+                }, function (status, response) {
+                    if (status === naver.maps.Service.Status.ERROR) {
+                        if (!address) {
+                            //return alert('Geocode Error, Please check address');
+                            list_div.style.display = "none";
+                        }
+                        //return alert('Geocode Error, address:' + address);
+                        list_div.style.display = "none";
+                    }
+
+                    console.log(response.v2.addresses);
+                    console.log(my_text.length);
+                    if (response.v2.meta.totalCount === 0) {
+                        //return alert('No result.');
+                        list_div.style.display = "none";
+                    } else {
+                        //console.log(result[0]['address_name']);
+                        var result = response.v2.addresses;
+                        list_div.style.display = "block";
+                        list_div.innerHTML = "";
+
+                        for (var k = 0; k < result.length; k++) {
+                            var p = document.createElement('p');
+                            var result_name = result[k]['roadAddress'];
+                            {{$config->get('id')}}_addClickProxy(p, result_name);
+                            p.append(result_name);
+                            list_div.appendChild(p);
+                        }
+                    }
+
+                });
+            }
+        }
+    }
+
+    function {{$config->get('id')}}_addClickProxy(element, result_name) {
+        var currentOnClick = element.onclick;
+        var list_div = document.querySelector(".{{$config->get('id')}}_location_ex");
+        element.onclick = function () {
+            if (currentOnClick) {
+                currentOnClick();
+            }
+            document.getElementById("{{$config->get('id')}}_addr_text").value = result_name;
+            list_div.style.display = "none";
+        }
+    }
+
     function infoWin_return(str) {
 
         var infoWindow = new naver.maps.InfoWindow({
@@ -370,7 +456,7 @@
 
         infoWindow.setContent([
             '<div style="padding:10px;min-width:100px;line-height:150%;">',
-            '<h4 style="margin-top:5px;">'+str+'</h4><br />'+
+            '<h4 style="margin-top:5px;">' + str + '</h4><br />' +
             '</div>'
         ].join('\n'));
 
@@ -380,14 +466,13 @@
     }
 
 
-
     function {{$config->get('id')}}_initGeocoder() {
         if (!{{$config->get('id')}}_map.isStyleMapReady) {
             return;
         }
 
-        {{$config->get('id')}}_map.addListener('click', function(e) {
-            if(!{{$config->get('id')}}_center_auto_set()) {
+        {{$config->get('id')}}_map.addListener('click', function (e) {
+            if (!{{$config->get('id')}}_center_auto_set()) {
                 document.getElementById("{{$config->get('id')}}_center_val").value = e.coord.y + "," + e.coord.x;
                 {{$config->get('id')}}_map.setCenter(e.coord);
                 {{$config->get('id')}}_map.setZoom(document.getElementById("{{$config->get('id').'_zoom'}}").value);
@@ -410,21 +495,21 @@
 
         div.classList.add("col");
         var div_str = '<div class="store-item">';
-        div_str+='<div ><h3 class="store-item-title" style="float:left">'+title+'</h3>';
-        div_str+='<button type="button" class="store-item-del xe-btn xi-trash-o" onclick="{{$config->get('id')}}_list_del(this, '+lat+','+lng+')" style="float:right"  ></button></div><br>';
-        div_str+='<span class="address-field">'+addr+' '+addr_ex+'</span>';
-        div_str+= '<div class="btn_area"><a class="store-btn xi-call" href="tel:+82'+phone+'">'+phone+'</a>';
+        div_str += '<div ><h3 class="store-item-title" style="float:left">' + title + '</h3>';
+        div_str += '<button type="button" class="store-item-del xe-btn xi-trash-o" onclick="{{$config->get('id')}}_list_del(this, ' + lat + ',' + lng + ')" style="float:right"  ></button></div><br>';
+        div_str += '<span class="address-field">' + addr + ' ' + addr_ex + '</span>';
+        div_str += '<div class="btn_area"><a class="store-btn xi-call" href="tel:+82' + phone + '">' + phone + '</a>';
         //div_str+='<a href="#" class="store-btn xi-maker">위치보기</a></div>';
-        div_str+=' <a class="store-btn xi-maker" href="javascript:'+'{{$config->get("id")}}'+'_setCenter('+lat+','+lng+')" >위치보기</a>';
-        div_str+='</div>';
-        div_str+='<input type="hidden" name="{{$config->get('id')}}_location_data[]" value=\'{"0":"'+title+'", "1":"'+addr+'", "2":"'+addr_ex+'", "3":"'+phone+'", "4":"'+lat+'", "5":"'+lng+'"}\'>';
+        div_str += ' <a class="store-btn xi-maker" href="javascript:' + '{{$config->get("id")}}' + '_setCenter(' + lat + ',' + lng + ')" >위치보기</a>';
+        div_str += '</div>';
+        div_str += '<input type="hidden" name="{{$config->get('id')}}_location_data[]" value=\'{"0":"' + title + '", "1":"' + addr + '", "2":"' + addr_ex + '", "3":"' + phone + '", "4":"' + lat + '", "5":"' + lng + '"}\'>';
         {{--div_str+='<input type="hidden" name="{{$config->get('id')}}_location_data[]" value=\'{"'+title+'","'+addr+'","'+addr_ex+'","'+phone+'",'+lat+','+lng+'}\'>';--}}
-            div_str+='<input type="hidden" name="{{$config->get('id')}}_location_info[]" value="'+detail+'">';
+            div_str += '<input type="hidden" name="{{$config->get('id')}}_location_info[]" value="' + detail + '">';
         div.innerHTML = div_str;
-        if(title) {
+        if (title) {
             list_child[1].appendChild(div);
             title_chk = true;
-        }else{
+        } else {
             alert("제목 내용이 있어야 리스트에 추가됩니다.");
             title_chk = false;
         }
@@ -434,8 +519,8 @@
     }
 
     function {{$config->get('id')}}_list_del(my_col, lat, lng) {
-        for(var i=0; i<{{$config->get('id')}}_markers.length; i++ ){
-            if(({{$config->get('id')}}_markers[i].getPosition().x == lat) && ({{$config->get('id')}}_markers[i].getPosition().y == lng)) {
+        for (var i = 0; i < {{$config->get('id')}}_markers.length; i++) {
+            if (({{$config->get('id')}}_markers[i].getPosition().x == lat) && ({{$config->get('id')}}_markers[i].getPosition().y == lng)) {
                 {{$config->get('id')}}_markers[i].setMap(null);
                 {{--{{$config->get('id')}}_infowindows[i].close();--}}
                 {{--document.getElementById("{{$config->get('id')}}_location_data").value = JSON.stringify(positions);--}}
@@ -450,13 +535,13 @@
 
     function {{$config->get('id')}}_auto_chk() {
         var my_display = document.querySelector('.{{$config->get('id')}}_auto_settings').style.display;
-        if({{$config->get('id')}}_center_auto_set() && my_display == "block"){
+        if ({{$config->get('id')}}_center_auto_set() && my_display == "block") {
             document.querySelector('.{{$config->get('id')}}_auto_settings').style.display = "none";
-        }else if(my_display=="none"){
+        } else if (my_display == "none") {
             document.querySelector('.{{$config->get('id')}}_auto_settings').style.display = "block";
         }
 
-        if({{$config->get('id')}}_center_auto_set()) {
+        if ({{$config->get('id')}}_center_auto_set()) {
 
 
             var now_markers = [];
@@ -467,7 +552,7 @@
                 }
             }
 
-            if(now_markers.length) {
+            if (now_markers.length) {
                 var my_bounds_cnt = [];
                 {{$config->get('id')}}_map.setCenter(now_markers[0].getPosition());
                 {{$config->get('id')}}_map.setZoom(17);
@@ -492,10 +577,11 @@
 
     function {{$config->get('id')}}_now_center_auto_set() {
         document.getElementById("{{$config->get('id')}}_auto_center").value = document.getElementById('{{$config->get('id')}}_auto_set').checked;
-        if(document.getElementById("{{$config->get('id')}}_auto_center").value == "true"){
+        if (document.getElementById("{{$config->get('id')}}_auto_center").value == "true") {
             document.querySelector(".{{$config->get('id')}}_auto_settings").style.display = "none";
         }
     }
+
     {{$config->get('id')}}_now_center_auto_set();
 
 
@@ -505,29 +591,29 @@
     }
 
     function {{$config->get('id')}}_center_auto_apply(position) {
-        if({{$config->get('id')}}_center_auto_set()) {
+        if ({{$config->get('id')}}_center_auto_set()) {
 
 
-            {{--var my_bounds_cnt = [];--}}
-            {{--var default_bounds = {{$config->get('id')}}_map.getBounds();--}}
-            {{--var my_bounds = naver.maps.LatLngBounds.bounds(default_bounds.getSW(), default_bounds.getNE());--}}
-            {{--//console.log(default_bounds.getSW());--}}
-            {{--var cnt = 0;--}}
-            {{--//======중앙 자동 지정 데이터 저장--}}
-            {{--for (i = 0; i < {{$config->get('id')}}_markers.length; i++) {--}}
-                {{--if ({{$config->get('id')}}_markers[i].getMap()) {--}}
+                    {{--var my_bounds_cnt = [];--}}
+                    {{--var default_bounds = {{$config->get('id')}}_map.getBounds();--}}
+                    {{--var my_bounds = naver.maps.LatLngBounds.bounds(default_bounds.getSW(), default_bounds.getNE());--}}
+                    {{--//console.log(default_bounds.getSW());--}}
+                    {{--var cnt = 0;--}}
+                    {{--//======중앙 자동 지정 데이터 저장--}}
+                    {{--for (i = 0; i < {{$config->get('id')}}_markers.length; i++) {--}}
+                    {{--if ({{$config->get('id')}}_markers[i].getMap()) {--}}
                     {{--my_bounds_cnt.push(my_bounds.extend({{$config->get('id')}}_markers[i].getPosition()));--}}
-                {{--}--}}
-            {{--}--}}
+                    {{--}--}}
+                    {{--}--}}
 
-            {{--//======중앙 자동 지정 데이터 저장end--}}
-            {{--//======중앙 자동 지정--}}
-            {{--if(my_bounds_cnt.length){--}}
-                {{--{{$config->get('id')}}_map.setBounds({{$config->get('id')}}_bounds);--}}
-                {{--{{$config->get('id')}}_map.fitBounds(my_bounds);--}}
-                {{--{{$config->get('id')}}_map.fitBounds(my_bounds, { top: 50, right: 50, bottom: 50, left: 50 });--}}
+                    {{--//======중앙 자동 지정 데이터 저장end--}}
+                    {{--//======중앙 자동 지정--}}
+                    {{--if(my_bounds_cnt.length){--}}
+                    {{--{{$config->get('id')}}_map.setBounds({{$config->get('id')}}_bounds);--}}
+                    {{--{{$config->get('id')}}_map.fitBounds(my_bounds);--}}
+                    {{--{{$config->get('id')}}_map.fitBounds(my_bounds, { top: 50, right: 50, bottom: 50, left: 50 });--}}
 
-            {{--}--}}
+                    {{--}--}}
 
             var now_markers = [];
             //======중앙 자동 지정 데이터 저장
@@ -537,7 +623,7 @@
                 }
             }
 
-            if(now_markers.length) {
+            if (now_markers.length) {
                 var my_bounds_cnt = [];
                 {{$config->get('id')}}_map.setCenter(now_markers[0].getPosition());
                 {{$config->get('id')}}_map.setZoom(17);
@@ -557,12 +643,12 @@
                 }
             }
 
-        }else {
+        } else {
 
             var center = document.getElementById("{{$config->get('id')}}_center_location").value.split(",");
-            if(center.length>1) {
+            if (center.length > 1) {
                 //var coords = new naver.maps.Point(center[0], center[1]);
-                var coords = new naver.maps.LatLng(center[0],center[1]);
+                var coords = new naver.maps.LatLng(center[0], center[1]);
 
                 //마커 수동 중앙 지정
                 {{$config->get('id')}}_map.setCenter(coords);

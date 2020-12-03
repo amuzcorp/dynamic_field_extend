@@ -1,7 +1,7 @@
 {{XeFrontend::js('plugins/dynamic_field_extend/assets/js/jquery.edittable.min.js')->appendTo('head')->load() }}
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/jquery.edittable.min.css')->load()}}
 
-<div>
+<div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
 
     <div>

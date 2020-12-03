@@ -46,12 +46,12 @@ class MapField extends AbstractType
 //
 //        ];
         return [
-            'auto_center'=>new ColumnEntity('auto_center', ColumnDataType::STRING),
-            'list_display'=>new ColumnEntity('list_display', ColumnDataType::STRING),
-            'zoom_level'=>new ColumnEntity('zoom_level', ColumnDataType::INTEGER),
-            'center_location'=>new ColumnEntity('center_location', ColumnDataType::TEXT),
-            'location_data'=>new ColumnEntity('location_data', ColumnDataType::TEXT),
-            'location_info'=>new ColumnEntity('location_info', ColumnDataType::TEXT),
+            'auto_center' => new ColumnEntity('auto_center', ColumnDataType::STRING),
+            'list_display' => new ColumnEntity('list_display', ColumnDataType::STRING),
+            'zoom_level' => new ColumnEntity('zoom_level', ColumnDataType::INTEGER),
+            'center_location' => new ColumnEntity('center_location', ColumnDataType::TEXT),
+            'location_data' => new ColumnEntity('location_data', ColumnDataType::TEXT),
+            'location_info' => new ColumnEntity('location_info', ColumnDataType::TEXT),
 
         ];
     }
@@ -79,6 +79,41 @@ class MapField extends AbstractType
     }
 
     /**
+     * return rules
+     *
+     * @return array
+     */
+    public function getRules()
+    {
+        $required = $this->config->get('required') === true;
+
+        $rules = [];
+        $names = array_map(function () {
+            return '';
+        }, $this->getColumns());
+
+        foreach (array_merge($names, $this->rules) as $name => $rule) {
+            $key = $this->config->get('id') . '_' . $name;
+            if ($required == true) {
+                if($name == "auto_center" || $name=="center_location" || $name="zoom_level"){
+                    $rules[$key] = 'nullable|' . $rule;
+                }else {
+                    $rules[$key] = ltrim($rule . '|required', '|');
+                }
+            } else {
+                $rules[$key] = 'nullable|' . $rule;
+            }
+        }
+
+        if ($required == true) {
+            $key = $this->config->get('id') . '_' . "location_data";
+            $rules[$key] = ltrim($rule . '|required', '|');
+        }
+
+        return $rules;
+    }
+
+    /**
      * 생성된 Dynamic Field 테이블에 데이터 입력
      *
      * @param array $args parameters
@@ -100,23 +135,23 @@ class MapField extends AbstractType
         foreach ($this->getColumns() as $column) {
             $key = $config->get('id') . '_' . $column->name;
 
-            if($column->name == "list_display"){
-                if(!isset($args[$key])){
+            if ($column->name == "list_display") {
+                if (!isset($args[$key])) {
                     $args[$key] = "off";
                 }
             }
 
 
-            if($column->name == "auto_center"){
-                if(!isset($args[$key])){
+            if ($column->name == "auto_center") {
+                if (!isset($args[$key])) {
                     $args[$key] = "off";
                 }
             }
 
             if (isset($args[$key]) == true) {
-                if(($column->name == "location_data") || $column->name == "location_info") {
+                if (($column->name == "location_data") || $column->name == "location_info") {
                     $insertParam[$column->name] = json_encode($args[$key]);
-                }else{
+                } else {
                     $insertParam[$column->name] = $args[$key];
                 }
                 //$insertParam[$column->name] = $args[$key];
@@ -160,14 +195,14 @@ class MapField extends AbstractType
         foreach ($this->getColumns() as $column) {
             $key = $this->config->get('id') . '_' . $column->name;
 
-            if($column->name == "list_display"){
-                if(!isset($args[$key])){
+            if ($column->name == "list_display") {
+                if (!isset($args[$key])) {
                     $args[$key] = "off";
                 }
             }
 
-            if($column->name == "auto_center"){
-                if(!isset($args[$key])){
+            if ($column->name == "auto_center") {
+                if (!isset($args[$key])) {
                     $args[$key] = "off";
                 }
             }
@@ -176,9 +211,9 @@ class MapField extends AbstractType
 //                $insertParam[$column->name] = $args[$key];
 //            }
             if (isset($args[$key]) == true) {
-                if(($column->name == "location_data") || $column->name == "location_info") {
+                if (($column->name == "location_data") || $column->name == "location_info") {
                     $insertParam[$column->name] = json_encode($args[$key]);
-                }else{
+                } else {
                     $insertParam[$column->name] = $args[$key];
                 }
                 //$insertParam[$column->name] = $args[$key];
@@ -191,7 +226,7 @@ class MapField extends AbstractType
     /**
      * 생성된 Dynamic Field 테이블에 데이터 수정
      *
-     * @param array $args   parameters
+     * @param array $args parameters
      * @param array $wheres Illuminate\Database\Query\Builder's wheres attribute
      * @return void
      */
@@ -219,9 +254,9 @@ class MapField extends AbstractType
             if (isset($args[$key])) {
 
                 //$updateParam[$column->name] = $args[$key];
-                if(($column->name == "location_data") || $column->name == "location_info") {
+                if (($column->name == "location_data") || $column->name == "location_info") {
                     $updateParam[$column->name] = json_encode($args[$key]);
-                }else{
+                } else {
                     $updateParam[$column->name] = $args[$key];
                 }
             }
