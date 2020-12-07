@@ -24,8 +24,9 @@
     <label class="xu-form-group__label __xe_df __xe_df_category __xe_df_category_{{$config->get('id')}}">{{xe_trans($config->get('label'))}}</label>
     @if ($config->get('skinDescription') !== '')<small>{{$config->get('skinDescription')}}</small>@endif
 
+    @if($config->get('required') === false)
     <input hidden name="{{$config->get('id') . '_item_id[]'}}">
-
+    @endif
     <ul class="check_ul">
         @if(gettype($itemId)=="array")
 

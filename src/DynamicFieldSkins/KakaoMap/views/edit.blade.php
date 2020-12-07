@@ -13,8 +13,10 @@
         <br>
     </head>
     <body>
+    @if($config->get('required') === false)
     <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
            value="">
+    @endif
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
            value="">
     <input type="hidden" id="{{$config->get('id')}}_zoom_level" name="{{$config->get('id')}}_zoom_level"

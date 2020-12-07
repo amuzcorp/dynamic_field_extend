@@ -14,8 +14,8 @@
                 src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
     </head>
     <body>
-    <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
-           value="">
+    {{--<input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"--}}
+           {{--value="">--}}
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
            value="">
     <input type="hidden" id="{{$config->get('id')}}_auto_center" name="{{$config->get('id')}}_auto_center"

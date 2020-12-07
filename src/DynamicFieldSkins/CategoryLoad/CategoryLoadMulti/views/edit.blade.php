@@ -4,8 +4,9 @@
     {{--<select name="{{$config->get('id') . '_item_id'}}" class="xe-form-control" data-valid-name="{{ xe_trans($config->get('label')) }}" multiple>--}}
 
     <select name="{{$config->get('id') . '_item_id[]'}}" class="xe-form-control" style="height: 150px" data-valid-name="{{ xe_trans($config->get('label')) }}" multiple>
+        @if($config->get('required') === false)
         <option value="">{{xe_trans($config->get('label'))}}</option>
-
+        @endif
         @if(gettype($itemId)=="array")
 
             @foreach ($items as $item)
