@@ -130,13 +130,13 @@ class WorkHoursDefault extends AbstractSkin
                     if ($value[0] == "closed") {
                         $result_str .= "오전 휴무, ";
                     } else {
-                        $result_str .= "오전 " . $value[0] . ":" . $this->plus_zero($value[1]) . "~" . $value[2] . ":" . $this->plus_zero($value[3]);
+                        $result_str .= "오전 " . $this->plus_zero($value[0]) . ":" . $this->plus_zero($value[1]) . "~" . $this->plus_zero($value[2]) . ":" . $this->plus_zero($value[3]).", ";
                     }
 
                     if ($value[4] == "closed") {
                         $result_str .= "오후 휴무 입니다. ";
                     } else {
-                        $result_str .= "오후 " . $this->after_none_value($value[4]) . ":" . $this->plus_zero($value[5]) . "~" . $this->after_none_value($value[6]) . ":" . $this->plus_zero($value[7]) . "까지 입니다.";
+                        $result_str .= "오후 " . $this->plus_zero($this->after_none_value($value[4])) . ":" . $this->plus_zero($value[5]) . "~" . $this->plus_zero($this->after_none_value($value[6])) . ":" . $this->plus_zero($value[7]) . "까지 입니다.";
                     }
 
                     $now_time = strtotime(date("H:i", time()));
@@ -172,7 +172,7 @@ class WorkHoursDefault extends AbstractSkin
         if($my_value==0){
             return "00";
         }else if($my_value<10){
-            return "0"+$my_value;
+            return "0".$my_value;
         }else{
             return $my_value;
         }

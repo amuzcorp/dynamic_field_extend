@@ -41,87 +41,95 @@
                 <label>{{str_replace("_data","",$key)}}</label>
                 <div style="width: 100%">
                     <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                            onchange="display_chk(this, '{{ $config->get('id') }}_{{str_replace('_data','',$key)}}_morning')"
                             class="xe-form-control" style="width: 115px;float: left">
                         <option value="closed" @if($my_val[0] == 'closed') selected @endif >오전휴무</option>
                         @for($i=0; $i<13; $i++)
                             {{--@if($my_val[0] == "closed")--}}
-                                {{--<option value="closed" @if($my_val[0] == "closed") selected @endif >오전휴무</option>--}}
+                            {{--<option value="closed" @if($my_val[0] == "closed") selected @endif >오전휴무</option>--}}
                             {{--@else--}}
-                                <option value="{{$i}}"
-                                        @if($my_val[0] == (String)$i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif </option>
+                            <option value="{{$i}}"
+                                    @if($my_val[0] == (String)$i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif </option>
                             {{--@endif--}}
                         @endfor
                     </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
-                            class="xe-form-control" style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}"
-                                    @if($my_val[1] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
-                            class="xe-form-control" style="width: 80px;float: left">
-                        @for($i=0; $i<13; $i++)
-                            <option value="{{$i}}"
-                                    @if($my_val[2] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
-                            class="xe-form-control" style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}"
-                                    @if($my_val[3] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-
+                    <div class="{{ $config->get('id') }}_{{str_replace("_data","",$key)}}_morning"
+                         @if($my_val[0] == 'closed') style="display: none" @endif>
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                                class="xe-form-control" style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}"
+                                        @if($my_val[1] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">~ </label>
+                        <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                                class="xe-form-control" style="width: 80px;float: left">
+                            @for($i=0; $i<13; $i++)
+                                <option value="{{$i}}"
+                                        @if($my_val[2] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                                class="xe-form-control" style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}"
+                                        @if($my_val[3] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                    </div>
                     <label style="float: left;width:25px;">, </label>
 
                     <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                            onchange="display_chk(this, '{{ $config->get('id') }}_{{str_replace('_data','',$key)}}_afternoon')"
                             class="xe-form-control" style="width: 115px;float: left">
                         <option value="closed" @if($my_val[4] == "closed") selected @endif >오후휴무</option>
                         @for($i=12; $i<25; $i++)
 
                             {{--@if($my_val[4] == "closed")--}}
-                                {{--<option value="closed" @if($my_val[4] == "closed") selected @endif >오후휴무</option>--}}
+                            {{--<option value="closed" @if($my_val[4] == "closed") selected @endif >오후휴무</option>--}}
                             {{--@else--}}
-                                <option value="{{$i}}"
-                                        @if($my_val[4] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            <option value="{{$i}}"
+                                    @if($my_val[4] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
                             {{--@endif--}}
                         @endfor
                     </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
-                            class="xe-form-control" style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}"
-                                    @if($my_val[5] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
-                            class="xe-form-control" style="width: 80px;float: left">
-                        @for($i=12; $i<25; $i++)
-                            <option value="{{$i}}"
-                                    @if($my_val[6] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
-                            class="xe-form-control" style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}"
-                                    @if($my_val[7] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
+
+                    <div class="{{ $config->get('id') }}_{{str_replace("_data","",$key)}}_afternoon"
+                         @if($my_val[4] == 'closed') style="display: none" @endif>
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                                class="xe-form-control" style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}"
+                                        @if($my_val[5] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">~ </label>
+                        <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                                class="xe-form-control" style="width: 80px;float: left">
+                            @for($i=12; $i<25; $i++)
+                                <option value="{{$i}}"
+                                        @if($my_val[6] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
+                                class="xe-form-control" style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}"
+                                        @if($my_val[7] == $i) selected @endif > @if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                    </div>
                 </div>
                 <div style="clear: both"></div>
             @endif
         @endforeach
         <br>
-        <h>기타</h>
+        <label>기타</label>
         <div id="{{$config->get('id')}}_etc_list">
 
         </div>
@@ -131,69 +139,77 @@
                     <input type="text" class="{{$config->get('id')}}_Datepicker xe-form-control"
                            style="width: 120px;float: left" placeholder="날짜 선택">
                     <label style="float: left;width:25px;">, </label>
-                    <label><input type="text" class="xe-form-control" name="{{$config->get('id')}}_etc_title"
-                                  value="휴무일"
-                                  style="width: 200px;float: left" placeholder="일정 제목을 입력해주세요."></label>
-                    <label style="float: left;width:25px;">, </label>
+                    <label style="float: left;"><input type="text" class="xe-form-control"
+                                                       name="{{$config->get('id')}}_etc_title"
+                                                       value=""
+                                                       style="width: 200px;float: left"
+                                                       placeholder="일정 제목을 입력해주세요."></label>
+                    <label style="float: left;width:25px;"></label>
+                    <div style="clear: both;margin-bottom: 5px"></div>
                     <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                            onchange="display_chk(this, '{{ $config->get('id') }}_etc_morning')"
                             style="width: 115px;float: left">
                         <option value="closed">오전휴무</option>
                         @for($i=0; $i<13; $i++)
                             <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
                         @endfor
                     </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<13; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-
+                    <div class="{{ $config->get('id') }}_etc_morning" style="display: none">
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                                style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">~ </label>
+                        <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                                style="width: 80px;float: left">
+                            @for($i=0; $i<13; $i++)
+                                <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                                style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                    </div>
                     <label style="float: left;width:25px;">, </label>
 
                     <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                            onchange="display_chk(this, '{{ $config->get('id') }}_etc_afternoon')"
                             style="width: 115px;float: left">
                         <option value="closed">오후휴무</option>
                         @for($i=12; $i<25; $i++)
                             <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
                         @endfor
                     </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=12; $i<25; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
+                    <div class="{{ $config->get('id') }}_etc_afternoon" style="display: none">
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                                style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">~ </label>
+                        <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                                style="width: 80px;float: left">
+                            @for($i=12; $i<25; $i++)
+                                <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                        <label style="float: left;">:</label>
+                        <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
+                                style="width: 80px;float: left">
+                            @for($i=0; $i<60; $i++)
+                                <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
+                            @endfor
+                        </select>
+                    </div>
                     <div style="clear: both"></div>
                 </div>
             </div>
@@ -208,12 +224,12 @@
     var get_etc_data_str = document.getElementById("{{$config->get('id')}}_etc_schedule_data").value;
     var get_etc_data_array = [];
 
-    if(get_etc_data_str){
+    if (get_etc_data_str) {
         get_etc_data_array = JSON.parse(get_etc_data_str);
     }
 
-    for(var i = 0; i<get_etc_data_array.length; i++){
-        if(get_etc_data_array[i]!=null) {
+    for (var i = 0; i < get_etc_data_array.length; i++) {
+        if (get_etc_data_array[i] != null) {
             add_schedule_from_data(get_etc_data_array[i][0], get_etc_data_array[i][1], get_etc_data_array[i]);
         }
     }
@@ -276,8 +292,8 @@
     function add_schedule_from_data(my_date, my_title, data_array) {
         var add_data = [];
         var new_div = document.createElement("div");
-        {{--var sel_date = document.querySelector(".{{$config->get('id')}}_Datepicker").value;--}}
-        {{--var sel_title = document.querySelector('input[name="{{$config->get('id')}}_etc_title"]').value;--}}
+                {{--var sel_date = document.querySelector(".{{$config->get('id')}}_Datepicker").value;--}}
+                {{--var sel_title = document.querySelector('input[name="{{$config->get('id')}}_etc_title"]').value;--}}
         var sel_date = my_date;
         var sel_title = my_title;
 
@@ -326,7 +342,7 @@
 
         etc_sel_data.push(add_data);
         //console.log(add_data);
-        console.log(etc_sel_data);
+        //console.log(etc_sel_data);
         document.getElementById("{{$config->get('id')}}_etc_schedule_data").value = JSON.stringify(etc_sel_data);
     }
 
@@ -354,6 +370,14 @@
             dateFormat: "yy-mm-dd"
         });
     });
+
+    function display_chk(my_sel, my_class) {
+        if (my_sel.value == "closed") {
+            document.querySelector("." + my_class).style.display = "none";
+        } else {
+            document.querySelector("." + my_class).style.display = "block";
+        }
+    }
 </script>
 {{--<div class="xe-form-group xe-dynamicField">--}}
 {{--<label class="xu-form-group__label __xe_df __xe_df_category __xe_df_category_{{$config->get('id')}}">{{xe_trans($config->get('label'))}}</label>--}}

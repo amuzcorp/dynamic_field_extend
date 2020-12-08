@@ -14,8 +14,8 @@
     </head>
     <body>
     @if($config->get('required') === false)
-    <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
-           value="">
+        <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
+               value="">
     @endif
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
            value="">
@@ -84,34 +84,37 @@
             {{--</div>--}}
             {{--</div>--}}
             @if(isset($args[$config->get('id')."_location_data"]))
-                @foreach(json_decode($args[$config->get('id')."_location_data"]) as $location)
-                    @if($location)
-                        @php
-                            $location_array = json_decode($location,true);
-                        @endphp
-                        <div class="col">
-                            <div class="store-item">
-                                <div>
-                                    <h3 class="store-item-title" style="float:left">{{$location_array[0]}}</h3>
-                                    <button type="button" class="store-item-del xe-btn xi-trash-o"
-                                            onclick="{{$config->get('id')}}_list_del(this,'{{json_decode($location,true)[4]}}','{{json_decode($location,true)[5]}}')"
-                                            style="float:right"></button>
+                @if(json_decode($args[$config->get('id')."_location_data"])!=null)
+                    @foreach(json_decode($args[$config->get('id')."_location_data"]) as $location)
+                        @if($location)
+                            @php
+                                $location_array = json_decode($location,true);
+                            @endphp
+                            <div class="col">
+                                <div class="store-item">
+                                    <div>
+                                        <h3 class="store-item-title" style="float:left">{{$location_array[0]}}</h3>
+                                        <button type="button" class="store-item-del xe-btn xi-trash-o"
+                                                onclick="{{$config->get('id')}}_list_del(this,'{{json_decode($location,true)[4]}}','{{json_decode($location,true)[5]}}')"
+                                                style="float:right"></button>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                    <span class="address-field">{{$location_array[1]}} {{$location_array[2]}}</span>
+                                    <div class="btn_area">
+                                        <a class="store-btn xi-call"
+                                           href="tel:+82{{$location_array[3]}}">{{$location_array[3]}}</a>
+                                        <a class="store-btn xi-maker"
+                                           href="javascript:{{$config->get('id')}}_setCenter('{{$location_array[4]}}', '{{$location_array[5]}}')">위치보기</a>
+                                    </div>
                                 </div>
-                                <div style="clear: both"></div>
-                                <span class="address-field">{{$location_array[1]}} {{$location_array[2]}}</span>
-                                <div class="btn_area">
-                                    <a class="store-btn xi-call"
-                                       href="tel:+82{{$location_array[3]}}">{{$location_array[3]}}</a>
-                                    <a class="store-btn xi-maker"
-                                       href="javascript:{{$config->get('id')}}_setCenter('{{$location_array[4]}}', '{{$location_array[5]}}')">위치보기</a>
-                                </div>
+                                <input type="hidden" name="{{$config->get('id')}}_location_data[]"
+                                       value="{{$location}}">
+                                <input type="hidden" name="{{$config->get('id')}}_location_info[]"
+                                       value="{{ json_decode($args[$config->get('id')."_location_info"])[$loop->index]}}">
                             </div>
-                            <input type="hidden" name="{{$config->get('id')}}_location_data[]" value="{{$location}}">
-                            <input type="hidden" name="{{$config->get('id')}}_location_info[]"
-                                   value="{{ json_decode($args[$config->get('id')."_location_info"])[$loop->index]}}">
-                        </div>
-                    @endif
-                @endforeach
+                        @endif
+                    @endforeach
+                @endif
             @endif
         </div>
     </div>
