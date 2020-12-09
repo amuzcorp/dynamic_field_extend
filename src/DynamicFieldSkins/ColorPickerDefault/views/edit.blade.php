@@ -10,7 +10,7 @@
         <input type="text" class="color_picker_input" id="{{$config->get('id').'_column_text'}}"
                value="{{$args[$config->get('id').'_column']}}"
                placeholder="{{xe_trans($config->get('placeholder',''))}}">
-        <button type="button" class="xe-btn" ) onclick=color_apply("{{$config->get('id').'_column'}}")>적용</button>
+        <button type="button" class="xe-btn"  style="margin-bottom: 4px" onclick=color_apply("{{$config->get('id').'_column'}}")>적용</button>
 
     </div>
 </div>

@@ -55,12 +55,15 @@
 
 
                         var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
-
+                        console.log(mediaList[cnt]['file']['url']);
                         if (over_chk == null) {
                             var img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
                             img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                            img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
                             img_string += '</li>';
-                            $('.thumb_' + media_id).append(img_string);
+                            if(mediaList[cnt]['file']['url']) {
+                                $('.thumb_' + media_id).append(img_string);
+                            }
 
                             cnt++;
                         }
@@ -79,11 +82,29 @@
 
 <style>
     .media_li {
+        position: relative;
         list-style-type: none;
         display: inline;
+        margin-right: 12px;
     }
 
     .media_li:hover {
         cursor: pointer;
+    }
+
+    .media_del_btn{
+        position: absolute;
+        z-index: 5;
+        right: 4px;
+        padding: 0;
+        width: 18px;
+        line-height: 18px;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        /*top:-77px;*/
+        font-size:12px;
     }
 </style>
