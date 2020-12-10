@@ -36,7 +36,7 @@
 
     <div class="xe-btn-toggle">
         <label>
-            <span class="sr-only">중앙자동지정</span><br>
+            <span>중앙자동지정</span><br>
             <input type="checkbox" id="{{$config->get('id')}}_auto_set" name="{{$config->get('id')}}_auto_set"
                    onchange="{{$config->get('id')}}_auto_chk()">
             <span class="toggle"></span>
@@ -44,7 +44,7 @@
     </div>
     <div class="xe-btn-toggle">
         <label>
-            <span class="sr-only">리스트 표시</span><br>
+            <span>리스트 표시</span><br>
             <input type="checkbox" id="{{$config->get('id')}}_list_display_chk"
                    name="{{$config->get('id')}}_list_display_chk" onchange="{{$config->get('id')}}_list_chk()" checked>
             <span class="toggle"></span>
@@ -63,14 +63,14 @@
                name="{{$config->get('id')}}_zoom_level" value=3 style="width:30px"><br>
         <span>중앙위치지정(마우스로 지도 위치를 클릭하면 지정됩니다.)</span>
         <input type="text" class="auto_center_location_input" id="{{$config->get('id')}}_center_val"
-               name="{{$config->get('id')}}_center_location" value="" style="width: 400px" autocomplete="off">
+               name="{{$config->get('id')}}_center_location" value=""  autocomplete="off">
         <br>
     </div>
 
     <div class="map" id="{{$config->get('id')}}_map"
-         style="width:500px;height:400px;float:left;position:inherit;"></div>
+         style="width:70%;height:400px;float:left;position:inherit;"></div>
     <div class="store-list" id="{{$config->get('id')}}_store_list"
-         style="width:250px;height:400px;overflow:auto;float:left">
+         style="width:28%;height:400px;overflow:auto;float:left">
         <div class="row_map">
             {{--<div class="col">--}}
             {{--<div class="store-item">--}}
@@ -84,9 +84,10 @@
             {{--</div>--}}
         </div>
     </div>
+    <div style="clear: both"></div>
 
 
-    <div id="input_addr" style="width:250px;height:400px;overflow:auto">
+    <div id="input_addr" style="height:400px;overflow:auto">
         <div>
             <p>위치 제목을 입력해주세요.</p>
             <input type="text" class="xe-form-control" name="{{$config->get('id')}}_addr_title"
