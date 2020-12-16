@@ -21,23 +21,11 @@ class Plugin extends AbstractPlugin
 
     protected function route()
     {
-        // implement code
-
         Route::settings(self::getId(), function () {
             Route::get('/', ['as' => 'manage.dynamic_field_extend.index', 'uses' => 'ManagerController@index']);
             Route::post('/', ['as' => 'manage.dynamic_field_extend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
             //Route::get('/pointLog', ['as' => 'manage.dynamic_field_extendextend.point_log', 'uses' => 'ManagerController@pointLog']);
         }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
-
-        Route::fixed(
-            $this->getId(),
-            function () {
-                Route::get('/', [
-                    'as' => 'dynamic_field_extend::index','uses' => 'Amuz\XePlugin\DynamicFieldExtend\Controller@index'
-                ]);
-            }
-        );
-
     }
 
     /**
