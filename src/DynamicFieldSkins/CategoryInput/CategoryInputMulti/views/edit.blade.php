@@ -15,6 +15,11 @@
                 <option value="{{$item[0]}}" @if($data_array) @if($item[0] == $data_array) {{"selected=selected"}} @endif @endif>{{$item[1]}}</option>
 
                 @endforeach
+        @else
+                @foreach ($cate as $item)
+                    <option value="{{$item[0]}}">{{$item[1]}}</option>
+
+                @endforeach
         @endif
     </select>
 </div>

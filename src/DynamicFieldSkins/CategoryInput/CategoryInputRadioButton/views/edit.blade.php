@@ -39,5 +39,18 @@
                     <span class="xe-label-text">{{$item[1]}}</span>
                 </label>
             @endforeach
+    @else
+        <label class="xe-label">
+            <input type="radio" name="{{$config->get('id') . '_column'}}" value="">
+            <span class="xe-input-helper"></span>
+            <span class="xe-label-text">{{xe_trans($config->get('label'))}}</span>
+        </label>
+        @foreach ($cate as $item)
+            <label class="xe-label">
+                <input type="radio" name="{{$config->get('id') . '_column'}}" value="{{$item[0]}}">
+                <span class="xe-input-helper"></span>
+                <span class="xe-label-text">{{$item[1]}}</span>
+            </label>
+        @endforeach
     @endif
 </div>

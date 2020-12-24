@@ -48,5 +48,15 @@
 
             @endforeach
         </ul>
+    @else
+        <ul class="check_ul">
+            @foreach ($cate as $item)
+                <li class="check_box_input_li"><input type="checkbox" class="checkbox_category_input"
+                                                      name="{{$config->get('id') . '_column[]'}}"
+                                                      value="{{$item[0]}}">{{$item[1]}}
+                </li>
+
+            @endforeach
+        </ul>
     @endif
 </div>
