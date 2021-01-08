@@ -25,7 +25,7 @@
     <ul class="thumb_{{$config->get('id')}}" id="thumb_{{$config->get('id')}}" style="padding-left: 0px;">
         <input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}"
                value="{{json_encode($media)}}">
-        @if($media)
+        @if(isset($media))
             @foreach($media as $data)
                 @if(XeStorage::find($data))
                     <li class="media_li" onclick="media_del(this)"><img width=100px height=100px
