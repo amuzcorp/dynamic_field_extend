@@ -152,6 +152,26 @@
                     "name": "WorkHoursDefault fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\WorkHoursDefault\\WorkHoursDefault"
+                },
+                "fieldType/dynamic_field_extend@calendar": {
+                    "name": "Calendar fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Calendar\\CalendarField"
+                },
+                "fieldType/dynamic_field_extend@calendar/fieldSkin/dynamic_field_extend@amuzDefault": {
+                    "name": "Calendar fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Calendar\\Skins\\AmuzDefault\\AmuzDefaultSkin"
+                },
+                "fieldType/dynamic_field_extend@timeRangePicker": {
+                    "name": "Time Range Picker fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\TimeRangePicker\\TimeRangePickerField"
+                },
+                "fieldType/dynamic_field_extend@timeRangePicker/fieldSkin/dynamic_field_extend@amuzDefault": {
+                    "name": "Time Range Picker fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\TimeRangePicker\\Skins\\AmuzDefault\\AmuzDefaultSkin"
                 }
             }
         }
