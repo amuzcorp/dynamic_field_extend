@@ -5,10 +5,10 @@
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['ca'] }}">{{ xe_trans($config->get('label')) }}</label>
     <div>
         <div class="xu-form-group__box" style="float:left; width:50%; padding-right:10px;">
-            <input type="text" id="{{ $key['ca'] }}_start" name="{{ $key['ca'] }}[]" class="xe-form-control" placeholder="시작일">
+            <input type="text" id="{{ $key['ca'] }}_start" name="{{ $key['ca'] }}[]" class="xe-form-control" placeholder="시작일" value="{{ $values[0] }}">
         </div>
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('date_type') == 'single') display:none @endif ">
-            <input type="text" id="{{ $key['ca'] }}_end" name="{{ $key['ca'] }}[]" class="xe-form-control" placeholder="종료일">
+            <input type="text" id="{{ $key['ca'] }}_end" name="{{ $key['ca'] }}[]" class="xe-form-control" placeholder="종료일" value="{{ $values[1] }}">
         </div>
         <div style="clear:both"></div>
     </div>
@@ -18,11 +18,24 @@
     $(document).ready(function() {
         $("#{{ $key['ca'] }}_start").datepicker({
             dateFormat: "yy-mm-dd",
-            maxDate: 0,
+            prevText: '이전 달',nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true, yearSuffix: '년'
         });
 
         $("#{{ $key['ca'] }}_end").datepicker({
             dateFormat: "yy-mm-dd",
+            prevText: '이전 달',nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true, yearSuffix: '년'
         });
     });
 </script>
