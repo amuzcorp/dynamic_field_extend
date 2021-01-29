@@ -37,18 +37,6 @@ class Plugin extends AbstractPlugin
      */
     public function activate($installedVersion = null)
     {
-        // implement code
-    }
-
-    /**
-     * 플러그인을 설치한다. 플러그인이 설치될 때 실행할 코드를 여기에 작성한다
-     *
-     * @return void
-     */
-    public function install()
-    {
-        // implement code
-
         //xe_config설정값
         $configManager = app('xe.config');
         $config = $configManager->get('dynamic_field_extend');
@@ -64,6 +52,16 @@ class Plugin extends AbstractPlugin
             $config->set('category_input', 1);
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
+    }
+
+    /**
+     * 플러그인을 설치한다. 플러그인이 설치될 때 실행할 코드를 여기에 작성한다
+     *
+     * @return void
+     */
+    public function install()
+    {
+        // implement code
     }
 
     /**
