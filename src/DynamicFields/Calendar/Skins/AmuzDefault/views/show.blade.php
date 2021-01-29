@@ -5,8 +5,10 @@
             <span>{{ $values[0] }}</span>
         </div>
     @else
+        @if(count($values) > 1)
         <div>
             <span>{{ $values[0] }}</span><span> ~ </span><span>{{ $values[1] }}</span>
         </div>
+        @endif
     @endif
 </div>

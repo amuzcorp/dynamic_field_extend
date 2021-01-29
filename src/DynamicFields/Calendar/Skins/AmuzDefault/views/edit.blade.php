@@ -7,9 +7,11 @@
         <div class="xu-form-group__box" style="float:left; width:50%; padding-right:10px;">
             <input type="text" id="{{ $key['ca'] }}_start" name="{{ $key['ca'] }}[]" class="xe-form-control" placeholder="시작일" value="{{ $values[0] }}">
         </div>
+        @if(count($values) > 1)
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('date_type') == 'single') display:none @endif ">
             <input type="text" id="{{ $key['ca'] }}_end" name="{{ $key['ca'] }}[]" class="xe-form-control" placeholder="종료일" value="{{ $values[1] }}">
         </div>
+        @endif
         <div style="clear:both"></div>
     </div>
 </div>
