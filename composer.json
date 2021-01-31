@@ -143,6 +143,16 @@
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\NaverMap\\NaverMap"
                 },
+                "fieldType/dynamic_field_extend@location": {
+                    "name": "Location fieldType",
+                    "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Location\\LocationField"
+                },
+                "fieldType/dynamic_field_extend@location/fieldSkin/dynamic_field_extend@kakaomap": {
+                    "name": "KakaoMap fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Location\\Skins\\KakaoMap\\KakaoMapSkin"
+                },
                 "fieldType/dynamic_field_extend@workhours": {
                     "name": "WorkHours fieldType",
                     "description": "The fieldType supported by Dynamic_field_extend plugin.",
