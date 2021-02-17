@@ -139,5 +139,19 @@
         }
     }
 
-    a2c(document.getElementById("doro_{{$config->get('id')}}").value);
+    function locationReload(){
+        let lat = "{{$data['lat']}}";
+        let lng = "{{$data['lng']}}";
+        if(lat != '' && lng != ''){
+            let coords = new kakao.maps.LatLng(lat, lng);
+            marker_{{ $config->get('id') }}.setPosition(coords);
+            map_{{ $config->get('id') }}.setCenter(coords);
+        }else{
+            a2c(document.getElementById("doro_{{$config->get('id')}}").value);
+        }
+    }
+
+    $(document).ready(function() {
+        locationReload();
+    });
 </script>
