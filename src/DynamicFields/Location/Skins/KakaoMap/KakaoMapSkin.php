@@ -84,4 +84,28 @@ class KakaoMapSkin extends AbstractSkin
             'map_key' => $map_key
         ])->render();
     }
+
+    /**
+     * 조회할 때 사용 될 html 코드 반환
+     * return html tag string
+     *
+     * @param array $args arguments
+     * @return \Illuminate\View\View
+     */
+    public function show(array $args)
+    {
+        list($data, $key) = $this->filter($args);
+
+        $dfe_config = app('xe.config')->get('dynamic_field_extend');
+        $map_key = $dfe_config->get('kakao_map_key');
+
+        $viewFactory = $this->handler->getViewFactory();
+        return $viewFactory->make($this->getViewPath('show'), [
+            'args' => $args,
+            'config' => $this->config,
+            'data' => array_merge($data, $this->mergeData),
+            'key' => $key,
+            'map_key' => $map_key
+        ])->render();
+    }
 }
