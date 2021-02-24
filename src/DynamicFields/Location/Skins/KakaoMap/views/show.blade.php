@@ -14,7 +14,7 @@
 <script>
     var mapContainer_{{ $config->get('id') }} = document.getElementById('map_{{ $config->get('id') }}'), // 지도를 표시할 div
         mapOption_{{ $config->get('id') }} = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            center: new kakao.maps.LatLng({{ $data['lat'] }}, {{ $data['lng'] }}), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 
@@ -31,18 +31,4 @@
     });
     // 지도에 마커를 표시합니다
     marker_{{ $config->get('id') }}.setMap(map_{{ $config->get('id') }});
-
-    // 지도에 클릭 이벤트를 등록합니다
-    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-    kakao.maps.event.addListener(map_{{ $config->get('id') }}, 'click', function(mouseEvent) {
-
-        // 클릭한 위도, 경도 정보를 가져옵니다
-        var latlng = mouseEvent.latLng;
-
-        $('#lat_{{$config->get('id')}}').val(latlng.getLat());
-        $('#lng_{{$config->get('id')}}').val(latlng.getLng());
-
-        // 마커 위치를 클릭한 위치로 옮깁니다
-        marker_{{ $config->get('id') }}.setPosition(latlng);
-    });
 </script>
