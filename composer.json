@@ -23,6 +23,26 @@
         "xpressengine": {
             "title": "다이나믹 필드 Extend",
             "component": {
+                "fieldType/dynamic_field_extend@SectionOpen": {
+                    "name": "Open New Section fieldType",
+                    "description": "The fieldType supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Section\\SectionOpen"
+                },
+                "fieldType/dynamic_field_extend@SectionClose": {
+                    "name": "Close The Section fieldType",
+                    "description": "The fieldType supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Section\\SectionClose"
+                },
+                "fieldType/dynamic_field_extend@SectionOpen/fieldSkin/dynamic_field_extend@SectionOpenDefault": {
+                    "name": "Open New Section fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Section\\SectionOpenDefault"
+                },
+                "fieldType/dynamic_field_extend@SectionClose/fieldSkin/dynamic_field_extend@SectionCloseDefault": {
+                    "name": "Close The Section fieldSkin",
+                    "description": "The fieldSkin supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Section\\SectionCloseDefault"
+                },
                 "fieldType/dynamic_field_extend@Tag": {
                     "name": "Tag fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
@@ -31,7 +51,7 @@
                 "fieldType/dynamic_field_extend@Tag/fieldSkin/dynamic_field_extend@TagDefault": {
                     "name": "TagSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
-                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TagDefault\\TagDefault"
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TagDefault\\TagDefault"
                 },
                 "fieldType/dynamic_field_extend@MediaLibrary": {
                     "name": "MediaLibrary fieldType",
