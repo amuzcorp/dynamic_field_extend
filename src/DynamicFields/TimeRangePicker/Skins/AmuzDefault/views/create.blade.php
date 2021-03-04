@@ -3,13 +3,13 @@
 {{ XeFrontend::js('//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js')->load() }}
 
 <div class="xe-form-group xe-dynamicField">
-    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['trp'] }}">{{ xe_trans($config->get('label')) }}</label>
+    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['start'] }}">{{ xe_trans($config->get('label')) }}</label>
     <div>
         <div class="xu-form-group__box" style="float:left; width:50%; padding-right:10px;">
-            <input type="text" id="trp_{{ $key['trp'] }}_start" name="{{ $key['trp'] }}[]" class="xe-form-control" placeholder="시작시간">
+            <input type="text" id="trp_{{ $key['start'] }}_start" name="{{ $key['start'] }}" class="xe-form-control"  placeholder="{{ $config->get('date_type') == 'single' ? '날짜선택' : '시작일' }}">
         </div>
-        <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('date_type') == 'single') display:none @endif ">
-            <input type="text" id="trp_{{ $key['trp'] }}_end" name="{{ $key['trp'] }}[]" class="xe-form-control" placeholder="종료시간">
+        <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('time_type') == 'single') display:none @endif ">
+            <input type="text" id="trp_{{ $key['end'] }}_end" name="{{ $key['end'] }}" class="xe-form-control" placeholder="종료시간">
         </div>
         <div style="clear:both"></div>
     </div>
@@ -18,7 +18,7 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        $('#trp_{{ $key['trp'] }}_start').timepicker({
+        $('#trp_{{ $key['start'] }}_start').timepicker({
             timeFormat: 'HH:mm',
             interval: 10,
             minTime: '00:00',
@@ -46,7 +46,7 @@
                 --}}
             }
         });
-        $('#trp_{{ $key['trp'] }}_end').timepicker({
+        $('#trp_{{ $key['end'] }}_end').timepicker({
             timeFormat: 'HH:mm',
             interval: 10,
             minTime: '00:00',
