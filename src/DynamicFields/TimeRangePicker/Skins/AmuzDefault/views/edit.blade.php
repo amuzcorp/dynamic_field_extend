@@ -18,12 +18,12 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        $('#trp_{{ $key['trp'] }}_start').timepicker({
+        $('#trp_{{ $key['start'] }}_start').timepicker({
             timeFormat: 'HH:mm',
             interval: 10,
             minTime: '00:00',
             maxTime: '23:50',
-            defaultTime: '{{ $values[0] }}',
+            defaultTime: '{{ $data['start'] }}',
             startTime: '09:00',
             dynamic: false,
             dropdown: true,
@@ -46,12 +46,12 @@
                 --}}
             }
         });
-        $('#trp_{{ $key['trp'] }}_end').timepicker({
+        $('#trp_{{ $key['end'] }}_end').timepicker({
             timeFormat: 'HH:mm',
             interval: 10,
             minTime: '00:00',
             maxTime: '23:50',
-            defaultTime: '{{ $values[1] }}',
+            defaultTime: '{{ $data['end'] }}',
             startTime: '09:00',
             dynamic: false,
             dropdown: true,
