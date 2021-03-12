@@ -5,7 +5,7 @@
     {{--</div>--}}
     <div class="thumb_{{$config->get('id')}}">
         @if($media)
-            @foreach($media as $data)
+            @foreach((array)$media as $data)
                 {{--{{var_dump(XeStorage::find($data))}}--}}
                 @if(XeStorage::find($data))
                     <div>
