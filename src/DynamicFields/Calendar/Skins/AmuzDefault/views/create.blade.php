@@ -1,5 +1,5 @@
-{{XeFrontend::js('//code.jquery.com/ui/1.12.1/jquery-ui.js')->appendTo('head')->load() }}
-{{XeFrontend::css('//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css')->load()}}
+{{XeFrontend::js('assets/vendor/jqueryui/jquery-ui.min.js')->load() }}
+{{XeFrontend::css('assets/vendor/jqueryui/jquery-ui.min.css')->load()}}
 
 <div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['start'] }}">{{ xe_trans($config->get('label')) }}</label>
