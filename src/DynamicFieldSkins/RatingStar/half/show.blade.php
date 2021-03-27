@@ -1,3 +1,5 @@
+<div class="xe-form-group xe-dynamicField">
+    <label class="xu-form-group__label __xe_df __xe_df_number __xe_df_number_{{$config->get('id')}}">{{xe_trans($config->get('label'))}}</label>
 <fieldset class="dynamic_field_rate half">
     <input type="radio" readonly="readonly" @if($data['num'] === 10) checked @endif name="{{$key['num']}}" value="10" /><label title="5 stars"></label>
     <input type="radio" readonly="readonly" @if($data['num'] === 8) checked @endif name="{{$key['num']}}" value="8" /><label title="4 stars"></label>
@@ -5,3 +7,4 @@
     <input type="radio" readonly="readonly" @if($data['num'] === 4) checked @endif name="{{$key['num']}}" value="4" /><label title="2 stars"></label>
     <input type="radio" readonly="readonly" @if($data['num'] === 2) checked @endif name="{{$key['num']}}" value="2" /><label title="1 star"></label>
 </fieldset>
+</div>
