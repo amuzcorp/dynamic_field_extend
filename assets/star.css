@@ -1,0 +1,53 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+/* Ratings widget */
+fieldset.dynamic_field_rate {
+  display: inline-block;
+  vertical-align: -15px;
+  border: 0;
+}
+/* Hide radio */
+fieldset.dynamic_field_rate > input {
+  display: none;
+}
+/* Order correctly by floating highest to the right */
+fieldset.dynamic_field_rate > label {
+  float: right;
+}
+/* The star of the show */
+fieldset.dynamic_field_rate > label:before {
+  display: inline-block;
+  font-size: 16px;
+  padding: 0.3rem 0.2rem;
+  margin: 0;
+  cursor: pointer;
+  font-family: FontAwesome;
+  content: "\f005 "; /* full star */
+}
+/* Zero stars rating */
+fieldset.dynamic_field_rate > label:last-child:before {
+  content: "\f006 "; /* empty star outline */
+}
+fieldset.dynamic_field_rate.half > label:last-child:before {
+  content: "\f005 "; /* empty star outline */
+}
+/* Half star trick */
+fieldset.dynamic_field_rate .half:before {
+  content: "\f089 "; /* half star no outline */
+  position: absolute;
+  padding-right: 0;
+}
+/* Click + hover color */
+fieldset.dynamic_field_rate input:checked ~ label, /* color current and previous stars on checked */
+fieldset.dynamic_field_rate label:hover,
+fieldset.dynamic_field_rate label:hover ~ label {
+  color: #73b100;
+} /* color previous stars on hover */
+
+/* Hover highlights */
+fieldset.dynamic_field_rate input:checked + label:hover,
+fieldset.dynamic_field_rate input:checked ~ label:hover, /* highlight current and previous stars */
+fieldset.dynamic_field_rate input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+fieldset.dynamic_field_rate label:hover ~ input:checked ~ label /* highlight previous selected stars */ {
+  color: #a6e72d;
+}

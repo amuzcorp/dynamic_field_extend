@@ -1,0 +1,21 @@
+
+.media_meta_table{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.media_meta_table li{
+  border-bottom:1px solid #eee;
+  padding:15px;
+  margin:10px 0;
+}
+.media_meta_table li img{
+  border:1px solid #ccc;
+  cursor:grab;
+}
+.itemBoxHighlight {
+  margin:10px 0;
+  border:dotted #ccc 1px;
+  height:100px;
+  background-color:#eee;
+}

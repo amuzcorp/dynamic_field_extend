@@ -43,6 +43,16 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Section\\SectionCloseDefault"
                 },
+                "fieldType/xpressengine@Number/fieldSkin/dynamic_field_extend@RatingStar": {
+                    "name": "RatingStar for DF Number Skin",
+                    "description": "The fieldSkin supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\RatingStar\\RatingStar"
+                },
+                "fieldType/xpressengine@Number/fieldSkin/dynamic_field_extend@RatingStarHalf": {
+                    "name": "RatingStar Half for DF Number Skin",
+                    "description": "The fieldSkin supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\RatingStar\\RatingStarHalf"
+                },
                 "fieldType/dynamic_field_extend@Tag": {
                     "name": "Tag fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
@@ -62,6 +72,11 @@
                     "name": "MediaSkin fieldSkin",
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaDefault\\MediaDefault"
+                },
+                "fieldType/dynamic_field_extend@MediaLibrary/fieldSkin/dynamic_field_extend@media_table": {
+                  "name": "MediaSkin TableSkin",
+                  "description": "The fieldSkin supported by Dynamic_field plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaTable\\MediaTable"
                 },
                 "fieldType/dynamic_field_extend@ColorPicker": {
                     "name": "ColorPicker fieldType",
