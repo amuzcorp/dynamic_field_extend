@@ -188,6 +188,16 @@
                     "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Location\\Skins\\KakaoMap\\KakaoMapSkin"
                 },
+                "fieldType/dynamic_field_extend@instance_selector": {
+                  "name": "InstanceSelector fieldType",
+                  "description": "The fieldType supported by Dynamic_field_extend plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\InstanceSelector\\InstanceSelectorField"
+                },
+                "fieldType/dynamic_field_extend@instance_selector/fieldSkin/dynamic_field_extend@default": {
+                  "name": "InstanceSelector Default fieldSkin",
+                  "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\InstanceSelector\\Skins\\Default\\DefaultSkin"
+                },
                 "fieldType/dynamic_field_extend@workhours": {
                     "name": "WorkHours fieldType",
                     "description": "The fieldType supported by Dynamic_field_extend plugin.",
