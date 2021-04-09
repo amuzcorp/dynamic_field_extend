@@ -37,7 +37,7 @@ class InstanceSelectorField extends AbstractType
     public function getColumns()
     {
         return [
-            'id' => new ColumnEntity('id', ColumnDataType::STRING)
+            'iid' => new ColumnEntity('iid', ColumnDataType::STRING)
         ];
     }
 

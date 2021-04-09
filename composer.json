@@ -193,10 +193,10 @@
                   "description": "The fieldType supported by Dynamic_field_extend plugin.",
                   "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\InstanceSelector\\InstanceSelectorField"
                 },
-                "fieldType/dynamic_field_extend@instance_selector/fieldSkin/dynamic_field_extend@default": {
-                  "name": "InstanceSelector Default fieldSkin",
+                "fieldType/dynamic_field_extend@instance_selector/fieldSkin/dynamic_field_extend@basic": {
+                  "name": "InstanceSelector Basic fieldSkin",
                   "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
-                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\InstanceSelector\\Skins\\Default\\DefaultSkin"
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\InstanceSelector\\Skins\\Basic\\BasicSkin"
                 },
                 "fieldType/dynamic_field_extend@workhours": {
                     "name": "WorkHours fieldType",
