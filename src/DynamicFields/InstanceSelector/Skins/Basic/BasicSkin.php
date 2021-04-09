@@ -96,12 +96,15 @@ class BasicSkin extends AbstractSkin
     {
         list($data, $key) = $this->filter($args);
 
+        $menu_items = $this->getMenuItems();
+
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
             'key' => $key,
+            'menu_items' => $menu_items
         ])->render();
     }
 
@@ -120,7 +123,7 @@ class BasicSkin extends AbstractSkin
             $menus[$menu_item->id] = $menu_item->title;
         }
         if(\XeSite::getCurrentSiteKey() == 'default') {
-            $menus['dashboard'] = '관리자 대시보드';
+            $menus['admin_dashboard'] = '관리자 대시보드';
         }
 
         return $menus;
