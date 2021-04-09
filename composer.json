@@ -73,7 +73,7 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaDefault\\MediaDefault"
                 },
-                "fieldType/dynamic_field_extend@MediaLibrary/fieldSkin/dynamic_field_extend@media_table": {
+                "fieldType/dynamic_field_extend@MediaLibrary/fieldSkin/dynamic_field_extend@MediaTable": {
                   "name": "MediaSkin TableSkin",
                   "description": "The fieldSkin supported by Dynamic_field plugin.",
                   "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\MediaTable\\MediaTable"
