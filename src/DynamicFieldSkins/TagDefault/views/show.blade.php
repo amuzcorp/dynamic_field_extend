@@ -10,7 +10,9 @@
 <div class="xe-list-board-body__article-tag">
     <ul class="xe-list-board-body__article-tag-list">
         @foreach ($item as $tag)
-            <li class="xe-list-board-body__article-tag-list-item"><a href="{{instance_route('index', ['searchTag' => $tag['word']], $args['instance_id'])}}" class="xe-list-board-body__link">{{ $tag['word'] }}</a></li>
+            <li class="xe-list-board-body__article-tag-list-item">
+                <a href="{{instance_route('index', ['searchTag' => $tag['word']])}}" class="xe-list-board-body__link">{{ $tag['word'] }}</a>
+            </li>
         @endforeach
     </ul>
 </div>
