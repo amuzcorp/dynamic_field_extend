@@ -88,11 +88,6 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\ColorPickerDefault\\ColorPickerDefault"
                 },
-                "fieldType/xpressengine@CellPhoneNumber/fieldSkin/dynamic_field_extend@CellPhoneNumberDefault": {
-                  "name": "CellPhoneNumber fieldSkin",
-                  "description": "The fieldSkin supported by Dynamic_field plugin.",
-                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CellPhoneNumberSkin\\BootStrapListStyleSkin"
-                },
                 "fieldType/dynamic_field_extend@TableEditor": {
                     "name": "TableEditor fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
