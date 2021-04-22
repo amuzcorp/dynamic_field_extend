@@ -23,6 +23,21 @@
         "xpressengine": {
             "title": "다이나믹 필드 Extend",
             "component": {
+                "fieldType/dynamic_field_extend@Rating": {
+                    "name": "Number Rating Field Type",
+                    "description": "The fieldType supported by Dynamic_field plugin.",
+                    "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Rating\\Rating"
+                },
+                "fieldType/dynamic_field_extend@Rating/fieldSkin/dynamic_field_extend@RatingStar": {
+                  "name": "Number Rating Star",
+                  "description": "The fieldSkin supported by Dynamic_field plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Rating\\RatingStar"
+                },
+                "fieldType/dynamic_field_extend@Rating/fieldSkin/dynamic_field_extend@RatingStarWithNumber": {
+                  "name": "Number Rating StarWithNumber",
+                  "description": "The fieldSkin supported by Dynamic_field plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Rating\\RatingStarWithNumber"
+                },
                 "fieldType/dynamic_field_extend@SectionOpen": {
                     "name": "Open New Section fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
