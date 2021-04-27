@@ -88,6 +88,16 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\ColorPickerDefault\\ColorPickerDefault"
                 },
+                "fieldType/dynamic_field_extend@Survey": {
+                  "name": "Survey fieldType",
+                  "description": "The fieldType supported by Dynamic_field plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Survey\\SurveyField"
+                },
+                "fieldType/dynamic_field_extend@Survey/fieldSkin/dynamic_field_extend@SurveyDefaultSkin": {
+                  "name": "Survey fieldSkin",
+                  "description": "The fieldType supported by Dynamic_field plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\SurveyDefault\\SurveyDefaultSkin"
+                },
                 "fieldType/dynamic_field_extend@TableEditor": {
                     "name": "TableEditor fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
