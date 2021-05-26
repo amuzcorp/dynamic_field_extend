@@ -81,6 +81,7 @@ class TagField extends AbstractType
 
     public function insert(array $args)
     {
+//        dd($args, 1);
         if(isset($args['_tags'])) {
             $this->set($args['id'], $args['_tags'], $args['instance_id']);
         }
@@ -94,8 +95,8 @@ class TagField extends AbstractType
     public function update(array $args, array $wheres)
     {
         //var_dump($args);var_dump($wheres);exit;
-        if(isset($args['id'])) {
-            $this->set($args['id'], $args['_tags'], $args['instance_id']);
+        if(isset($args['doc_id'])) {
+            $this->set($args['doc_id'], $args['_tags'], $args['cpt_id']);
         }
     }
 
