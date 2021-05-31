@@ -95,7 +95,7 @@ class TagField extends AbstractType
     public function update(array $args, array $wheres)
     {
         //var_dump($args);var_dump($wheres);exit;
-        if(isset($args['doc_id'])) {
+        if(isset($args['doc_id']) && isset($args['_tags'])) {
             $this->set($args['doc_id'], $args['_tags'], $args['cpt_id']);
         }
     }
