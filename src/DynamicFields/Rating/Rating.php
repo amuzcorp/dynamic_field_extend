@@ -126,4 +126,18 @@ class Rating extends AbstractType
         return $query;
     }
 
+    public function insert(array $args)
+    {
+
+    }
+
+    public function insertRevision(array $args)
+    {
+
+    }
+
+    public function update(array $args, array $wheres)
+    {
+
+    }
 }

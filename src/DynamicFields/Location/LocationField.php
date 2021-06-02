@@ -70,4 +70,35 @@ class LocationField extends AbstractType
     {
         return view('dynamic_field_extend::src/DynamicFields/Location/views/setting');
     }
+
+
+    /**
+     * 관리자 페이지 목록을 출력하기 위한 함수.
+     * CPT 목록에만 해당하며, 필드타입자체에 추가해주어야한다.
+     *
+     * @param string $id   dynamic field name
+     * @param array  $args arguments
+     * @return string|null
+     */
+    public function getSettingListItem($id, array $args){
+        $data = [];
+        foreach ($this->getColumns() as $columnName => $columns) {
+            $dataName = snake_case($id . '_' . $columnName);
+            if (isset($args[$dataName])) {
+                $data[$dataName] = $args[$dataName];
+            } else {
+                $data[$dataName] = '';
+            }
+        }
+        if (count($data) == 0) {
+            return null;
+        }
+
+        $output = implode(' ', $data);
+        if (trim($output) == '') {
+            return null;
+        }
+
+        return view('dynamic_field_extend::src/DynamicFields/Location/views/list-item',compact('id','data'));
+    }
 }

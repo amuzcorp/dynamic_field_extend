@@ -3,6 +3,7 @@
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Section;
 
 use Xpressengine\Config\ConfigEntity;
+use Xpressengine\Database\DynamicQuery;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
 use Xpressengine\DynamicField\ColumnDataType;
@@ -66,4 +67,24 @@ class SectionClose extends AbstractType
         return view('dynamic_field_extend::src/DynamicFields/Section/views/settingClose');
     }
 
+
+
+    public function get(DynamicQuery $query)
+    {
+        return $query;
+    }
+    public function insert(array $args)
+    {
+
+    }
+
+    public function insertRevision(array $args)
+    {
+
+    }
+
+    public function update(array $args, array $wheres)
+    {
+
+    }
 }
