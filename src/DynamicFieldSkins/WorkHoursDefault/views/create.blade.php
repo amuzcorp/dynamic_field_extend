@@ -1,8 +1,3 @@
-{{--{{XeFrontend::js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')->appendTo('head')->load() }}--}}
-{{XeFrontend::js('https://code.jquery.com/ui/1.12.1/jquery-ui.js')->appendTo('head')->load() }}
-{{XeFrontend::css('http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css')->load()}}
-
-
 <div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $config->get('id') }}">{{ xe_trans($config->get('label')) }}</label>
     <input type="hidden" id="{{$config->get('id')}}_etc_schedule_data" name="{{$config->get('id')}}_etc_schedule_data"
@@ -10,181 +5,47 @@
     @if ($config->get('skinDescription') !== '')
         <small>{{ $config->get('skinDescription') }}</small>
     @endif
-    {{--{{date("y-m-d H-i-s",time())}}{{date("y-m-d H-i-s",time())}}--}}
-    {{--<div class="xu-form-group__box">--}}
-    {{--<input type="text" name="{{ $key['column'] }}"--}}
-    {{--class="xe-form-control xu-form-group__control __xe_df __xe_df_text __xe_df_text_{{ $config->get('id') }}" value=""--}}
-    {{--data-valid-name="{{ xe_trans($config->get('label')) }}"--}}
-    {{--placeholder="{{ xe_trans($config->get('placeholder', '')) }}" />--}}
-    {{--</div>--}}
-
-    {{--{{xe_trans($config->get('label'))}}--}}
-
-
-    {{-- name="{{$config->get('id')}}_mon_data[]" --}}
-
-    @php
-        $week_array=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-    @endphp
 
 
     <div class="xu-form-group__box">
-        @foreach($week_array as $data)
-            <label>{{$data}}</label>
-            <div style="width: 100%">
-                <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                        style="width: 115px;float: left"
-                        onchange="display_chk(this, '{{ $config->get('id') }}_{{$data}}_morning')">
-                    <option value="closed">오전휴무</option>
-                    @for($i=0; $i<13; $i++)
-                        <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                    @endfor
-                </select>
-                <div class="{{ $config->get('id') }}_{{$data}}_morning" style="display: none">
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<13; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                </div>
-                <label style="float: left;width:25px;">, </label>
+        <table class="xe-table table table-striped text-center center">
+            <thead>
+                <tr>
+                    <th class="text-center">요일</th>
+                    <td class="text-center">구분</td>
+                    <td class="text-center">시작시간</td>
+                    <td class="text-center"></td>
+                </tr>
+            </thead>
+        @foreach(\Amuz\XePlugin\DynamicFieldExtend\Resources::weeks as $week)
+            @foreach(['morning','afternoon'] as $time)
+            <tr>
+                @if($time == 'morning')
+                <th rowspan="2" class="text-center">{{ \Amuz\XePlugin\DynamicFieldExtend\Resources::weeks_name_full[$week] }}</th>
+                @endif
+                <td class="text-center">{{\Amuz\XePlugin\DynamicFieldExtend\Resources::time_name[$time]}}</td>
 
+                    @include('dynamic_field_extend::src.DynamicFieldSkins.WorkHoursDefault.views.time-selector')
 
-                <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                        style="width: 115px;float: left"
-                        onchange="display_chk(this, '{{ $config->get('id') }}_{{$data}}_afternoon')">
-                    <option value="closed">오후휴무</option>
-                    @for($i=12; $i<25; $i++)
-                        <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                    @endfor
-                </select>
-                <div class="{{ $config->get('id') }}_{{$data}}_afternoon" style="display: none">
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=12; $i<25; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_{{$data}}_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                </div>
-            </div>
-            <div style="clear: both"></div>
+                @if($time == 'morning')
+                <td rowspan="2" class="text-center">
+                    @if($week != "mon") <a href="#"><i class="xi-documents"></i> 복제</a> @endif
+                </td>
+                @endif
+            </tr>
+            @endforeach
         @endforeach
-        <br>
-        <label>기타</label>
-        <div id="{{$config->get('id')}}_etc_list">
-
-        </div>
-        <div id="{{$config->get('id')}}_etc_input">
-            <div id="{{$config->get('id')}}_etc_content">
-                <div style="width: 100%">
-                    <input type="text" class="{{$config->get('id')}}_Datepicker xe-form-control"
-                           style="width: 120px;float: left" placeholder="날짜 선택">
-                    <label style="float: left;width:25px;">, </label>
-                    <label style="float: left;"><input type="text" class="xe-form-control"
-                                                       name="{{$config->get('id')}}_etc_title" value=""
-                                                       style="width: 200px;float: left"
-                                                       placeholder="일정 제목을 입력해주세요."></label>
-                    <label style="float: left;width:25px;"> </label>
-                    <div style="clear: both;margin-bottom: 5px"></div>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 115px;float: left" onchange="display_chk(this, '{{ $config->get('id') }}_etc_morning')">
-                        <option value="closed">오전휴무</option>
-                        @for($i=0; $i<13; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <div class="{{ $config->get('id') }}_etc_morning" style="display: none">
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<13; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
+            <tr>
+                <th>예외일정</th>
+                <td colspan="3">
+                    <div class="form-inline xe-form-inline">
+                    <input type="date" class="form-control xe-form-control"/>
+                    <input type="text" class="form-control xe-form-control" placeholder="일정 제목" />
+                    <button class="xe-btn xe-btn-primary-outline btn btn-default"><i class="xi-plus"></i> 새 예외일정 등록</button>
                     </div>
-                    <label style="float: left;width:25px;">, </label>
-
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 115px;float: left" onchange="display_chk(this, '{{ $config->get('id') }}_etc_afternoon')">
-                        <option value="closed">오후휴무</option>
-                        @for($i=12; $i<25; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <div class="{{ $config->get('id') }}_etc_afternoon" style="display: none">
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">~ </label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=12; $i<25; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                    <label style="float: left;">:</label>
-                    <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
-                            style="width: 80px;float: left">
-                        @for($i=0; $i<60; $i++)
-                            <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
-                        @endfor
-                    </select>
-                        </div>
-                    <div style="clear: both"></div>
-                </div>
-            </div>
-            <button type="button" class="xe-btn" onclick="add_schedule()" style="margin-top: 10px">일정 추가</button>
-        </div>
-    </div>
+                </td>
+            </tr>
+        </table>
 </div>
 
 

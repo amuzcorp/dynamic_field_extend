@@ -10,18 +10,6 @@
     @if ($config->get('skinDescription') !== '')
         <small>{{ $config->get('skinDescription') }}</small>
     @endif
-    {{--{{date("y-m-d H-i-s",time())}}{{date("y-m-d H-i-s",time())}}--}}
-    {{--<div class="xu-form-group__box">--}}
-    {{--<input type="text" name="{{ $key['column'] }}"--}}
-    {{--class="xe-form-control xu-form-group__control __xe_df __xe_df_text __xe_df_text_{{ $config->get('id') }}" value=""--}}
-    {{--data-valid-name="{{ xe_trans($config->get('label')) }}"--}}
-    {{--placeholder="{{ xe_trans($config->get('placeholder', '')) }}" />--}}
-    {{--</div>--}}
-
-    {{--{{xe_trans($config->get('label'))}}--}}
-
-
-    {{-- name="{{$config->get('id')}}_mon_data[]" --}}
 
     @php
         $week_array=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
@@ -38,11 +26,11 @@
                         $my_val = ["close",0,0,0,"closed",0,0,0];
                     }
                 @endphp
-                <label>{{str_replace("_data","",$key)}}</label>
+                <label>{{ str_replace("_data","",$key) }}</label>
                 <div style="width: 100%">
                     <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
                             onchange="display_chk(this, '{{ $config->get('id') }}_{{str_replace('_data','',$key)}}_morning')"
-                            class="xe-form-control" style="width: 115px;float: left">
+                            class="xe-form-control" style="width: 80px;float: left">
                         <option value="closed" @if($my_val[0] == 'closed') selected @endif >오전휴무</option>
                         @for($i=0; $i<13; $i++)
                             {{--@if($my_val[0] == "closed")--}}
@@ -84,7 +72,7 @@
 
                     <select name="{{$config->get('id')}}_{{str_replace("_data","",$key)}}_data[]"
                             onchange="display_chk(this, '{{ $config->get('id') }}_{{str_replace('_data','',$key)}}_afternoon')"
-                            class="xe-form-control" style="width: 115px;float: left">
+                            class="xe-form-control" style="width: 80px;float: left">
                         <option value="closed" @if($my_val[4] == "closed") selected @endif >오후휴무</option>
                         @for($i=12; $i<25; $i++)
 
@@ -148,7 +136,7 @@
                     <div style="clear: both;margin-bottom: 5px"></div>
                     <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
                             onchange="display_chk(this, '{{ $config->get('id') }}_etc_morning')"
-                            style="width: 115px;float: left">
+                            style="width: 80px;float: left">
                         <option value="closed">오전휴무</option>
                         @for($i=0; $i<13; $i++)
                             <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>
@@ -181,7 +169,7 @@
 
                     <select name="{{$config->get('id')}}_etc_data[]" class="xe-form-control"
                             onchange="display_chk(this, '{{ $config->get('id') }}_etc_afternoon')"
-                            style="width: 115px;float: left">
+                            style="width: 80px;float: left">
                         <option value="closed">오후휴무</option>
                         @for($i=12; $i<25; $i++)
                             <option value="{{$i}}">@if($i<10){{"0".$i}}@else{{$i}}@endif</option>

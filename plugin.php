@@ -2,6 +2,7 @@
 namespace Amuz\XePlugin\DynamicFieldExtend;
 
 use Route;
+use XeLang;
 use Xpressengine\Plugin\AbstractPlugin;
 use Xpressengine\Config\ConfigEntity;
 
@@ -61,7 +62,6 @@ class Plugin extends AbstractPlugin
      */
     public function install()
     {
-        // implement code
     }
 
     /**

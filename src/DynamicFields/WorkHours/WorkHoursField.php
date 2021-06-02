@@ -2,6 +2,7 @@
 
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\WorkHours;
 
+use Amuz\XePlugin\DynamicFieldExtend\Resources;
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
@@ -39,22 +40,20 @@ class WorkHoursField extends AbstractType
      * @return ColumnEntity[]
      */
     public function getColumns()
-    {   //mon, tue, wed, thu, fri, sat, fri
-//        return [
-//            'column'=>new ColumnEntity('column', ColumnDataType::STRING)
-//        ];
+    {
+        $columns = [];
+        $columns['day_name'] = new ColumnEntity('day_name', ColumnDataType::STRING);
+        $columns['day_name']->setDescription("기타일정인 경우 제목이 작성되고, 그게 아니면 요일 키값이 들어간다.");
 
+        $columns['etc_date'] = new ColumnEntity('schedule_date', ColumnDataType::DATE);
+        $columns['etc_date']->setDefault(null)->setNullAble()->setDescription('날짜는 지정된경우에만 조건절에 걸기위해서 쓴다.');
 
-        return [
-            'Mon_data' => new ColumnEntity('Mon_data', ColumnDataType::TEXT),
-            'Tue_data' => new ColumnEntity('Tue_data', ColumnDataType::TEXT),
-            'Wed_data' => new ColumnEntity('Wed_data', ColumnDataType::TEXT),
-            'Thu_data' => new ColumnEntity('Thu_data', ColumnDataType::TEXT),
-            'Fri_data' => new ColumnEntity('Fri_data', ColumnDataType::TEXT),
-            'Sat_data' => new ColumnEntity('Sat_data', ColumnDataType::TEXT),
-            'Sun_data' => new ColumnEntity('Sun_data', ColumnDataType::TEXT),
-            'etc_schedule_data' => new ColumnEntity('etc_schedule_data', ColumnDataType::TEXT)
-        ];
+        $columns['morning_start'] = new ColumnEntity('morning_start', ColumnDataType::TIME);
+        $columns['morning_end'] = new ColumnEntity('morning_end', ColumnDataType::TIME);
+        $columns['afternoon_start'] = new ColumnEntity('afternoon_start', ColumnDataType::TIME);
+        $columns['afternoon_end'] = new ColumnEntity('afternoon_end', ColumnDataType::TIME);
+
+        return $columns;
     }
 
     /**
