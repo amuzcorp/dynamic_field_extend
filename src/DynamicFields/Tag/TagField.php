@@ -1,8 +1,12 @@
 <?php
 
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Tag;
-
+use Schema;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Database\Schema\Blueprint;
 use Xpressengine\Config\ConfigEntity;
+use Xpressengine\Database\DynamicQuery;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
 use Xpressengine\DynamicField\ColumnDataType;
@@ -25,10 +29,7 @@ class TagField extends AbstractType
      */
     public function name()
     {
-        //return 'Hashtag fieldType';
         return 'Tag - 태그';
-        //return "Hashtag -".($this->getId());
-
     }
 
     /**
@@ -49,11 +50,12 @@ class TagField extends AbstractType
     public function getColumns()
     {
         return [
-            'column'=>new ColumnEntity('column', ColumnDataType::STRING)
+            'word' => (new ColumnEntity('word', ColumnDataType::STRING))->setParams([100]),
+            'decomposed' => (new ColumnEntity('decomposed', ColumnDataType::STRING))->setParams([255]),
+            'count' => (new ColumnEntity('count', ColumnDataType::INTEGER))->setParams([11])->setUnsigned(),
+            'site_key' => (new ColumnEntity('site_key', ColumnDataType::STRING))->setParams([50])
         ];
     }
-
-
 
     /**
      * 다이나믹필스 생성할 때 타입 설정에 적용될 rule 반환
@@ -65,6 +67,15 @@ class TagField extends AbstractType
         return [];
     }
 
+    /**
+     * get dynamic field table name
+     *
+     * @return string
+     */
+    public function getTableName()
+    {
+        return 'taggables';
+    }
 
 
     /**
@@ -81,15 +92,18 @@ class TagField extends AbstractType
 
     public function insert(array $args)
     {
-//        dd($args, 1);
+        $this->checkAndModifyTagTable();
         if(isset($args['_tags'])) {
             $this->set($args['id'], $args['_tags'], $args['instance_id']);
         }
     }
 
-    public function insertRevision(array $args)
-    {
-
+    public function checkAndModifyTagTable(){
+        if(Schema::hasColumn('taggables', 'field_id') === false){
+            Schema::table('taggables', function (Blueprint $table) {
+                $table->string('field_id', 36)->nullable()->after('taggable_id');
+            });
+        }
     }
 
     public function update(array $args, array $wheres)
@@ -102,17 +116,25 @@ class TagField extends AbstractType
 
     public function delete(array $wheres)
     {
-        //$repo = new TagRepository();
-        //$repo->detach()
-        /*
-        foreach ($wheres as $data){
-            $tags = \XeTag::fetchByTaggable($data['value']);
-            \XeTag::detach($data['value'], $tags);
-        }
-        */
         foreach ($wheres as $data){
             $this->set($data['value']);
         }
+    }
+
+    /**
+     * delete dynamic field all data
+     *
+     * @return void
+     */
+    public function dropData()
+    {
+        $where  = [
+            ['instance_id', $this->config->get('id', '')],
+            ['group', $this->config->get('group', '')]
+        ];
+
+        $this->handler->connection()->table($this->getTableName())
+            ->where($where)->delete();
     }
 
     public function set($taggableId, array $words = [], $instanceId = null)
@@ -121,11 +143,13 @@ class TagField extends AbstractType
         $decomposer = new SimpleDecomposer();
         $words = array_unique($words);
 
-        $tags = $repo->query()->where('instance_id', $instanceId)->whereIn('word', $words)->get();
+        $tags = $repo->query()->where('instance_id', $instanceId)
+            ->where('group',$taggableId)->whereIn('word', $words)->get();
 
         // 등록되지 않은 단어가 있다면 등록 함
         foreach (array_diff($words, $tags->pluck('word')->all()) as $word) {
             $tag = $repo->create([
+                'group' => $taggableId,
                 'word' => $word,
                 'decomposed' => $decomposer->execute($word),
                 'instance_id' => $instanceId,
@@ -166,4 +190,70 @@ class TagField extends AbstractType
         return is_numeric($v) ? '_'.$v : $v;
     }
 
+    /**
+     * create dynamic field tables
+     *
+     * @return void
+     */
+    public function createTypeTable()
+    {
+        //테이블을 생성하지 않는다.
+    }
+
+    /**
+     * table join
+     *
+     * @param DynamicQuery $query  query builder
+     * @param ConfigEntity $config config entity
+     * @return Builder
+     */
+    public function join(DynamicQuery $query, ConfigEntity $config = null)
+    {
+        if ($config === null) {
+            $config = $this->config;
+        }
+
+        if ($config->get('use') === false) {
+            return $query;
+        }
+
+        $baseTable = $query->from;
+
+        $type = $this->handler->getRegisterHandler()->getType($this->handler, $config->get('typeId'));
+        $tablePrefix = $this->handler->connection()->getTablePrefix();
+
+        if ($query->hasDynamicTable($config->get('group') . '_' . $config->get('id')) === true) {
+            return $query;
+        }
+
+        //check column
+        $this->checkAndModifyTagTable();
+        $createTableName = 'dynamic_tags';
+        $sub_query = \DB::table('taggables')
+                    ->selectRaw(sprintf('%staggables.taggable_id as `target_id`, %1$stags.instance_id as `group`, %1$staggables.field_id as `field_id`,%1$stags.word as `word`',$tablePrefix))
+                    ->leftJoin('tags','taggables.tag_id','=','tags.id');
+        //서브쿼리 확인
+//        $obj = $sub_query->get();
+//        dd($obj);
+
+        $column_name = 'word';
+        $key = $config->get('id') . '_' . $column_name;
+
+        $rawString = sprintf('%s.*', $tablePrefix . $baseTable);
+        $rawString .= sprintf(', GROUP_CONCAT(distinct %s.%s SEPARATOR \',\') as %s', $tablePrefix.$createTableName, $column_name, $key);
+
+        $query->leftJoin(\DB::raw(sprintf("(%s) as %s",$sub_query->toSql(),$tablePrefix.$createTableName)),
+            function (JoinClause $join) use ($createTableName, $config, $baseTable,$sub_query) {
+                $join->on(
+                    sprintf('%s.%s', $baseTable, $config->get('joinColumnName')),
+                    '=',
+                    sprintf('%s.target_id', $createTableName)
+                )->where($createTableName . '.field_id', $config->get('id'));
+            }
+        )->selectRaw($rawString);
+
+        $query->setDynamicTable($config->get('group') . '_' . $config->get('id'));
+
+        return $query;
+    }
 }
