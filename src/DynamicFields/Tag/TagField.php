@@ -143,16 +143,13 @@ class TagField extends AbstractType
         $decomposer = new SimpleDecomposer();
         $words = array_unique($words);
 
-        $tags = $repo->query()->where('instance_id', $instanceId)
-            ->where('group',$taggableId)->whereIn('word', $words)->get();
+        $tags = $repo->query()->whereIn('word', $words)->get();
 
         // 등록되지 않은 단어가 있다면 등록 함
         foreach (array_diff($words, $tags->pluck('word')->all()) as $word) {
             $tag = $repo->create([
-                'group' => $taggableId,
                 'word' => $word,
                 'decomposed' => $decomposer->execute($word),
-                'instance_id' => $instanceId,
             ]);
 
             $tags->push($tag);
