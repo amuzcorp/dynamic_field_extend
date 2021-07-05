@@ -4,7 +4,7 @@
 <div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['start'] }}">{{ xe_trans($config->get('label')) }}</label>
     <div>
-        <div class="xu-form-group__box" style="float:left; width:50%; padding-right:10px;">
+        <div class="xu-form-group__box"  @if($config->get('date_type') != 'single') style="float:left; width:50%; padding-right:10px;" @endif>
             <input type="text" id="{{ $key['start'] }}_start" name="{{ $key['start'] }}" class="xe-form-control amuz-date-picker" placeholder="{{ $config->get('date_type') == 'single' ? '날짜선택' : '시작일' }}">
         </div>
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('date_type') == 'single') display:none @endif ">
