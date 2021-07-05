@@ -64,6 +64,8 @@ class HtmlLandingField extends AbstractType
      */
     public function getSettingsView(ConfigEntity $config = null)
     {
-        return view('dynamic_field_extend::src/DynamicFields/HtmlLanding/views/setting', compact('config'));
+        $cpt_id = str_replace('documents_', '', $config->get('group'));
+        $thumb = null;
+        return view('dynamic_field_extend::src/DynamicFields/HtmlLanding/views/setting', compact('config', 'thumb', 'cpt_id'));
     }
 }
