@@ -13,8 +13,8 @@ class HtmlLandingDefault extends AbstractSkin
      */
     public function name()
     {
-        //return 'HTML 랜딩 fieldSkin';
-        return 'Html Landing default';
+        //return 'HTML 직접입력 fieldSkin';
+        return 'Html 직접입력 Default Skin';
     }
 
     /**

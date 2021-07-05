@@ -20,7 +20,7 @@ class HtmlLandingField extends AbstractType
     public function name()
     {
         //return 'ColorPicker - 색상';
-        return 'Html Landing - HTML 코드';
+        return 'Html 직접입력 - HTML 코드';
     }
 
     /**
