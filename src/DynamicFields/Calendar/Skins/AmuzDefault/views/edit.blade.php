@@ -10,7 +10,7 @@
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('date_type') == 'single') display:none @endif ">
             <input type="text" id="{{ $key['end'] }}_end" name="{{ $key['end'] }}" class="xe-form-control amuz-date-picker" placeholder="종료일" value="{{ $data['end'] }}">
         </div>
-        <div style="clear:both"></div>
+        <div class="clearfix" style="clear:both"></div>
     </div>
 </div>
 

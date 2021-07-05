@@ -11,7 +11,7 @@
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('time_type') == 'single') display:none @endif ">
             <input type="text" id="trp_{{ $key['end'] }}_end" name="{{ $key['end'] }}" class="xe-form-control amuz-time-range-picker" placeholder="종료시간" value="{{ $data['end'] }}">
         </div>
-        <div style="clear:both"></div>
+        <div class="clearfix" style="clear:both"></div>
     </div>
 </div>
 
