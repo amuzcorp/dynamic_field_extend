@@ -5,13 +5,13 @@
 <div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['start'] }}">{{ xe_trans($config->get('label')) }}</label>
     <div>
-        <div class="xu-form-group__box" style="float:left; width:50%; padding-right:10px;">
-            <input type="text" id="trp_{{ $key['start'] }}_start" name="{{ $key['start'] }}" class="xe-form-control amuz-time-range-picker" placeholder="{{ $config->get('date_type') == 'single' ? '날짜선택' : '시작일' }}" value="{{ $data['start'] }}">
+        <div class="xu-form-group__box" @if($config->get('time_type') != 'single') style="float:left; width:50%; padding-right:10px;" @endif>
+            <input type="text" id="trp_{{ $key['start'] }}_start" name="{{ $key['start'] }}" class="xe-form-control amuz-time-range-picker" placeholder="{{ $config->get('time_type') == 'single' ? '날짜선택' : '시작일' }}" value="{{ $data['start'] }}">
         </div>
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('time_type') == 'single') display:none @endif ">
             <input type="text" id="trp_{{ $key['end'] }}_end" name="{{ $key['end'] }}" class="xe-form-control amuz-time-range-picker" placeholder="종료시간" value="{{ $data['end'] }}">
         </div>
-        <div style="clear:both"></div>
+        <div class="clearfix" style="clear:both"></div>
     </div>
 </div>
 

@@ -2,6 +2,7 @@
 
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Location;
 
+use Overcode\XePlugin\DynamicFactory\Models\CptDocument;
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
@@ -76,11 +77,12 @@ class LocationField extends AbstractType
      * 관리자 페이지 목록을 출력하기 위한 함수.
      * CPT 목록에만 해당하며, 필드타입자체에 추가해주어야한다.
      *
-     * @param string $id   dynamic field name
-     * @param array  $args arguments
+     * @param string $id dynamic field name
+     * @param CptDocument $doc arguments
      * @return string|null
      */
-    public function getSettingListItem($id, array $args){
+    public function getSettingListItem($id, CptDocument $doc){
+        $args = $doc->getAttributes();
         $data = [];
         foreach ($this->getColumns() as $columnName => $columns) {
             $dataName = snake_case($id . '_' . $columnName);
