@@ -262,6 +262,17 @@
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\Widgets\\Map\\Skins\\Kakao\\KakaoSkin",
                     "name": "Kakao 스킨",
                     "description": "Kakao 지도 API 를 사용합니다."
+                },
+
+                "fieldType/dynamic_field_extend@HtmlLanding": {
+                  "name": "HTML 코드 랜딩 fieldType",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\HtmlLanding\\HtmlLandingField",
+                  "description": "HTML 코드 랜딩 fieldType"
+                },
+                "fieldType/dynamic_field_extend@HtmlLanding/fieldSkin/dynamic_field_extend@default": {
+                  "name": "HTML 코드 랜딩 fieldType DefaultSkin",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\HtmlLandingDefault\\HtmlLandingDefault",
+                  "description": "HTML 코드 랜딩 fieldType DefaultSkin"
                 }
             }
         }
