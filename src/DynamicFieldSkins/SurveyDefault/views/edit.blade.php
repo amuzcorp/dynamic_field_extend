@@ -1,5 +1,5 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/src/DynamicFieldSkins/SurveyDefault/assets/survey_common.css')->load()}}
-<?php $content = json_decode($args[$config->get('id').'_column']); ?>
+<?php $content = json_decode($args[$config->get('id').'_column']) ?: []; ?>
 <div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
 
