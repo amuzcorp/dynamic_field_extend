@@ -2,6 +2,7 @@
 
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\CategoryInput;
 
+use Overcode\XePlugin\DynamicFactory\Models\CptDocument;
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
@@ -265,5 +266,32 @@ class CategoryInputField extends AbstractType
         $this->handler->getRegisterHandler()->fireEvent(
             sprintf('dynamicField.%s.%s.after_update', $config->get('group'), $config->get('id'))
         );
+    }
+
+    /**
+     * 관리자 페이지 목록을 출력하기 위한 함수.
+     * CPT 목록에만 해당하며, 필드타입자체에 추가해주어야한다.
+     *
+     * @param string $id dynamic field name
+     * @param CptDocument $doc arguments
+     * @return string|null
+     */
+    public function getSettingListItem($id, CptDocument $doc){
+        $config = $this->config;
+        $type = $this->handler->getRegisterHandler()->getType($this->handler, $config->get('typeId'));
+
+        $args = $doc->getAttributes();
+        $data = [];
+        foreach ($type->getColumns() as $columnName => $columns) {
+            $dataName = snake_case($id . '_' . $columnName);
+            if (isset($args[$dataName])) {
+                $data[$dataName] = array_get($args,$dataName);
+            }
+        }
+        if (count($data) == 0) {
+            return null;
+        }
+
+        return view('dynamic_field_extend::src/DynamicFields/CategoryInput/views/list-item',compact('id','data'));
     }
 }
