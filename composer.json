@@ -273,6 +273,17 @@
                   "name": "HTML 코드 랜딩 fieldType DefaultSkin",
                   "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\HtmlLandingDefault\\HtmlLandingDefault",
                   "description": "HTML 코드 랜딩 fieldType DefaultSkin"
+                },
+
+                "fieldType/dynamic_field_extend@VimeoSelector": {
+                  "name": "Vimeo 영상 클립 Selector",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\VimeoClipSelector\\VimeoClipSelectorField",
+                  "description": "Vimeo 영상 클립 Selector fieldType"
+                },
+                "fieldType/dynamic_field_extend@VimeoSelector/fieldSkin/dynamic_field_extend@default": {
+                  "name": "Vimeo 영상 클립 Selector",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\VimeoClipSelectorDefault\\VimeoClipSelectorDefault",
+                  "description": "Vimeo 영상 클립 Selector DefaultSkin"
                 }
             }
         }
