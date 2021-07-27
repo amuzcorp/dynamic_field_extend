@@ -3,4 +3,4 @@
 <p>{{ explode(" ",$data[$id . '_doro'])[0] }} {{ explode(" ",$data[$id . '_doro'])[1] }} {{ explode(" ",$data[$id . '_doro'])[2] }}</p>
 @else
 <p class="text-muted">입력되지 않은 주소</p>
-@endisset
+@endif
