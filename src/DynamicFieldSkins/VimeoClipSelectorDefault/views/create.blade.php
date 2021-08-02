@@ -29,6 +29,7 @@
             <div class="card-body">
                 <table class="table">
                     <colgroup>
+                        <col style="width:15%;" />
                         <col style=""/>
                         <col style="width:15%;" />
                     </colgroup>
@@ -59,21 +60,24 @@
                     <colgroup>
                         <col style=""/>
                         <col style="width:15%;" />
-                        <col style="width:15%;" />
+                        <col style="width:20%;" />
+                        <col style="width:20%;" />
                     </colgroup>
                     <thead>
                     <tr>
                         <th>명칭</th>
                         <th>타입</th>
                         <th>선택</th>
+                        <th>DB에서 제거</th>
                     </tr>
                     </thead>
                     <tbody id="vimeoList">
                     @foreach($directories as $directory)
-                        <tr onclick="selectDirectory({{$directory->id}}, '{{$directory->name}}')">
+                        <tr >
                             <td>{{$directory->name}}</td>
                             <td>폴더</td>
-                            <td>{{$directory->updated_at}}</td>
+                            <td><a class="btn btn-info btn-sm text-white" onclick="selectDirectory({{$directory->id}}, '{{$directory->name}}')">영상리스트</a></td>
+                            <td><a class="btn btn-danger text-white" onclick="DeleteInDB({{$directory->id}}, '{{$directory->name}}', 'directory')">디렉토리 제거</a></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -114,7 +118,7 @@
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-info btn-sm py-0 text-white" onclick="selectVideo($('input[name=video_id]').val(), $('input[name=video_name]').val())">영상선택</a>
-                        <a class="btn btn-secondary text-white" data-dismiss="modal" id="closeModal">닫기</a>
+                        <a class="btn xe-btn-secondary" data-dismiss="modal" id="closeModal">닫기</a>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -192,13 +196,14 @@
             success: function(response) {
                 document.getElementById('vimeoList').innerHTML = '';
                 let videoData = response.data;
-                var str = `<tr onclick="getDirectoryList()"><td colspan="3" style="padding-top: 14px; padding-bottom: 14px;">폴더 리스트로</td></tr>`;
+                var str = `<tr onclick="getDirectoryList()"><td colspan="4" style="padding-top: 14px; padding-bottom: 14px;">폴더 리스트로</td></tr>`;
                 for(let i in videoData){
                     str += `
                         <tr>
                            <td>${videoData[i].name}</td>
                            <td>동영상</td>
-                           <td><a class="btn btn-info btn-sm py-0 text-white" onclick="selectVideo(${videoData[i].id}, '${videoData[i].name}')">선택</a><a class="btn btn-primary btn-sm py-0 text-white" onclick="viewVideoData(${videoData[i].id})" >영상</a></td>
+                           <td><a class="btn btn-info btn-sm text-white" onclick="selectVideo(${videoData[i].id}, '${videoData[i].name}')">선택</a><a class="btn btn-primary btn-sm py-0 text-white" onclick="viewVideoData(${videoData[i].id})" >영상</a></td>
+                           <td><a class="btn btn-danger btn-sm text-white" onclick="DeleteInDB(${videoData[i].id}, '${videoData[i].name}', 'video')">영상 제거</a></td>
                         </tr>`;
                 }
                 document.getElementById('vimeoList').innerHTML = str;
@@ -314,12 +319,44 @@
                     <tr onclick="selectDirectory(${directoryData[i].id}, '${directoryData[i].name}')">
                         <td>${directoryData[i].name}</td>
                         <td>폴더</td>
-                        <td>${directoryData[i].created_at}</td>
+                        <td><a class="btn btn-info btn-sm text-white" onclick="selectDirectory(${directoryData[i].id}, '${directoryData[i].name}')">영상리스트</a></td>
+                        <td><a class="btn btn-danger text-white" onclick="DeleteInDB(${directoryData[i].id}, '${directoryData[i].name}', 'directory')">디렉토리 제거</a></td>
                     </tr>
                     `;
                 }
                 document.getElementById('vimeoList').innerHTML = str;
                 document.getElementById('selectDirectory').innerText = '';
+            }
+        });
+    }
+
+    function DeleteInDB(id, name, target) {
+        if(target === 'directory') {
+            if (confirm(name + "디렉토리를 정말 삭제 하시겠습니까?\n다시 복구할 수 없습니다") == false) {
+                return false;
+            }
+        } else if(target === 'video') {
+            if (confirm(name + "영상을 정말 삭제 하시겠습니까?\n다시 복구할 수 없습니다") == false) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        if(!id || id === undefined) {
+            alert('삭제할 대상이 없습니다 다시 시도 해주세요');
+            return false;
+        }
+        let params = {
+            id: id,
+            target: target
+        };
+        XE.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: params,
+            url: '{{route('manage.dynamic_field_extend.getTargetDelete')}}',
+            success: function (response) {
+                getDirectoryList();
             }
         });
     }

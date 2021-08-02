@@ -176,14 +176,14 @@ class VimeoApiContoller extends Controller
 
     //디렉토리 LIST 조회
     public function getSelectDirectoryList(Request $request) {
-        $directoryList = VimeoDirectory::get();
+        $directoryList = VimeoDirectory::where('delete_check', 'N')->get();
 
         return \XePresenter::makeApi(['error' => 0, 'message' => 'Complete', 'data' => $directoryList]);
     }
 
     //선택한 디렉토리 내 영상 리스트 조회
     public function getSelectDirectoryVideo(Request $request) {
-        $videoList = VimeoVideo::where('directory_id', $request->get('directory'))->get();
+        $videoList = VimeoVideo::where('directory_id', $request->get('directory'))->where('delete_check', 'N')->get();
 
         return \XePresenter::makeApi(['error' => 0, 'message' => 'Complete', 'data' => $videoList]);
     }
@@ -219,6 +219,37 @@ class VimeoApiContoller extends Controller
 
     public function getVimeoVideoLink(Request $request) {
 
+    }
+
+    public function getTargetDelete(Request $request) {
+
+        $target = $request->get('target');
+
+        $update = [];
+        $update['delete_check'] = 'Y';
+        XeDB::beginTransaction();
+        try {
+            if ($target === 'directory') {
+                $check = VimeoDirectory::where('id', $request->get('id'))->first();
+                if (!$check) return redirect()->back()->with('alert', ['type' => 'danger', 'message' => '존재하지 않는 디렉토리입니다 다시 시도해주세요']);
+
+                VimeoDirectory::where('id', $request->get('id'))->update($update);
+            } else {
+                $check = VimeoVideo::where('id', $request->get('id'))->first();
+                if (!$check) return redirect()->back()->with('alert', ['type' => 'danger', 'message' => '존재하지 않는 영상입니다 다시 시도해주세요']);
+
+                VimeoVideo::where('id', $request->get('id'))->update($update);
+            }
+        } catch (Exception $e) {
+            XeDB::rollback();
+            $request->flash();
+            return redirect()->back()->with('alert', ['type' => 'danger', 'message' => $e->getMessage()]);
+        }
+
+        XeDB::commit();
+
+
+        return \XePresenter::makeApi(['error' => 0, 'message' => 'Complete']);
     }
 
 }

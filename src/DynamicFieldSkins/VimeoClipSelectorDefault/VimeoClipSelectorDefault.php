@@ -55,7 +55,7 @@ class VimeoClipSelectorDefault extends AbstractSkin
         $configManager = app('xe.config');
         $config_dynamic = $configManager->get('dynamic_field_extend');
 
-        $vimeoDirectories = VimeoDirectory::get();
+        $vimeoDirectories = VimeoDirectory::where('delete_check', 'N')->get();
 
         return $viewFactory->make($this->getViewPath('create'), [
             'args' => $args,
@@ -76,17 +76,29 @@ class VimeoClipSelectorDefault extends AbstractSkin
     public function show(array $args)
     {
         list($data, $key) = $this->filter($args);
-
         $viewFactory = $this->handler->getViewFactory();
 
         $configManager = app('xe.config');
         $config_dynamic = $configManager->get('dynamic_field_extend');
+        $responseData = array_merge($data, $this->mergeData);
+
+        //선택한 영상 리스트
+        $selectedVideoList = [];
+        if($responseData['vimeo_ids'] !== '') {
+            $selected = explode(',', $responseData['vimeo_ids']);
+            $selectedVideoList = VimeoVideo::whereIn('id', $selected)->get();
+
+            foreach($selectedVideoList as $key => $item) {
+                $selectedVideoList[$key]->directory_name = $this->getVideoDirectoryName($item->id);
+            }
+        }
 
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
             'key' => $key,
+            'datas' => $selectedVideoList
         ])->render();
     }
 
@@ -107,7 +119,7 @@ class VimeoClipSelectorDefault extends AbstractSkin
         $responseData = array_merge($data, $this->mergeData);
 
         //비메오 디렉토리
-        $vimeoDirectories = VimeoDirectory::get();
+        $vimeoDirectories = VimeoDirectory::where('delete_check', 'N')->get();
 
         $selectedVideoList = [];
 
