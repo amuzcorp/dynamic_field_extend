@@ -38,7 +38,7 @@ class Plugin extends AbstractPlugin
 
         Route::fixed(self::getId(), function () {
 
-            Route::post('/getVideoInfo', ['as' => 'dynamic_field_extend.vimeo.getVideoInfo', 'uses' => 'VimeoApiContoller@getVideoInfo']);
+            Route::get('/getVideoInfo', ['as' => 'dynamic_field_extend.vimeo.getVideoInfo', 'uses' => 'VimeoApiContoller@getVideoInfo']);
             Route::post('/getVimeoVideoLink', ['as' => 'dynamic_field_extend.vimeo.getVimeoVideoLink', 'uses' => 'VimeoApiContoller@getVimeoVideoLink']);
 
 

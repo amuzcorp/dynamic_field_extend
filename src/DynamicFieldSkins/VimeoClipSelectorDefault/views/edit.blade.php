@@ -232,11 +232,12 @@
             access_token: access_token
         };
         XE.ajax({
-            type: 'post',
+            type: 'get',
             dataType: 'json',
             data: params,
             url: '{{route('dynamic_field_extend.vimeo.getVideoInfo')}}',
             success: function (response) {
+                console.log(response);
                 document.getElementById('vimeoOpenModal').click();
                 document.getElementById('vimeoVideoContent').innerHTML = '';
                 document.getElementById('vimeoVideoContent').innerHTML = response.data.embed.html;

@@ -7,7 +7,7 @@ class VimeoDirectory extends DynamicModel
 {
     protected $table = 'vimeo_directory';
 
-    protected $fillable = ['id', 'name', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'name', 'delete_status', 'created_at', 'updated_at'];
 
     public $primaryKey = 'id';
 

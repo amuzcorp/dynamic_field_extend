@@ -138,6 +138,9 @@ class VimeoApiContoller extends Controller
                     //$data[$i]['video_viewer'] = $obj['data'][$i]['embed']['html'];
                     $data['video_link'] = $obj['data'][$p]['link'];
                     $data['video_duration'] = $obj['data'][$p]['duration'];
+                    $data['thumbnail'] = $obj['data'][$p]['pictures']['sizes'][5]['link'];
+                    $data['thumbnail_overlay'] = $obj['data'][$p]['pictures']['sizes'][5]['link_with_play_button'];
+
                     $p = $p + 1;
                     $this->storeVimeoVideo($data, $project_id);
                 }
@@ -152,6 +155,7 @@ class VimeoApiContoller extends Controller
         $inputs = [];
         $inputs['id'] = $data['project_id'];
         $inputs['name'] = $data['project_name'];
+        $inputs['delete_status'] = 'N';
 
         if(!VimeoDirectory::where('id', $data['project_id'])->first()) {
             VimeoDirectory::create($inputs);
@@ -166,6 +170,9 @@ class VimeoApiContoller extends Controller
         $inputs['directory_id'] = $directory_id;
         $inputs['name'] = $data['video_name'];
         $inputs['video_duration'] = $data['video_duration'];
+        $inputs['thumbnail'] = $data['thumbnail'];
+        $inputs['thumbnail_overlay'] = $data['thumbnail_overlay'];
+        $inputs['delete_status'] = 'N';
 
         if(!VimeoVideo::where('id', $data['id'])->first()) {
             VimeoVideo::create($inputs);
@@ -176,14 +183,14 @@ class VimeoApiContoller extends Controller
 
     //디렉토리 LIST 조회
     public function getSelectDirectoryList(Request $request) {
-        $directoryList = VimeoDirectory::where('delete_check', 'N')->get();
+        $directoryList = VimeoDirectory::where('delete_status', 'N')->get();
 
         return \XePresenter::makeApi(['error' => 0, 'message' => 'Complete', 'data' => $directoryList]);
     }
 
     //선택한 디렉토리 내 영상 리스트 조회
     public function getSelectDirectoryVideo(Request $request) {
-        $videoList = VimeoVideo::where('directory_id', $request->get('directory'))->where('delete_check', 'N')->get();
+        $videoList = VimeoVideo::where('directory_id', $request->get('directory'))->where('delete_status', 'N')->get();
 
         return \XePresenter::makeApi(['error' => 0, 'message' => 'Complete', 'data' => $videoList]);
     }
@@ -226,7 +233,7 @@ class VimeoApiContoller extends Controller
         $target = $request->get('target');
 
         $update = [];
-        $update['delete_check'] = 'Y';
+        $update['delete_status'] = 'Y';
         XeDB::beginTransaction();
         try {
             if ($target === 'directory') {

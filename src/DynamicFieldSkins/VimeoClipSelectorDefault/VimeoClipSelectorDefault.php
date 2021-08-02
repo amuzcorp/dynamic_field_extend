@@ -55,7 +55,7 @@ class VimeoClipSelectorDefault extends AbstractSkin
         $configManager = app('xe.config');
         $config_dynamic = $configManager->get('dynamic_field_extend');
 
-        $vimeoDirectories = VimeoDirectory::where('delete_check', 'N')->get();
+        $vimeoDirectories = VimeoDirectory::where('delete_status', 'N')->get();
 
         return $viewFactory->make($this->getViewPath('create'), [
             'args' => $args,
@@ -119,7 +119,7 @@ class VimeoClipSelectorDefault extends AbstractSkin
         $responseData = array_merge($data, $this->mergeData);
 
         //비메오 디렉토리
-        $vimeoDirectories = VimeoDirectory::where('delete_check', 'N')->get();
+        $vimeoDirectories = VimeoDirectory::where('delete_status', 'N')->get();
 
         $selectedVideoList = [];
 
