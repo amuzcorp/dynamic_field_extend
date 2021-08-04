@@ -28,20 +28,6 @@ class Plugin extends AbstractPlugin
             Route::post('/', ['as' => 'manage.dynamic_field_extend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
             //Route::get('/pointLog', ['as' => 'manage.dynamic_field_extendextend.point_log', 'uses' => 'ManagerController@pointLog']);
 
-            //비메오 컨트롤러 Route
-            Route::post('/syncVimeoProjectData', ['as' => 'manage.dynamic_field_extend.syncVimeoProjectData', 'uses' => 'VimeoApiContoller@syncVimeoProjectData']);
-            Route::post('/getSelectDirectoryVideo', ['as' => 'manage.dynamic_field_extend.getSelectDirectoryVideo', 'uses' => 'VimeoApiContoller@getSelectDirectoryVideo']);
-            Route::post('/getSelectDirectoryList', ['as' => 'manage.dynamic_field_extend.getSelectDirectoryList', 'uses' => 'VimeoApiContoller@getSelectDirectoryList']);
-            Route::post('/getTargetDelete', ['as' => 'manage.dynamic_field_extend.getTargetDelete', 'uses' => 'VimeoApiContoller@getTargetDelete']);
-
-        }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
-
-        Route::fixed(self::getId(), function () {
-
-            Route::get('/getVideoInfo', ['as' => 'dynamic_field_extend.vimeo.getVideoInfo', 'uses' => 'VimeoApiContoller@getVideoInfo']);
-            Route::post('/getVimeoVideoLink', ['as' => 'dynamic_field_extend.vimeo.getVimeoVideoLink', 'uses' => 'VimeoApiContoller@getVimeoVideoLink']);
-
-
         }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
     }
 
