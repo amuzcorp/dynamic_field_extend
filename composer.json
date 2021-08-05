@@ -278,7 +278,8 @@
         }
     },
     "require": {
-        "xpressengine/xpressengine": "~3.0.12"
+        "xpressengine/xpressengine": "~3.0.12",
+        "xpressengine-plugin/integrated_keychain": "*"
     },
     "autoload": {
         "psr-4": {

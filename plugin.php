@@ -1,6 +1,7 @@
 <?php
 namespace Amuz\XePlugin\DynamicFieldExtend;
 
+use Amuz\XePlugin\DynamicFieldExtend\Middleware\CheckRequirePlugins;
 use Route;
 use XeLang;
 use Xpressengine\Plugin\AbstractPlugin;
@@ -16,9 +17,39 @@ class Plugin extends AbstractPlugin
      */
     public function boot()
     {
-        // implement code
+        app('router')->pushMiddlewareToGroup('web', CheckRequirePlugins::class);
 
+        // implement code
+        $this->registerKeyChain();
         $this->route();
+    }
+
+    function registerKeyChain(){
+        $keychain = [
+            'kakao_map_key' => [
+                'tab' => '확장필드',
+                'group' => '지도',
+                'label' => '카카오 지도 API KEY',
+                'description' => '카카오 지도의 자바스크립트 키를 입력합니다.',
+                'how' => '확장필드 위치 및 지도 필드에 활용됩니다.',
+                'pid' => 'map',
+                'vid' => 'kakao',
+                'type' => 'formText',
+                'ordering' => 500
+            ],
+            'naver_map_key' => [
+                'tab' => '확장필드',
+                'group' => '지도',
+                'label' => '네이버 Client ID',
+                'description' => '네이버 클라우드 플랫폼의 Client ID를 입력합니다.',
+                'how' => '확장필드 위치 및 지도 필드에 활용됩니다.',
+                'pid' => 'map',
+                'vid' => 'naver',
+                'type' => 'formText',
+                'ordering' => 500
+            ],
+        ];
+        \XeRegister::push('integrated_keychain',self::getId(),$keychain);
     }
 
     protected function route()
@@ -105,7 +136,8 @@ class Plugin extends AbstractPlugin
 
     public function getSettingsURI()
     {
-        return route('manage.dynamic_field_extend.index');
+        //integrated keychain 으로 설정 통합
+//        return route('manage.dynamic_field_extend.index');
         //return "";
     }
 }
