@@ -41,7 +41,6 @@ class KakaoMapSkin extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function create(array $args)
     {
@@ -49,8 +48,7 @@ class KakaoMapSkin extends AbstractSkin
 
         list($data, $key) = $this->filter($args);
 
-        $dfe_config = app('xe.config')->get('dynamic_field_extend');
-        $map_key = $dfe_config->get('kakao_map_key');
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         return $viewFactory->make($this->getViewPath('create'), [
             'args' => $args,
@@ -66,14 +64,12 @@ class KakaoMapSkin extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function edit(array $args)
     {
         list($data, $key) = $this->filter($args);
 
-        $dfe_config = app('xe.config')->get('dynamic_field_extend');
-        $map_key = $dfe_config->get('kakao_map_key');
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('edit'), [
@@ -90,14 +86,12 @@ class KakaoMapSkin extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function show(array $args)
     {
         list($data, $key) = $this->filter($args);
 
-        $dfe_config = app('xe.config')->get('dynamic_field_extend');
-        $map_key = $dfe_config->get('kakao_map_key');
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('show'), [

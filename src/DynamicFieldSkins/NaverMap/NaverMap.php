@@ -42,7 +42,6 @@ class NaverMap extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function create(array $args)
     {
@@ -50,10 +49,7 @@ class NaverMap extends AbstractSkin
 
         list($data, $key) = $this->filter($args);
 
-        $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
-
-        $map_key = $config_dynamic->get('naver_map_key');
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         return $viewFactory->make($this->getViewPath('create'), [
             'args' => $args,
@@ -69,16 +65,11 @@ class NaverMap extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function edit(array $args)
     {
         list($data, $key) = $this->filter($args);
-
-        $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
-
-        $map_key = $config_dynamic->get('naver_map_key');
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('edit'), [
@@ -95,16 +86,12 @@ class NaverMap extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function show(array $args)
     {
         list($data, $key) = $this->filter($args);
 
-        $configManager = app('xe.config');
-        $config_dynamic = $configManager->get('dynamic_field_extend');
-
-        $map_key = $config_dynamic->get('naver_map_key');
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('show'), [

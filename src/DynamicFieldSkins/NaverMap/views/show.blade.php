@@ -1,18 +1,6 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/style.css')->load()}}
+
 <div class="xe-form-group xe-dynamicField">
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-        {{--<title>간단한 지도 표시하기</title>--}}
-        <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
-        <script type="text/javascript"
-                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
-    </head>
-    <body>
     <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
            value="">
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
@@ -63,22 +51,11 @@
         <br>
     </div>
 
-    {{--<div class="map" id="{{$config->get('id')}}_map" style="width:500px;height:400px;float:left"></div>--}}
     <div class="map" id="map"
          style="@if($args[$config->get('id')."_list_display"] == "true")width:70%@else width:100% @endif;height:400px;float:left;@if(json_decode($args[$config->get('id')."_location_data"]) == null) display: none; @elseif(!array_filter(json_decode($args[$config->get('id')."_location_data"]))) display: none; @endif"></div>
     <div class="store-list" id="{{$config->get('id')}}_store_list"
          style="width:28%;height:400px;overflow:auto;float:left;@if($args[$config->get('id')."_list_display"] != "true") display:none;@endif">
         <div class="row_map">
-            {{--<div class="col">--}}
-            {{--<div class="store-item">--}}
-            {{--<div class="store-item-title">제목</div>--}}
-            {{--<span class="address-field">주소</span>--}}
-            {{--<div class="btn_area">--}}
-            {{--<a class="store-btn" href="tel:+82#">연락처</a>--}}
-            {{--<a href="#">위치보기</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
             @if(isset($args[$config->get('id')."_location_data"]))
                 @foreach(json_decode($args[$config->get('id')."_location_data"]) as $location)
                     @if($location)
@@ -136,21 +113,14 @@
         </div>
 
         <button class="xe-btn" type="button" onclick="{{$config->get('id')}}_searchAddressToCoordinate()">위치추가</button>
-        {{--<button type="button" onclick="{{$config->get('id')}}_mark_init()">초기화</button>--}}
     </div>
 
     <div style="clear: both"></div>
-    </body>
-    </html>
 </div>
-<script>
-    // var mapOptions = {
-    //     center: new naver.maps.LatLng(37.3595704, 127.105399),
-    //     zoom: 10
-    // };
-    //
-    // var map = new naver.maps.Map('map', mapOptions);
 
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{ $map_key }}&submodules=geocoder"></script>
+
+<script>
 
     var {{$config->get('id')}}_map = new naver.maps.Map("map", {
         center: new naver.maps.LatLng(37.3595316, 127.1052133),

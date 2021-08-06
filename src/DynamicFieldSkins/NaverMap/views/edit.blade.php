@@ -1,19 +1,10 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/style.css')->load()}}
 <div class="xe-form-group xe-dynamicField">
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-        {{--<title>간단한 지도 표시하기</title>--}}
-        <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
-        <br>
-        <script type="text/javascript"
-                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
-    </head>
-    <body>
+    <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
+    <br>
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
+
     @if($config->get('required') === false)
         <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
                value="">

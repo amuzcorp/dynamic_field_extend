@@ -1,21 +1,6 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/style.css')->load()}}
 <div class="xe-form-group xe-dynamicField">
-    <!DOCTYPE html>
-    {{--광주광역시 서구 치평동 시청로--}}
-    {{--제주특별자치도 제주시 첨단로 242--}}
-    {{--부산광역시 연제구 연산동 중앙대로 1001--}}
-    {{--중구 세종대로 110 서울특별시청--}}
-    <html>
-    <head>
-        {{--<meta charset="utf-8"/>--}}
-        {{--<title>Kakao 지도 시작하기</title>--}}
-        <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
-        <br>
-
-
-    </head>
-
-    <body>
+    <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
     <input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"
            value="">
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
@@ -79,10 +64,6 @@
         </div>
     </div>
     <div style="clear: both"></div>
-
-
-    </body>
-    </html>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{$map_key}}&libraries=services"></script>
 {{--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{$config->get('kakao_map_key')}}&libraries=services"></script>--}}

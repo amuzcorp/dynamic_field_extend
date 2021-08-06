@@ -1,32 +1,9 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/style.css')->load()}}
-{{--<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?query=부산"></script>--}}
-{{--<script>--}}
-{{--new daum.Postcode({--}}
-{{--query:"부산",--}}
-{{--oncomplete: function(data) {--}}
-{{--// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.--}}
-{{--// 예제를 참고하여 다양한 활용법을 확인해 보세요.--}}
-{{--console.log(data);--}}
-{{--}--}}
-{{--});--}}
-{{--</script>--}}
-<div class="xe-form-group xe-dynamicField">
-    <!DOCTYPE html>
-    {{--광주광역시 서구 치평동 시청로--}}
-    {{--제주특별자치도 제주시 첨단로 242--}}
-    {{--부산광역시 연제구 연산동 중앙대로 1001--}}
-    {{--중구 세종대로 110 서울특별시청--}}
-    <html>
-    <head>
-        {{--<meta charset="utf-8"/>--}}
-        {{--<title>Kakao 지도 시작하기</title>--}}
-        <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
-        <br>
-    </head>
 
-    <body>
-    {{--<input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"--}}
-           {{--value="">--}}
+<div class="xe-form-group xe-dynamicField">
+    <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
+
+
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
            value="">
     <input type="hidden" id="{{$config->get('id')}}_auto_center" name="{{$config->get('id')}}_auto_center"
@@ -72,16 +49,6 @@
     <div class="store-list" id="{{$config->get('id')}}_store_list"
          style="width:28%;height:400px;overflow:auto;float:left">
         <div class="row_map">
-            {{--<div class="col">--}}
-            {{--<div class="store-item">--}}
-            {{--<div class="store-item-title">제목</div>--}}
-            {{--<span class="address-field">주소</span>--}}
-            {{--<div class="btn_area">--}}
-            {{--<a class="store-btn" href="tel:+82#">연락처</a>--}}
-            {{--<a href="#">위치보기</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
     <div style="clear: both"></div>
@@ -115,8 +82,6 @@
     </div>
 
     <div style="clear: both"></div>
-    </body>
-    </html>
 </div>
 
 

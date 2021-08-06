@@ -1,21 +1,9 @@
 {{XeFrontend::css('plugins/dynamic_field_extend/assets/style.css')->load()}}
 <div class="xe-form-group xe-dynamicField">
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-        {{--<title>간단한 지도 표시하기</title>--}}
-        <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
-        <br>
-        <script type="text/javascript"
-                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
-    </head>
-    <body>
-    {{--<input type="hidden" id="{{$config->get('id')}}_location_data" name="{{$config->get('id')}}_location_data[]"--}}
-           {{--value="">--}}
+    <h class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</h>
+    <script type="text/javascript"
+            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId={{$map_key}}&submodules=geocoder"></script>
+
     <input type="hidden" id="{{$config->get('id')}}_location_info" name="{{$config->get('id')}}_location_info[]"
            value="">
     <input type="hidden" id="{{$config->get('id')}}_auto_center" name="{{$config->get('id')}}_auto_center"
@@ -63,16 +51,6 @@
     <div class="store-list" id="{{$config->get('id')}}_store_list"
          style="width:28%;height:400px;overflow:auto;float:left">
         <div class="row_map">
-            {{--<div class="col">--}}
-            {{--<div class="store-item">--}}
-            {{--<div class="store-item-title">제목</div>--}}
-            {{--<span class="address-field">주소</span>--}}
-            {{--<div class="btn_area">--}}
-            {{--<a class="store-btn" href="tel:+82#">연락처</a>--}}
-            {{--<a href="#">위치보기</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 
@@ -106,16 +84,8 @@
     </div>
 
     <div style="clear: both"></div>
-    </body>
-    </html>
 </div>
 <script>
-    // var mapOptions = {
-    //     center: new naver.maps.LatLng(37.3595704, 127.105399),
-    //     zoom: 10
-    // };
-    //
-    // var map = new naver.maps.Map('map', mapOptions);
 
 
     var {{$config->get('id')}}_map = new naver.maps.Map("map", {
