@@ -5,3 +5,7 @@
         <option value="multi" @if($config !== null && $config->get('time_type') === 'multi') selected="selected"@endif>시작시간+종료시간</option>
     </select>
 </div>
+<div class="form-group">
+    <label class="xe-form__label--requried">기본 시간 ex)09:00</label>
+    <input type="text" class="form-control" name="default_time" value="{{$config->get('default_time')}}">
+</div>

@@ -6,7 +6,10 @@
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_{{ $key['start'] }}">{{ xe_trans($config->get('label')) }}</label>
     <div>
         <div class="xu-form-group__box" @if($config->get('time_type') != 'single') style="float:left; width:50%; padding-right:10px;" @endif>
-            <input type="text" id="trp_{{ $key['start'] }}_start" name="{{ $key['start'] }}" class="xe-form-control amuz-time-range-picker"  placeholder="{{ $config->get('time_type') == 'single' ? '날짜선택' : '시작일' }}">
+            <input type="text" id="trp_{{ $key['start'] }}_start"
+                   name="{{ $key['start'] }}"
+                   class="xe-form-control amuz-time-range-picker"
+                   placeholder="{{ $config->get('time_type') == 'single' ? '시간을 선택해주세요' : '시작일' }}">
         </div>
         <div class="xu-form-group__box" style="float:right; width:50%; padding-left:10px; @if($config->get('time_type') == 'single') display:none @endif ">
             <input type="text" id="trp_{{ $key['end'] }}_end" name="{{ $key['end'] }}" class="xe-form-control amuz-time-range-picker" placeholder="종료시간">
@@ -23,7 +26,9 @@
             interval: 10,
             minTime: '00:00',
             maxTime: '23:50',
-            defaultTime: '09:00',
+            @if($config->get('default_time') && $config->get('default_time') !== '')
+                defaultTime: '{{$config->get('default_time')}}',
+            @endif
             startTime: '09:00',
             dynamic: false,
             dropdown: true,
