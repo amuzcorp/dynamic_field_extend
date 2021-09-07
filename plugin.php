@@ -6,7 +6,6 @@ use Route;
 use XeLang;
 use Xpressengine\Plugin\AbstractPlugin;
 use Xpressengine\Config\ConfigEntity;
-use Amuz\XePlugin\DynamicFieldExtend\Plugin\Database;
 
 class Plugin extends AbstractPlugin
 {
@@ -86,7 +85,7 @@ class Plugin extends AbstractPlugin
             $config->set('category_input', 1);
             $configManager->add('dynamic_field_extend', $config->getPureAll());
         }
-        Database::create();
+
     }
 
     /**
