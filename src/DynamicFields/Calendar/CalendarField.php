@@ -215,9 +215,9 @@ class CalendarField extends AbstractType
 
                 if($config->get('picker_type') === 'date') {
                     if($column->name === 'start') {
-                        $dateTime[$column->name.'_time'] = '00:00';
+                        $dateTime[$column->name.'_time'] = '09:00';
                     } elseif($column->name === 'end') {
-                        $dateTime[$column->name.'_time'] = '23:59';
+                        $dateTime[$column->name.'_time'] = '09:00';
                     }
                 }
                 if($config->get('date_type') == 'single') {
