@@ -117,11 +117,10 @@ class CalendarField extends AbstractType
         $insertParam['target_id'] = $args[$config->get('joinColumnName')];
         $insertParam['group'] = $config->get('group');
 
-        $dateTime_data = $this->setDateTimeData($config, $args);
-
         foreach ($this->getColumns() as $column) {
             $key = $config->get('id') . '_' . $column->name;
             if (isset($args[$key]) == true) {
+                $dateTime_data = $this->setDateTimeData($config, $args);
                 $insertParam[$column->name] = $dateTime_data[$column->name];
             }
         }
