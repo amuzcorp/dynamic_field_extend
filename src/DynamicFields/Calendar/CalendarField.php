@@ -166,10 +166,10 @@ class CalendarField extends AbstractType
         }
 
         $updateParam = [];
-        $dateTime_data = $this->setDateTimeData($config, $args);
         foreach ($this->getColumns() as $column) {
             $key = $config->get('id') . '_' . $column->name;
             if (isset($args[$key]) == true) {
+                $dateTime_data = $this->setDateTimeData($config, $args);
                 $updateParam[$column->name] = $dateTime_data[$column->name];
             }
         }
@@ -207,7 +207,9 @@ class CalendarField extends AbstractType
         foreach ($this->getColumns() as $column) {
             $key = $config->get('id') . '_' . $column->name;
             if (isset($args[$key]) == true) {
-                $date = $args[$key][0];
+                $date = date('Ymd', strtotime($args[$key][0]));
+                $date = str_replace('-', '', $date);
+                $date = date('Y-m-d', strtotime($date));
                 $time = $args[$key][1];
 
                 $dateTime[$column->name] = $date;
