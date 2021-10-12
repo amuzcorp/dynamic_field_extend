@@ -126,48 +126,5 @@
         /*top:-77px;*/
         font-size:12px;
     }
-
-    .xe-btn {
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: normal;
-        text-align: center;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        background-image: none;
-        background-color: #fff;
-        border: 1px solid #bbbcbf;
-        border-top-color: rgb(187, 188, 191);
-        border-top-style: solid;
-        border-top-width: 1px;
-        border-right-color: rgb(187, 188, 191);
-        border-right-style: solid;
-        border-right-width: 1px;
-        border-bottom-color: rgb(187, 188, 191);
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-left-color: rgb(187, 188, 191);
-        border-left-style: solid;
-        border-left-width: 1px;
-        border-image-source: initial;
-        border-image-slice: initial;
-        border-image-width: initial;
-        border-image-outset: initial;
-        border-image-repeat: initial;
-        white-space: nowrap;
-        text-decoration: none;
-        padding: 7px 16px;
-        font-size: 14px;
-        line-height: 1.42857;
-        border-radius: 2px;
-        color: #333;
-        background-color: #fff;
-        border-color: #bbbcbf;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
+    
 </style>
