@@ -41,7 +41,7 @@
                 listMode: 2,
                 user: user,
                 selected: function (mediaList) {
-                    $('.thumb_' + media_id).empty();
+                    //$('.thumb_' + media_id).empty();
                     $.each(mediaList, function () {
                         //that._renderMedia(this, $form)
                         //that._insertToDocument(that._normalizeFileData(this), $form)
@@ -126,5 +126,5 @@
         /*top:-77px;*/
         font-size:12px;
     }
-    
+
 </style>
