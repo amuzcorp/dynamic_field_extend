@@ -41,7 +41,7 @@
                 listMode: 2,
                 user: user,
                 selected: function (mediaList) {
-                    $('.thumb_' + media_id).empty();
+                    //$('.thumb_' + media_id).empty();
                     $.each(mediaList, function () {
                         //that._renderMedia(this, $form)
                         //that._insertToDocument(that._normalizeFileData(this), $form)
@@ -55,17 +55,32 @@
 
 
                         var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
-                        console.log(mediaList[cnt]['file']['url']);
-                        if (over_chk == null) {
-                            var img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
-                            img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
-                            img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
-                            img_string += '</li>';
-                            if(mediaList[cnt]['file']['url']) {
-                                $('.thumb_' + media_id).append(img_string);
+                        //console.log(mediaList[cnt]['file']['url']);
+                        if(mediaList[cnt]['file']['id'] != "") {
+                            if (over_chk == null) {
+                                var img_string = '';
+
+                                if(checkURL(mediaList[cnt]['file']['filename'])) {
+                                    img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
+                                    img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                                    img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
+                                    img_string += '</li>';
+                                }else{
+                                    img_string = '<li class="media_li" onclick="media_del(this)">'+mediaList[cnt]['file']['clientname'];
+                                    img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                                    img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
+                                    img_string += '</li>';
+
+                                }
+
+                                if (mediaList[cnt]['file']['filename']) {
+
+                                    $('.thumb_' + media_id).append(img_string);
+                                }
+
+                                cnt++;
                             }
 
-                            cnt++;
                         }
                     })
                 }
@@ -75,6 +90,10 @@
 
     function media_del(my_data) {
         my_data.remove();
+    }
+
+    function checkURL(url) {
+        return(url.match(/(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/) != null);
     }
 
 
@@ -107,4 +126,5 @@
         /*top:-77px;*/
         font-size:12px;
     }
+
 </style>

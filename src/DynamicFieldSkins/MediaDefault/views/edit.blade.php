@@ -28,11 +28,23 @@
         @if(isset($media) && $media != 'null')
             @foreach($media as $data)
                 @if(XeStorage::find($data))
-                    <li class="media_li" onclick="media_del(this)"><img width=100px height=100px
-                                                                        src="{{$storage_path.'/'.XeStorage::find($data)->path.'/'.XeStorage::find($data)->filename}}">
-                        <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}"
-                               value="{{$data}}">
-                    </li>
+                    @php
+                        $img_ok = array("gif", "png", "jpg", "jpeg", "bmp", "GIF", "PNG", "JPG", "JPEG", "BMP");
+                        $file_ext = explode(".", strrev(XeStorage::find($data)->filename));
+                        $file_ext = strrev($file_ext[0]);
+                    @endphp
+                    @if(in_array($file_ext, $img_ok))
+                        <li class="media_li" onclick="media_del(this)"><img width=100px height=100px
+                                                                            src="{{$storage_path.'/'.XeStorage::find($data)->path.'/'.XeStorage::find($data)->filename}}">
+                            <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}"
+                                   value="{{$data}}">
+                        </li>
+                    @elseif(!in_array($file_ext, $img_ok))
+                        <li class="media_li" onclick="media_del(this)">{{XeStorage::find($data)->clientname}}
+                            <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}"
+                                   value="{{$data}}">
+                        </li>
+                    @endif
                 @endif
             @endforeach
         @endif
@@ -62,21 +74,35 @@
                         //that._renderMedia(this, $form)
                         //that._insertToDocument(that._normalizeFileData(this), $form)
 
-                        // console.log(mediaList[cnt]['file']);
+                        //console.log(mediaList[cnt]['file']);
 
                         var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
 
-                        if (over_chk == null) {
-                            var img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
-                            img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
-                            img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
-                            img_string += '</li>';
+                        if(mediaList[cnt]['file']['id'] != "") {
+                            if (over_chk == null) {
+                                var img_string = '';
 
-                            if(mediaList[cnt]['file']['url']) {
-                                $('.thumb_' + media_id).append(img_string);
+                                if(checkURL(mediaList[cnt]['file']['filename'])) {
+                                    img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
+                                    img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                                    img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
+                                    img_string += '</li>';
+                                }else{
+                                    img_string = '<li class="media_li" onclick="media_del(this)">'+mediaList[cnt]['file']['clientname'];
+                                    img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                                    img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
+                                    img_string += '</li>';
+
+                                }
+
+                                if (mediaList[cnt]['file']['filename']) {
+
+                                    $('.thumb_' + media_id).append(img_string);
+                                }
+
+                                cnt++;
                             }
 
-                            cnt++;
                         }
                     })
                 }
@@ -86,6 +112,10 @@
 
     function media_del(my_data) {
         my_data.remove();
+    }
+
+    function checkURL(url) {
+        return(url.match(/(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/) != null);
     }
 
 
