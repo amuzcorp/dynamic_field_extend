@@ -209,16 +209,17 @@ class CalendarField extends AbstractType
                 $date = date('Ymd', strtotime($args[$key][0]));
                 $date = str_replace('-', '', $date);
                 $date = date('Y-m-d', strtotime($date));
-                $time = $args[$key][1];
+                if($column->name === 'start') $time = $args[$key][1] ?: '00:00';
+                else $time = $args[$key][1] ?: '23:59';
 
                 $dateTime[$column->name] = $date;
                 $dateTime[$column->name.'_time'] = $time;
 
                 if($config->get('picker_type') === 'date') {
                     if($column->name === 'start') {
-                        $dateTime[$column->name.'_time'] = '09:00';
+                        $dateTime[$column->name.'_time'] = '00:00';
                     } elseif($column->name === 'end') {
-                        $dateTime[$column->name.'_time'] = '09:00';
+                        $dateTime[$column->name.'_time'] = '23:59';
                     }
                 }
                 if($config->get('date_type') == 'single') {
@@ -235,7 +236,7 @@ class CalendarField extends AbstractType
         }
 
         $start_dateTime = $dateTime['start'].' '.$dateTime['start_time'].':00';
-        $end_dateTime = $dateTime['end'].' '.$dateTime['end_time'].':00';
+        $end_dateTime = $dateTime['end'].' '.$dateTime['end_time'].':59';
         $start = Carbon::createFromFormat('Y-m-d H:i:s', $start_dateTime);
         $end = Carbon::createFromFormat('Y-m-d H:i:s', $end_dateTime);
 
