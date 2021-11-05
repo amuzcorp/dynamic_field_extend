@@ -263,7 +263,6 @@
                     "name": "Kakao 스킨",
                     "description": "Kakao 지도 API 를 사용합니다."
                 },
-
                 "fieldType/dynamic_field_extend@HtmlLanding": {
                   "name": "HTML 코드 랜딩 fieldType",
                   "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\HtmlLanding\\HtmlLandingField",
@@ -273,6 +272,16 @@
                   "name": "HTML 코드 랜딩 fieldType DefaultSkin",
                   "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\HtmlLandingDefault\\HtmlLandingDefault",
                   "description": "HTML 코드 랜딩 fieldType DefaultSkin"
+                },
+                "fieldType/dynamic_field_extend@ToDoList": {
+                  "name": "To Do List fieldType",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\ToDoList\\ToDoListField",
+                  "description": "To Do List fieldType"
+                },
+                "fieldType/dynamic_field_extend@ToDoList/fieldSkin/dynamic_field_extend@default": {
+                  "name": "To Do List fieldType DefaultSkin",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\ToDoList\\Skins\\Common\\CommonSkin",
+                  "description": "To Do List fieldType DefaultSkin"
                 }
             }
         }
