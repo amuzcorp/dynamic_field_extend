@@ -94,7 +94,7 @@ class TagField extends AbstractType
     {
         $this->checkAndModifyTagTable();
         if(isset($args['_tags'])) {
-            $this->set($args['id'], $args['_tags'], $args['instance_id']);
+            $this->set($args['id'], $args['_tags'], $args['cpt_id']);
         }
     }
 
@@ -125,22 +125,28 @@ class TagField extends AbstractType
 
     /**
      * delete dynamic field all data
-     *
+     * core taggables 에 field id 기록 자체를 안함 + group columns 없음으로 임의로 데이터 삭제 시퀀스 추가
      * @return void
      */
     public function dropData()
     {
-        $where  = [
-            ['instance_id', $this->config->get('id', '')],
-            ['group', $this->config->get('group', '')]
-        ];
+        $instance_id = str_replace('documents_', '', $this->config->get('group')) ?: '';
 
-        $this->handler->connection()->table($this->getTableName())
-            ->where($where)->delete();
+        $repo = new TagRepository();
+        $tags = $repo->query()->where('instance_id', $instance_id)->pluck('id');
+
+//        $where  = [
+//            ['field_id', $this->config->get('id', '')],
+//            ['group', $this->config->get('group', '')]
+//        ];
+
+        $repo->query()->where('instance_id', $instance_id)->delete();
+        $this->handler->connection()->table($this->getTableName())->whereIn('tag_id', $tags)->delete();
     }
 
     public function set($taggableId, array $words = [], $instanceId = null)
     {
+        $config = $this->config;
         $repo = new TagRepository();
         $decomposer = new SimpleDecomposer();
         $words = array_unique($words);
@@ -150,6 +156,7 @@ class TagField extends AbstractType
         // 등록되지 않은 단어가 있다면 등록 함
         foreach (array_diff($words, $tags->pluck('word')->all()) as $word) {
             $tag = $repo->create([
+                'instance_id' => $instanceId,
                 'word' => $word,
                 'decomposed' => $decomposer->execute($word),
             ]);
@@ -159,6 +166,8 @@ class TagField extends AbstractType
 
         // 넘겨준 태그와 대상 아이디를 연결
         $tags = $this->multisort($words, $tags->all());
+
+        //field Id 등록 될 때 $config->get('id') 보내주기
         $repo->attach($taggableId, $tags);
 
         // 이전에 대상 아이디에 연결된 태그중
