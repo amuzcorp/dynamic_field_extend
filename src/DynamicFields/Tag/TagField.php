@@ -111,6 +111,8 @@ class TagField extends AbstractType
         //var_dump($args);var_dump($wheres);exit;
         if(isset($args['doc_id']) && isset($args['_tags'])) {
             $this->set($args['doc_id'], $args['_tags'], $args['cpt_id']);
+        } else {
+            \DB::table('taggables')->where('taggable_id', $args['doc_id'])->delete();
         }
     }
 
