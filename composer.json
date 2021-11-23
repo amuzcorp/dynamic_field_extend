@@ -282,7 +282,17 @@
                   "name": "To Do List fieldType DefaultSkin",
                   "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\ToDoList\\Skins\\Common\\CommonSkin",
                   "description": "To Do List fieldType DefaultSkin"
-                }
+                },
+              "fieldType/dynamic_field_extend@SignCanvas": {
+                "name": "고객서명 fieldType",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\SignCanvas\\SignCanvasField",
+                "description": "고객서명 fieldType"
+              },
+              "fieldType/dynamic_field_extend@SignCanvas/fieldSkin/dynamic_field_extend@default": {
+                "name": "고객서명 fieldType DefaultSkin",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\SignCanvasDefault\\SignCanvasSkin",
+                "description": "고객서명 fieldType DefaultSkin"
+              }
             }
         }
     },
