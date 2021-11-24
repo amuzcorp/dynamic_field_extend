@@ -2,7 +2,11 @@
 
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\SignCanvas;
 
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Xpressengine\Config\ConfigEntity;
+use Xpressengine\Database\DynamicQuery;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
 use Xpressengine\DynamicField\ColumnDataType;
@@ -41,7 +45,8 @@ class SignCanvasField extends AbstractType
     public function getColumns()
     {
         return [
-            'text'=>new ColumnEntity('text', ColumnDataType::TEXT)
+            'text'=>new ColumnEntity('text', ColumnDataType::TEXT),
+            'signature_date'=>new ColumnEntity('signature_date', ColumnDataType::TIMESTAMP)
         ];
     }
 
@@ -85,7 +90,7 @@ class SignCanvasField extends AbstractType
                     $table->string('target_id', 36);
                     $table->string('group');
                     $table->text('text');
-
+                    $table->timestamp('signature_date')->default(\DB::raw('CURRENT_TIMESTAMP'))->nullable();
 //                    foreach ($self->getColumns() as $column) {
 //                        $column->add($table, '');
 //                    }
@@ -106,6 +111,7 @@ class SignCanvasField extends AbstractType
                     $table->string('target_id', 36);
                     $table->string('group');
                     $table->text('text');
+                    $table->timestamp('signature_date')->default(\DB::raw('CURRENT_TIMESTAMP'))->nullable();
 
 //                    foreach ($self->getColumns() as $column) {
 //                        $column->add($table, '');
@@ -191,6 +197,9 @@ class SignCanvasField extends AbstractType
             return null;
         }
 
+        $is_changed = array_get($args, $where['field_id'].'_edit', 'N');
+        if($is_changed == 'N') return;
+
         foreach ($args as $index => $arg) {
             if ($arg == null) {
                 $args[$index] = '';
@@ -205,6 +214,7 @@ class SignCanvasField extends AbstractType
                 $updateParam[$column->name] = $args[$key];
             }
         }
+        $updateParam['signature_date'] = Carbon::now();
 
         // event fire
         $this->handler->getRegisterHandler()->fireEvent(
@@ -232,5 +242,59 @@ class SignCanvasField extends AbstractType
         $this->handler->getRegisterHandler()->fireEvent(
             sprintf('dynamicField.%s.%s.after_update', $config->get('group'), $config->get('id'))
         );
+    }
+    /**
+     * table join
+     *
+     * @param DynamicQuery $query  query builder
+     * @param ConfigEntity $config config entity
+     * @return Builder
+     */
+    public function join(DynamicQuery $query, ConfigEntity $config = null)
+    {
+
+        if ($config === null) {
+            $config = $this->config;
+        }
+
+        if ($config->get('use') === false) {
+            return $query;
+        }
+
+        $baseTable = $query->from;
+
+        $type = $this->handler->getRegisterHandler()->getType($this->handler, $config->get('typeId'));
+        $tablePrefix = $this->handler->connection()->getTablePrefix();
+
+        $createTableName = $type->getTableName();
+        if ($query->hasDynamicTable($config->get('group') . '_' . $config->get('id')) === true) {
+            return $query;
+        }
+
+        $rawString = sprintf('%s.*', $tablePrefix . $baseTable);
+
+//        $rawString = sprintf('%s.*', $tablePrefix . $baseTable);
+        // doc 에 filed_id 가 있어야 update 가능
+        $rawString .= sprintf(', null as '.$config->get('id').'_edit');
+        foreach ($type->getColumns() as $column) {
+            $key = $config->get('id') . '_' . $column->name;
+
+            $rawString .= sprintf(', %s.%s as %s', $tablePrefix . $config->get('id'), $column->name, $key);
+        }
+
+        $query->leftJoin(
+            sprintf('%s as %s', $createTableName, $config->get('id')),
+            function (JoinClause $join) use ($createTableName, $config, $baseTable) {
+                $join->on(
+                    sprintf('%s.%s', $baseTable, $config->get('joinColumnName')),
+                    '=',
+                    sprintf('%s.target_id', $config->get('id'))
+                )->where($config->get('id') . '.field_id', $config->get('id'));
+            }
+        )->selectRaw($rawString);
+
+        $query->setDynamicTable($config->get('group') . '_' . $config->get('id'));
+
+        return $query;
     }
 }

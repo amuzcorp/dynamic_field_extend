@@ -15,6 +15,7 @@
     <br />
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic"><small>서명 후 서명확정 버튼을 눌러주세요</small></label>
     <input type="hidden" name="{{$config->get('id')}}_text" value="" required>
+    <input type="hidden" name="{{$config->get('id')}}_edit" value="Y">
     <label id="{{$config->get('id')}}_check_label" class="unchecked">등록된 서명이 없습니다.</label>
     <br />
     <div id="{{$config->get('id')}}_sign_field">

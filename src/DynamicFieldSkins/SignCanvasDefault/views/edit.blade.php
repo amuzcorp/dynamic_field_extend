@@ -14,9 +14,10 @@
     <label class="xu-form-group__label __xe_df __xe_df_textarea __xe_df_textarea_information">{{xe_trans($config->get('label'))}}</label>
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic"><small>서명 후 서명확정 버튼을 눌러주세요</small></label>
     <br />
+    <input type="hidden" name="{{$config->get('id')}}_edit" value="N">
     <input type="hidden" name="{{$config->get('id')}}_text" value="{{$data['text']}}" required>
     @if($data['text'] !== '')
-        <label id="{{$config->get('id')}}_check_label" class="checked">서명이 확인 되었습니다.</label>
+        <label id="{{$config->get('id')}}_check_label" class="checked">{{date('Y년 m월 d일 H시 i분', strtotime($data['signature_date']))}}  서명이 확인 되었습니다.</label>
     @else
         <label id="{{$config->get('id')}}_check_label" class="unchecked">등록된 서명이 없습니다.</label>
     @endif

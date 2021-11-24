@@ -437,6 +437,7 @@
 
     saveButton.addEventListener('click', function(event) {
         var data = signaturePad.toDataURL('image/png');
+        $('input[name={{$config->get('id')}}_edit]').val('Y');
         $('input[name={{$config->get('id')}}_text]').val(data);
         document.getElementById('{{$config->get('id')}}_check_label').className = "checked";
         document.getElementById('{{$config->get('id')}}_check_label').innerText = "서명이 확인 되었습니다.";
@@ -452,6 +453,7 @@
         signaturePad.clear();
 
         $('input[name={{$config->get('id')}}_text]').val('');
+        $('input[name={{$config->get('id')}}_edit]').val('Y');
         document.getElementById('{{$config->get('id')}}_check_label').className = "unchecked";
         document.getElementById('{{$config->get('id')}}_check_label').innerText = "등록된 서명이 없습니다.";
 
