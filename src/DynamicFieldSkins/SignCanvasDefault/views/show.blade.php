@@ -12,7 +12,7 @@
 <div class="xe-form-group xe-dynamicField">
     <h3>{{xe_trans($config->get('label'))}}</h3>
     @if($data['text'] !== '')
-        <label id="{{$config->get('id')}}_check_label" class="checked">서명이 확인 되었습니다.</label>
+        <label id="{{$config->get('id')}}_check_label" class="checked">{{date('Y년 m월 d일 H시 i분', strtotime($data['signature_date']))}}  서명이 확인 되었습니다.</label>
     @else
         <label id="{{$config->get('id')}}_check_label" class="unchecked">등록된 서명이 없습니다.</label>
     @endif
