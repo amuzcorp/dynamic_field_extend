@@ -42,7 +42,6 @@ class SectionOpen extends AbstractType
     public function getColumns()
     {
         return [
-            'column'=>new ColumnEntity('column', ColumnDataType::STRING)
         ];
     }
 
