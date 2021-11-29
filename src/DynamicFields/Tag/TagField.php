@@ -109,8 +109,20 @@ class TagField extends AbstractType
     public function update(array $args, array $wheres)
     {
         //var_dump($args);var_dump($wheres);exit;
-        if(isset($args['doc_id']) && isset($args['_tags'])) {
-            $this->set($args['doc_id'], $args['_tags'], $args['cpt_id']);
+        if(isset($args['doc_id'])) {
+            $doc_id = $args['doc_id'];
+        } else {
+            $doc_id = $wheres[0]['value'];
+        }
+
+        if(isset($args['cpt_id'])) {
+            $cpt_id = $args['cpt_id'];
+        } else {
+            $cpt_id = 'user';
+        }
+
+        if($doc_id && $cpt_id) {
+            $this->set($doc_id, $args['_tags'], $cpt_id);
         } else {
             \DB::table('taggables')->where('taggable_id', $args['doc_id'])->delete();
         }
@@ -149,7 +161,14 @@ class TagField extends AbstractType
         $config = $this->config;
         $repo = new TagRepository();
         $decomposer = new SimpleDecomposer();
-        $words = array_unique($words);
+        $word_data = array_unique($words);
+
+        $words = [];
+        foreach($word_data as $word) {
+            if($word !== null && $word !== '') {
+                $words[] = $word;
+            }
+        }
 
         $tags = $repo->query()->whereIn('word', $words)->get();
 
