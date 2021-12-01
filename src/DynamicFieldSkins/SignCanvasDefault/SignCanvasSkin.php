@@ -116,4 +116,25 @@ class SignCanvasSkin extends AbstractSkin
             'key' => $key,
         ])->render();
     }
+
+
+    /**
+     * 데이터 출력
+     *
+     * @param string $name dynamic field name
+     * @param array  $args 데이터
+     * @return mixed
+     */
+    public function output($name, array $args)
+    {
+        if (isset($args[$name.'_text']) && isset($args[$name.'_signature_date'])) {
+            if ($args[$name.'_text'] === '' || !$args[$name.'_signature_date']) {
+                return '<span style="color:#ff2831;">서명없음</span>';
+            } else {
+                return '<span style="color:#0049ff;">서명확인</span>';
+            }
+        }
+        return '<span style="color:#ff2831;">서명없음</span>';
+    }
+
 }
