@@ -23,7 +23,7 @@
             <tr>
                 <td><label>{{$column->title}}</label></td>
                 <td><input type="checkbox"
-                           class="TO_DO_list_checked"
+                           class="TO_DO_list_checked" disabled
                            @if($column->checked) checked="" @endif/></td>
             </tr>
         @endforeach
