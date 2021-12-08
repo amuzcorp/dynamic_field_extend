@@ -93,15 +93,12 @@ class CommonSkin extends AbstractSkin
     {
         list($data, $key) = $this->filter($args);
 
-        $menu_items = $this->getMenuItems();
-
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
-            'key' => $key,
-            'menu_items' => $menu_items
+            'key' => $key
         ])->render();
     }
 
