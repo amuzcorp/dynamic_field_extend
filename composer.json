@@ -292,6 +292,11 @@
                 "name": "고객서명 fieldType DefaultSkin",
                 "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\SignCanvasDefault\\SignCanvasSkin",
                 "description": "고객서명 fieldType DefaultSkin"
+              },
+              "fieldType/xpressengine@Textarea/fieldSkin/dynamic_field_extend@JsonParser": {
+                "name": "Textarea Json Parse Viewer Style",
+                "description": "Textarea Json Parse Viewer Style Dynamic_field plugin Skin.",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TextareaJson\\TextareaJson"
               }
             }
         }
