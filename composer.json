@@ -297,6 +297,11 @@
                 "name": "Textarea Json Parse Viewer Style",
                 "description": "Textarea Json Parse Viewer Style Dynamic_field plugin Skin.",
                 "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TextareaJson\\TextareaJson"
+              },
+              "fieldType/xpressengine@Boolean/fieldSkin/dynamic_field_extend@BooleanSwitch": {
+                "name": "Boolean Switch Style Skin",
+                "description": "Boolean Field Switch Style Skin.",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\BooleanSwitch\\BooleanSwitch"
               }
             }
         }
