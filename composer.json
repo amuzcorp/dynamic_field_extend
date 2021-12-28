@@ -153,6 +153,11 @@
                     "description": "The fieldSkin supported by Dynamic_field plugin.",
                     "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadCheckBox\\CategoryLoadCheckBox"
                 },
+                "fieldType/dynamic_field_extend@CategoryLoad/fieldSkin/dynamic_field_extend@CategoryLoadDepth": {
+                  "name": "CategoryLoadDepthSkin fieldSkin",
+                  "description": "The fieldSkin supported by Dynamic_field plugin.",
+                  "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\CategoryLoad\\CategoryLoadDepth\\CategoryLoadDepth"
+                },
                 "fieldType/dynamic_field_extend@CategoryInput": {
                     "name": "CategoryInput fieldType",
                     "description": "The fieldType supported by Dynamic_field plugin.",
