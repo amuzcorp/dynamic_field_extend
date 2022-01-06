@@ -1,11 +1,20 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\TextareaJson;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\BooleanSwitch;
 
 use Xpressengine\DynamicField\AbstractSkin;
 
-class TextareaJson extends AbstractSkin
+/**
+ * Class DefaultSkin
+ *
+ * @category    FieldSkins
+ * @package     App\FieldSkins\Boolean
+ * @author      XE Developers <developers@xpressengine.com>
+ * @copyright   2020 Copyright XEHub Corp. <https://www.xehub.io>
+ * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
+ * @link        https://xpressengine.io
+ */
+class BooleanSwitch extends AbstractSkin
 {
-
     /**
      * get name of skin
      *
@@ -13,8 +22,7 @@ class TextareaJson extends AbstractSkin
      */
     public function name()
     {
-        //return '해시태그 fieldSkin';
-        return 'Textarea Json Type';
+        return 'Boolean Switch Skin';
     }
 
     /**
@@ -24,7 +32,7 @@ class TextareaJson extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.TextareaJson.views';
+        return 'dynamic_field_extend::src.DynamicFieldSkins.BooleanSwitch.views';
     }
 
     /**
@@ -97,6 +105,5 @@ class TextareaJson extends AbstractSkin
             'key' => $key,
         ])->render();
     }
-
 
 }
