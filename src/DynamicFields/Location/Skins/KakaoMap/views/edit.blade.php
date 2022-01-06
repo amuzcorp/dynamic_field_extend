@@ -79,7 +79,7 @@
                     guideTextBox.style.display = 'none';
                 }
 
-                a2c(roadAddr);
+                a2c_{{$config->get('id')}}(roadAddr);
             }
         }).open();
     }
@@ -119,7 +119,7 @@
     });
 
     // Address To Coordinate
-    function a2c(address){
+    function a2c_{{$config->get('id')}}(address){
         // 주소로 좌표를 검색합니다
         if(address) {
             geocoder_{{ $config->get('id') }}.addressSearch(address, function (result, status) {
@@ -141,7 +141,7 @@
         }
     }
 
-    function locationReload(){
+    function locationReload_{{$config->get('id')}}(){
         let lat = "{{$data['lat']}}";
         let lng = "{{$data['lng']}}";
         if(lat != '' && lng != ''){
@@ -149,11 +149,11 @@
             marker_{{ $config->get('id') }}.setPosition(coords);
             map_{{ $config->get('id') }}.setCenter(coords);
         }else{
-            a2c(document.getElementById("doro_{{$config->get('id')}}").value);
+            a2c_{{$config->get('id')}}(document.getElementById("doro_{{$config->get('id')}}").value);
         }
     }
 
     $(document).ready(function() {
-        locationReload();
+        locationReload_{{$config->get('id')}}();
     });
 </script>

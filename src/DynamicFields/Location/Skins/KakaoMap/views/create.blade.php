@@ -79,7 +79,7 @@
                     guideTextBox.style.display = 'none';
                 }
 
-                a2c(roadAddr);
+                a2c_{{$config->get('id')}}(roadAddr);
             }
         }).open();
     }
@@ -119,7 +119,7 @@
     });
 
     // Address To Coordinate
-    function a2c(address){
+    function a2c_{{$config->get('id')}}(address){
         // 주소로 좌표를 검색합니다
         if(address) {
             geocoder_{{ $config->get('id') }}.addressSearch(address, function (result, status) {
