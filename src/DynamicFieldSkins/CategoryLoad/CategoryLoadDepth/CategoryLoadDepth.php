@@ -206,6 +206,8 @@ class CategoryLoadDepth extends AbstractSkin
             $selectItem = json_decode($datas['item_id']);
             $selectItem = json_decode($selectItem);
 
+            if($selectItem === null) $selectItem = [];
+
             $sub_categories = [];
             $selectedItemCollection = [];
             foreach ($selectItem as $value) {
