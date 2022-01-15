@@ -37,4 +37,28 @@ class TextTranslationSkin extends AbstractSkin
     {
         return [];
     }
+
+    public function output($id, array $args)
+    {
+        $data = [];
+        foreach ($this->getType()->getColumns() as $columnName => $columns) {
+            $dataName = snake_case($id . '_' . $columnName);
+            if (isset($args[$dataName])) {
+                $data[$dataName] = $args[$dataName];
+            } else {
+                $data[$dataName] = '';
+            }
+        }
+        if (count($data) == 0) {
+            return null;
+        }
+
+        $output = xe_trans('laravel::'.implode($this->glue, $data)) ?: '';
+
+        if (trim($output) == '') {
+            return null;
+        }
+
+        return $output;
+    }
 }
