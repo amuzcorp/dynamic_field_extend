@@ -307,6 +307,11 @@
                 "name": "Boolean Switch Style Skin",
                 "description": "Boolean Field Switch Style Skin.",
                 "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\BooleanSwitch\\BooleanSwitch"
+              },
+              "fieldType/xpressengine@Text/fieldSkin/dynamic_field_extend@Translation": {
+                "name": "Text Field Translation Skin",
+                "description": "The fieldSkin supported by Dynamic_field plugin.",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TextTranslationSkin\\TextTranslationSkin"
               }
             }
         }
