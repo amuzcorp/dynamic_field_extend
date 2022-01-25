@@ -16,7 +16,7 @@
 @expose_route('media_library.upload')
 @expose_route('media_library.download_file')
 <div class="xe-form-group xe-dynamicField">
-    <input type="hidden" name="_column" value="dum">
+    <input type="hidden" name="{{$config->get('id')}}_column" id="{{$code}}_{{$config->get('id')}}_column" value="{{json_encode($media)}}">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
     <div>
         <button type="button" class="xe-btn" onclick="media_popup('{{$config->get('id')}}', '{{$code}}')"><i class="xi-plus"></i> 미디어
@@ -33,15 +33,15 @@
                         $file_ext = strrev($file_ext[0]);
                     @endphp
                     @if(in_array($file_ext, $img_ok))
-                        <li class="media_li" onclick="media_del(this)"><img width=100px height=100px
-                                                                            src="{{$storage_path.'/'.XeStorage::find($data)->path.'/'.XeStorage::find($data)->filename}}">
-                            <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}"
-                                   value="{{$data}}">
+                        <li class="media_li" onclick="media_del(this, '{{$config->get('id')}}', '{{$code}}', '{{$data}}')">
+                            <img width=100px height=100px src="{{$storage_path.'/'.XeStorage::find($data)->path.'/'.XeStorage::find($data)->filename}}">
+                            <input type="hidden" class="{{$data}}" value="{{$data}}">
+                            <button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>
                         </li>
                     @elseif(!in_array($file_ext, $img_ok))
-                        <li class="media_li" onclick="media_del(this)">{{XeStorage::find($data)->clientname}}
-                            <input type="hidden" name="{{$config->get('id')."_column[]"}}" class="{{$data}}"
-                                   value="{{$data}}">
+                        <li class="media_li" onclick="media_del(this, '{{$config->get('id')}}', '{{$code}}', '{{$data}}')">{{XeStorage::find($data)->clientname}}
+                            <input type="hidden" class="{{$data}}" value="{{$data}}">
+                            <button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>
                         </li>
                     @endif
                 @endif
@@ -82,17 +82,16 @@
                                 var img_string = '';
 
                                 if(checkURL(mediaList[cnt]['file']['filename'])) {
-                                    img_string = `<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src="${mediaList[cnt]['file']['url']}">`;
-                                    img_string += `<input type="hidden" name="${media_id}_column[]" class="${mediaList[cnt]['file']['id']}" value="${mediaList[cnt]['file']['id']}">`;
-                                    img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
-                                    img_string += '</li>';
+                                    img_string = `<li class="media_li" onclick="media_del(this, '${media_id}', '${code}', '${mediaList[cnt]['file']['id']}')"><img width=100px height=100px src="${mediaList[cnt]['file']['url']}">`;
                                 }else{
-                                    img_string = `<li class="media_li" onclick="media_del(this)">${mediaList[cnt]['file']['clientname']}`;
-                                    img_string += `<input type="hidden" name="${media_id}_column[]" class="${mediaList[cnt]['file']['id']}" value="${mediaList[cnt]['file']['id']}">`;
-                                    img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
-                                    img_string += '</li>';
+                                    img_string = `<li class="media_li" onclick="media_del(this, '${media_id}', '${code}', '${mediaList[cnt]['file']['id']}')">${mediaList[cnt]['file']['clientname']}`;
                                 }
+                                img_string += `<input type="hidden" class="${mediaList[cnt]['file']['id']}" value="${mediaList[cnt]['file']['id']}">`;
+                                // img_string += `<input type="hidden" name="${media_id}_column[]" class="${mediaList[cnt]['file']['id']}" value="${mediaList[cnt]['file']['id']}">`;
+                                img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
+                                img_string += '</li>';
                                 if (mediaList[cnt]['file']['filename']) {
+                                    addItem(media_id, code, mediaList[cnt]['file']['id']);
                                     $('#'+code+'_thumb_' + media_id).append(img_string);
                                 }
                                 cnt++;
@@ -105,7 +104,16 @@
         })
     }
 
-    function media_del(my_data) {
+    function media_del(my_data, media_id, code, image_id) {
+        var column_value = $("#"+code+'_'+media_id+'_column').val();
+        column_value = JSON.parse(column_value);
+        const index = column_value.indexOf(image_id);
+        if (index > -1) {
+            column_value.splice(index, 1);
+        }
+        if(column_value.length === 0) $("#"+code+'_'+media_id+'_column').val("null");
+        else $("#"+code+'_'+media_id+'_column').val(JSON.stringify(column_value));
+
         my_data.remove();
     }
 
@@ -113,6 +121,21 @@
         return(url.match(/(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/) != null);
     }
 
+    function addItem(media_id, code, image_id) {
+        //{$code}}_{$config->get('id')}}_column
+        var column_value = $("#"+code+'_'+media_id+'_column').val();
+        if(column_value === "null" || column_value === undefined) {
+            var array = [];
+            array.push(image_id);
+
+            $("#"+code+'_'+media_id+'_column').val(JSON.stringify(array));
+        } else {
+            column_value = JSON.parse(column_value);
+            column_value.push(image_id);
+
+            $("#"+code+'_'+media_id+'_column').val(JSON.stringify(column_value));
+        }
+    }
 
 </script>
 
