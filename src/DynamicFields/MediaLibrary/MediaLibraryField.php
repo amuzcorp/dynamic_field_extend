@@ -243,6 +243,11 @@ class MediaLibraryField extends AbstractType
                 $this->handler->connection()->table($type->getTableName())
                     ->insert($insertParam);
             }
+        } else {
+            $check = $this->handler->connection()->table($type->getTableName())->where($where)->first();
+            if($check) {
+                $this->handler->connection()->table($type->getTableName())->where($where)->update(['column' => null]);
+            }
         }
 
         // event fire
