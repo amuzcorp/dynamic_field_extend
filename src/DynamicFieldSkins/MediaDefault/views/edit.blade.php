@@ -1,3 +1,4 @@
+<?php $code = Illuminate\Support\Str::random(16); ?>
 <script src="/assets/vendor/jqueryui/jquery-ui.min.js"></script>
 <script src="/assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
 <script src="/assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js"></script>
@@ -18,13 +19,11 @@
     <input type="hidden" name="_column" value="dum">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
     <div>
-        <button type="button" class="xe-btn" onclick=media_popup("{{$config->get('id')}}")><i class="xi-plus"></i> 미디어
+        <button type="button" class="xe-btn" onclick="media_popup('{{$config->get('id')}}', '{{$code}}')"><i class="xi-plus"></i> 미디어
             라이브러리
         </button>
     </div>
-    <ul class="thumb_{{$config->get('id')}}" id="thumb_{{$config->get('id')}}" style="padding-left: 0px;">
-        <input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}"
-               value="{{json_encode($media)}}">
+    <ul class="thumb_{{$config->get('id')}}" id="{{$code}}_thumb_{{$config->get('id')}}" style="padding-left: 0px;">
         @if(isset($media) && $media != 'null')
             @foreach($media as $data)
                 @if(XeStorage::find($data))
@@ -58,7 +57,7 @@
         rating: XE.config.getters['user/rating']
     }
 
-    function media_popup(media_id) {
+    function media_popup(media_id, code) {
         var cnt = 0;
 
         XE.app('MediaLibrary').then(function (appMediaLibrary) {
@@ -76,30 +75,26 @@
 
                         //console.log(mediaList[cnt]['file']);
 
-                        var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
-
+                        var over_chk = $('#'+code+'_thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
+                        // var over_chk = $('.thumb_' + media_id).find("input." + mediaList[cnt]['file']['id']).val();
                         if(mediaList[cnt]['file']['id'] != "") {
                             if (over_chk == null) {
                                 var img_string = '';
 
                                 if(checkURL(mediaList[cnt]['file']['filename'])) {
-                                    img_string = '<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src=' + mediaList[cnt]['file']['url'] + '>';
-                                    img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                                    img_string = `<li class="media_li" onclick="media_del(this)"><img width=100px height=100px src="${mediaList[cnt]['file']['url']}">`;
+                                    img_string += `<input type="hidden" name="${media_id}_column[]" class="${mediaList[cnt]['file']['id']}" value="${mediaList[cnt]['file']['id']}">`;
                                     img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
                                     img_string += '</li>';
                                 }else{
-                                    img_string = '<li class="media_li" onclick="media_del(this)">'+mediaList[cnt]['file']['clientname'];
-                                    img_string += '<input type="hidden" name="' + media_id + '_column[]" class="' + mediaList[cnt]['file']['id'] + '" value=' + mediaList[cnt]['file']['id'] + '>';
+                                    img_string = `<li class="media_li" onclick="media_del(this)">${mediaList[cnt]['file']['clientname']}`;
+                                    img_string += `<input type="hidden" name="${media_id}_column[]" class="${mediaList[cnt]['file']['id']}" value="${mediaList[cnt]['file']['id']}">`;
                                     img_string += '<button type="button" class="btn-delete media_del_btn"><i class="xi-close"></i><span class="xe-sr-only">첨부삭제</span></button>';
                                     img_string += '</li>';
-
                                 }
-
                                 if (mediaList[cnt]['file']['filename']) {
-
-                                    $('.thumb_' + media_id).append(img_string);
+                                    $('#'+code+'_thumb_' + media_id).append(img_string);
                                 }
-
                                 cnt++;
                             }
 
