@@ -145,7 +145,11 @@ class MediaLibraryField extends AbstractType
             $key = $config->get('id') . '_' . $column->name;
 
             if (isset($args[$key]) == true) {
-                $insertParam[$column->name] = json_encode($args[$key]);
+                if($this->isJson($args[$key])) {
+                    $insertParam[$column->name] = $args[$key];
+                } else if(is_array($args[$key])) {
+                    $insertParam[$column->name] = json_encode($args[$key]);
+                }
             }
         }
         //$my_json = json_encode($insertParam['column']);
@@ -219,7 +223,11 @@ class MediaLibraryField extends AbstractType
             $key = $config->get('id') . '_' . $column->name;
 
             if (isset($args[$key])) {
-                $updateParam[$column->name] = json_encode($args[$key]);
+                if($this->isJson($args[$key])) {
+                    $updateParam[$column->name] = $args[$key];
+                } else if(is_array($args[$key])) {
+                    $updateParam[$column->name] = json_encode($args[$key]);
+                }
             }
         }
 
@@ -285,5 +293,11 @@ class MediaLibraryField extends AbstractType
         );
     }
 
+
+    public function isJson($string) {
+        return ((is_string($string) &&
+            (is_object(json_decode($string)) ||
+                is_array(json_decode($string))))) ? true : false;
+    }
 
 }
