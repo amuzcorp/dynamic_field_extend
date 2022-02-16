@@ -91,10 +91,9 @@
 
         htmlStr += `
         <tr>
-            <th>주소</th>
-            <th>동</th>
-            <th>영문주소</th>
             <th>우편번호</th>
+            <th>주소</th>
+            <th>지번</th>
             <th></th>
         </tr>
 
@@ -103,10 +102,9 @@
         // jquery를 이용한 JSON 결과 데이터 파싱
         $(jsonStr.results.juso).each(function(){
             htmlStr += "<tr>";
-            htmlStr += "<td>"+this.roadAddrPart1+"</td>";
-            htmlStr += "<td>"+this.roadAddrPart2+"</td>";
-            htmlStr += "<td>"+this.engAddr+"</td>";
             htmlStr += "<td>"+this.zipNo+"</td>";
+            htmlStr += "<td>"+this.roadAddrPart1+"</td>";
+            htmlStr += "<td>"+this.jibunAddr+"</td>";
             htmlStr += `<td>
                 <input type="button" onclick="addressing('${this.zipNo}', '${this.jibunAddr}','${this.roadAddrPart1}', '${configId}')" value="선택"></td>
             </tr>`;
