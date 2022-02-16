@@ -7,7 +7,7 @@
     <div class="xe-form-inline">
         <input type="text" name="{{$key['postcode']}}" class="xe-form-control xu-form-group__control" readonly="readonly" placeholder="{{xe_trans('xe::postCode')}}" value="" />
         <input type="text" name="{{$config->get('id')}}_keyword" class="xe-form-control xu-form-group__control" placeholder="검색어를 입력해주세요" value=""/>
-        <input type="button" class="xe-btn xe-btn-default" onclick="getAddr( '{{$config->get('apiKey')}}', '{{$config->get('id')}}')" value="{{xe_trans('xe::findPostCode')}}" />
+        <input type="button" class="xe-btn xe-btn-default" onclick="getAddr( '{{$address_key}}', '{{$config->get('id')}}')" value="{{xe_trans('xe::findPostCode')}}" />
     </div>
     <div class="xe-form-inline">
         <input type="text" name="{{$key['address1']}}" class="xe-form-control xu-form-group__control" placeholder="{{xe_trans('xe::address')}}" readonly="readonly" value="{{Request::old($key['address1'])}}">

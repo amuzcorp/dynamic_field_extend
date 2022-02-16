@@ -1,20 +1,11 @@
 <?php
-namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFieldSkins\Address;
+namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\Location\Skins\DoroAPI;
 
 use Xpressengine\DynamicField\AbstractSkin;
 
-/**
- * Class DefaultSkin
- *
- * @category    FieldSkins
- * @package     App\FieldSkins\Boolean
- * @author      XE Developers <developers@xpressengine.com>
- * @copyright   2020 Copyright XEHub Corp. <https://www.xehub.io>
- * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
- * @link        https://xpressengine.io
- */
-class DFAddress extends AbstractSkin
+class DoroAPISkin extends AbstractSkin
 {
+
     /**
      * get name of skin
      *
@@ -22,7 +13,7 @@ class DFAddress extends AbstractSkin
      */
     public function name()
     {
-        return 'Address DF Skin';
+        return 'api - 도로명 검색 API 스킨';
     }
 
     /**
@@ -32,7 +23,7 @@ class DFAddress extends AbstractSkin
      */
     public function getPath()
     {
-        return 'dynamic_field_extend::src.DynamicFieldSkins.Address.default';
+        return 'dynamic_field_extend::src.DynamicFields.Location.Skins.DoroAPI.views';
     }
 
     /**
@@ -50,7 +41,6 @@ class DFAddress extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function create(array $args)
     {
@@ -58,6 +48,7 @@ class DFAddress extends AbstractSkin
 
         list($data, $key) = $this->filter($args);
 
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
         $address_key = app('amuz.keychain')->getValueById('address_api_key');
 
         return $viewFactory->make($this->getViewPath('create'), [
@@ -65,6 +56,31 @@ class DFAddress extends AbstractSkin
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
             'key' => $key,
+            'map_key' => $map_key,
+            'address_key' => $address_key
+        ])->render();
+    }
+
+    /**
+     * 수정 form 에 추가될 html 코드 반환
+     * return html tag string
+     *
+     * @param array $args arguments
+     */
+    public function edit(array $args)
+    {
+        list($data, $key) = $this->filter($args);
+
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
+        $address_key = app('amuz.keychain')->getValueById('address_api_key');
+
+        $viewFactory = $this->handler->getViewFactory();
+        return $viewFactory->make($this->getViewPath('edit'), [
+            'args' => $args,
+            'config' => $this->config,
+            'data' => array_merge($data, $this->mergeData),
+            'key' => $key,
+            'map_key' => $map_key,
             'address_key' => $address_key
         ])->render();
     }
@@ -74,43 +90,20 @@ class DFAddress extends AbstractSkin
      * return html tag string
      *
      * @param array $args arguments
-     * @return \Illuminate\View\View
      */
     public function show(array $args)
     {
         list($data, $key) = $this->filter($args);
+
+        $map_key = app('amuz.keychain')->getValueById('kakao_map_key');
 
         $viewFactory = $this->handler->getViewFactory();
         return $viewFactory->make($this->getViewPath('show'), [
             'args' => $args,
             'config' => $this->config,
             'data' => array_merge($data, $this->mergeData),
-            'key' => $key
-        ])->render();
-    }
-
-    /**
-     * 수정 form 에 추가될 html 코드 반환
-     * return html tag string
-     *
-     * @param array $args arguments
-     * @return \Illuminate\View\View
-     */
-    public function edit(array $args)
-    {
-        list($data, $key) = $this->filter($args);
-
-        $viewFactory = $this->handler->getViewFactory();
-
-        $address_key = app('amuz.keychain')->getValueById('address_api_key');
-
-        return $viewFactory->make($this->getViewPath('edit'), [
-            'args' => $args,
-            'config' => $this->config,
-            'data' => array_merge($data, $this->mergeData),
             'key' => $key,
-            'address_key' => $address_key
+            'map_key' => $map_key
         ])->render();
     }
-
 }

@@ -315,8 +315,13 @@
               },
               "fieldType/xpressengine@Address/fieldSkin/dynamic_field_extend@dynamic_address": {
                 "name": "Address None Iframe Skin",
-                "description": "The fieldSkin supported by Dynamic_field plugin.",
+                "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
                 "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Address\\DFAddress"
+              },
+              "fieldType/dynamic_field_extend@location/fieldSkin/dynamic_field_extend@doro_api": {
+                "name": "Location None Iframe Skin",
+                "description": "The fieldSkin supported by Dynamic_field_extend plugin.",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFields\\Location\\Skins\\DoroAPI\\DoroAPISkin"
               }
             }
         }

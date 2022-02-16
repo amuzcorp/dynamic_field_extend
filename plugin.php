@@ -47,6 +47,17 @@ class Plugin extends AbstractPlugin
                 'type' => 'formText',
                 'ordering' => 500
             ],
+            'address_api_key' => [
+                'tab' => '확장필드',
+                'group' => '주소검색',
+                'label' => '주소검색 API KEY',
+                'description' => '주소 검색 API 키를 입력해주세요 [ https://www.juso.go.kr/addrlink/devAddrLinkRequestWrite.do?returnFn=write&cntcMenu=URL ]',
+                'how' => '확장필드 위치 및 지도 필드에 활용됩니다.',
+                'pid' => 'map',
+                'vid' => 'addrlink',
+                'type' => 'formText',
+                'ordering' => 500
+            ],
         ];
         \XeRegister::push('integrated_keychain',self::getId(),$keychain);
     }
