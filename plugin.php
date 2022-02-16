@@ -51,7 +51,7 @@ class Plugin extends AbstractPlugin
                 'tab' => '확장필드',
                 'group' => '주소검색',
                 'label' => '주소검색 API KEY',
-                'description' => '주소 검색 API 키를 입력해주세요 [ https://www.juso.go.kr/addrlink/devAddrLinkRequestWrite.do?returnFn=write&cntcMenu=URL ]',
+                'description' => "주소 검색 API 키를 입력해주세요<br/> API 종류 -> 도로명 주소 API <br/> API 유형 -> 검색 API <br/> 발급주소 - <a href='https://www.juso.go.kr/addrlink/devAddrLinkRequestWrite.do?returnFn=write&cntcMenu=URL'>https://www.juso.go.kr/addrlink/devAddrLinkRequestWrite.do?returnFn=write&cntcMenu=URL</a>",
                 'how' => '확장필드 위치 및 지도 필드에 활용됩니다.',
                 'pid' => 'map',
                 'vid' => 'addrlink',
