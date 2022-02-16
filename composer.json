@@ -312,6 +312,11 @@
                 "name": "Text Field Translation Skin",
                 "description": "The fieldSkin supported by Dynamic_field plugin.",
                 "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\TextTranslationSkin\\TextTranslationSkin"
+              },
+              "fieldType/xpressengine@Address/fieldSkin/dynamic_field_extend@dynamic_address": {
+                "name": "Address None Iframe Skin",
+                "description": "The fieldSkin supported by Dynamic_field plugin.",
+                "class": "Amuz\\XePlugin\\DynamicFieldExtend\\DynamicFieldSkins\\Address\\DFAddress"
               }
             }
         }
