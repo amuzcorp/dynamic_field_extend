@@ -53,8 +53,8 @@
                     else { XE.toast('danger', "에러가 발생하였습니다. 잠시후 다시 시도해주세요."); }
                 }else{
                     if(jsonStr!= null){
-                        makeListJson(jsonStr);							// 결과 JSON 데이터 파싱 및 출력
-                        pageMake(jsonStr, key);
+                        {{$config->get('id')}}makeListJson(jsonStr);							// 결과 JSON 데이터 파싱 및 출력
+                        {{$config->get('id')}}pageMake(jsonStr, key);
                     }
                 }
             }
