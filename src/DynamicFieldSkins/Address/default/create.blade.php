@@ -5,7 +5,7 @@
     <label class="xu-form-group__label __xe_df __xe_df_address __xe_df_address_{{$config->get('id')}}">{{xe_trans($config->get('label'))}}</label>
     @if ($config->get('skinDescription') !== '')<small>{{$config->get('skinDescription')}}</small>@endif
     <div class="xe-form-inline">
-        <input type="text" name="{{$key['postcode']}}" class="xe-form-control xu-form-group__control" readonly="readonly" placeholder="{{xe_trans('xe::postCode')}}" value="" />
+        <input type="text" name="{{$key['postcode']}}" class="xe-form-control xu-form-group__control" readonly="readonly" placeholder="{{xe_trans('xe::postCode')}}" value="{{Request::old($key['postcode'])}}" />
         <input type="text" name="{{$config->get('id')}}_keyword" class="xe-form-control xu-form-group__control" placeholder="검색어를 입력해주세요" value=""/>
         <input type="button" class="xe-btn xe-btn-default" onclick="{{$config->get('id')}}getAddr( '{{$address_key}}')" value="{{xe_trans('xe::findPostCode')}}" />
     </div>

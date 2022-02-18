@@ -7,7 +7,7 @@
     <div class="xe-form-inline">
         <input type="text" name="{{$key['postcode']}}" class="xe-form-control xu-form-group__control" readonly="readonly" placeholder="{{xe_trans('xe::postCode')}}" value="{{$data['postcode']}}" />
         <input type="text" name="{{$config->get('id')}}_keyword" class="xe-form-control xu-form-group__control" placeholder="검색어를 입력해주세요" value=""/>
-        <input type="button" class="xe-btn xe-btn-default" onclick="getAddr( '{{$address_key}}', '{{$config->get('id')}}')" value="{{xe_trans('xe::findPostCode')}}" />
+        <input type="button" class="xe-btn xe-btn-default" onclick="{{$config->get('id')}}getAddr( '{{$address_key}}')" value="{{xe_trans('xe::findPostCode')}}" />
     </div>
     <div class="xe-form-inline">
         <input type="text" name="{{$key['address1']}}" class="xe-form-control xu-form-group__control" placeholder="{{xe_trans('xe::address')}}" readonly="readonly" value="{{$data['address1']}}">
@@ -15,16 +15,16 @@
     </div>
 </div>
 
-<div id="list"> <!-- 검색 결과 리스트 출력 영역 --> </div>
-<div class="paginate" id="pageApi"></div>
+<div id="{{$config->get('id')}}list"> <!-- 검색 결과 리스트 출력 영역 --> </div>
+<div class="paginate" id="{{$config->get('id')}}pageApi"></div>
 
 <script type="text/javascript">
     // 주소 검색후 데이터 받아오기
-    function getAddr(key, configId){
+    function {{$config->get('id')}}getAddr(key){
         if(key === '') {
             XE.toast('danger', 'API 키를 등록해주세요');
             return false;
-        } else if($('input[name='+ configId +'_keyword]').val() === '') {
+        } else if($('input[name={{$config->get('id')}}_keyword]').val() === '') {
             XE.toast('warning', '검색어를 입력해주세요');
             return false;
         }
@@ -34,27 +34,27 @@
             url:"//www.juso.go.kr/addrlink/addrLinkApiJsonp.do",	// 주소검색 OPEN API URL
             type:"post",
             data : {
-                currentPage: $('input[name='+configId+'_currentPage]').val(),
-                countPerPage: $('input[name='+configId+'_countPerPage]').val(),
+                currentPage: $('input[name={{$config->get('id')}}_currentPage]').val(),
+                countPerPage: $('input[name={{$config->get('id')}}_countPerPage]').val(),
                 resultType: 'json',
                 confmKey: key,
-                keyword: $('input[name='+ configId +'_keyword]').val()
+                keyword: $('input[name={{$config->get('id')}}_keyword]').val()
             },					// 요청 변수 설정
             dataType:"jsonp",											// 크로스도메인으로 인한 jsonp 이용, 검색결과형식 JSON
             crossDomain:true,
             success:function(jsonStr){									// jsonStr : 주소 검색 결과 JSON 데이터
-                $("#list").html("");									// 결과 출력 영역 초기화
+                $("#{{$config->get('id')}}list").html("");									// 결과 출력 영역 초기화
                 var errCode = jsonStr.results.common.errorCode;
                 if(errCode != "0"){
-                    $("#pageApi").html("");
+                    $("#{{$config->get('id')}}pageApi").html("");
                     if(errCode ==  "E0001"){ XE.toast('danger',"승인되지 않은 KEY 입니다."); }
                     else if(errCode ==  "E0005"){ XE.toast('danger', "검색어를 입력해주세요."); }
                     else if(errCode ==  "E0006"){ XE.toast('danger', "시도명으로는 검색이 불가합니다."); }
                     else { XE.toast('danger', "에러가 발생하였습니다. 잠시후 다시 시도해주세요."); }
                 }else{
                     if(jsonStr!= null){
-                        makeListJson(jsonStr, configId);							// 결과 JSON 데이터 파싱 및 출력
-                        pageMake(jsonStr, key, configId);
+                        makeListJson(jsonStr);							// 결과 JSON 데이터 파싱 및 출력
+                        pageMake(jsonStr, key);
                     }
                 }
             }
@@ -73,7 +73,7 @@
 
     // 주소검색한 리스트를 html에 생성
 
-    function makeListJson(jsonStr, configId){
+    function {{$config->get('id')}}makeListJson(jsonStr){
         var htmlStr = "";
         htmlStr += `<table class="table">`;
 
@@ -96,44 +96,44 @@
             htmlStr += "<td>"+this.engAddr+"</td>";
             htmlStr += "<td>"+this.zipNo+"</td>";
             htmlStr += `<td>
-                <input type="button" onclick="addressing('${this.zipNo}','${this.roadAddrPart1}','${this.roadAddrPart2}', '${configId}')" value="선택"></td>
+                <input type="button" onclick="{{$config->get('id')}}addressing('${this.zipNo}','${this.roadAddrPart1}','${this.roadAddrPart2}')" value="선택"></td>
             </tr>`;
 
         });
 
         htmlStr += "</table>";
         // 결과 HTML을 FORM의 결과 출력 DIV에 삽입
-        $("#list").html(htmlStr);
+        $("#{{$config->get('id')}}list").html(htmlStr);
     }
 
 
 
     // 주소값 넣어주기
 
-    function addressing(zipNo,roadAddrPart1,roadAddrPart2, configId){
-        $('input[name=' + configId + '_postcode]').val(zipNo); // 우편주소
-        $('input[name=' + configId + '_address1]').val(roadAddrPart1 + ' ' + roadAddrPart2 ); // 도로명 주소
-        $('input[name=' + configId + '_currentPage]').val(1);
-        $("#list").html("");
-        $("#pageApi").html("");
+    function {{$config->get('id')}}addressing(zipNo,roadAddrPart1,roadAddrPart2){
+        $('input[name={{$config->get('id')}}_postcode]').val(zipNo); // 우편주소
+        $('input[name={{$config->get('id')}}_address1]').val(roadAddrPart1 + ' ' + roadAddrPart2 ); // 도로명 주소
+        $('input[name={{$config->get('id')}}_currentPage]').val(1);
+        $("#{{$config->get('id')}}list").html("");
+        $("#{{$config->get('id')}}pageApi").html("");
     }
 
 
 
     //페이지 이동
 
-    function goPage(pageNum, key, configId){
-        $('input[name='+configId+'_currentPage]').val(pageNum);
-        getAddr(key, configId);
+    function {{$config->get('id')}}goPage(pageNum, key){
+        $('input[name={{$config->get('id')}}_currentPage]').val(pageNum);
+        {{$config->get('id')}}getAddr(key);
     }
 
 
 
     // json타입 페이지 처리 (주소정보 리스트 makeListJson(jsonStr); 다음에서 호출)
 
-    function pageMake(jsonStr, key, configId){
+    function {{$config->get('id')}}pageMake(jsonStr, key){
         var total = jsonStr.results.common.totalCount; // 총건수
-        var pageNum = $('input[name='+configId+'_currentPage]').val(); // 현재페이지
+        var pageNum = $('input[name={{$config->get('id')}}_currentPage]').val(); // 현재페이지
         var paggingStr = "";
         if(total < 1){
             var htmlStr = "";
@@ -142,8 +142,8 @@
             htmlStr += "<td>검색결과가 없습니다.</td>";
             htmlStr += "</tr>";
             htmlStr += "</table>";
-            $("#list").html(htmlStr);
-            $("#pageApi").html("");
+            $("#{{$config->get('id')}}list").html(htmlStr);
+            $("#{{$config->get('id')}}pageApi").html("");
         }else{
             if(total > 1000){
                 total=1000;
@@ -165,7 +165,7 @@
 
             if( firstPage > PAGEBLOCK ){
                 paggingStr +=  `<li class="page-item">
-                                    <a class="page-link" href='javascript:goPage("${prePage}", "${key}", "${configId}");' aria-label="Previous">
+                                    <a class="page-link" href='javascript:{{$config->get('id')}}goPage("${prePage}", "${key}");' aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
@@ -173,13 +173,13 @@
             }
             for(var i=firstPage; i<=lastPage; i++ ){
                 if( pageNum == i )
-                    paggingStr += `<li class="page-item active"><a class="page-link" href='javascript:goPage("${i}", "${key}", "${configId}");'>${i}</a></li>`;
+                    paggingStr += `<li class="page-item active"><a class="page-link" href='javascript:{{$config->get('id')}}goPage("${i}", "${key}");'>${i}</a></li>`;
                 else
-                    paggingStr += `<li class="page-item"><a class="page-link" href='javascript:goPage("${i}", "${key}", "${configId}");'>${i}</a></li>`;
+                    paggingStr += `<li class="page-item"><a class="page-link" href='javascript:{{$config->get('id')}}goPage("${i}", "${key}");'>${i}</a></li>`;
             }
             if( lastPage < totalPages ){
                 paggingStr +=  `<li class="page-item">
-                                    <a class="page-link" href='javascript:goPage("${nextPage}", "${key}", "${configId}");' aria-label="Next">
+                                    <a class="page-link" href='javascript:{{$config->get('id')}}goPage("${nextPage}", "${key}");' aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>
                                     </a>
@@ -187,7 +187,7 @@
             }
             paggingStr += `</ul>
             </nav>`;
-            $("#pageApi").html(paggingStr);
+            $("#{{$config->get('id')}}pageApi").html(paggingStr);
         }
 
     }
