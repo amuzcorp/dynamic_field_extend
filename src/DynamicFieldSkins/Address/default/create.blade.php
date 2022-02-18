@@ -32,7 +32,7 @@
 
         // AJAX 주소 검색 요청
         XE.ajax({
-            url:"http://www.juso.go.kr/addrlink/addrLinkApiJsonp.do",	// 주소검색 OPEN API URL
+            url:"//www.juso.go.kr/addrlink/addrLinkApiJsonp.do",	// 주소검색 OPEN API URL
             type:"post",
             data : {
                 currentPage: $('input[name={{$config->get('id')}}_currentPage]').val(),
