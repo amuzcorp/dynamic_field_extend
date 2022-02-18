@@ -8,7 +8,7 @@
     @if ($config->get('skinDescription') !== '')<small>{{$config->get('skinDescription')}}</small>@endif
     <div class="xe-form-inline">
         <input type="text" name="{{$key['postcode']}}" id="postcode_{{$config->get('id')}}" class="xe-form-control xu-form-group__control" placeholder="우편번호" readonly="readonly" value="{{$data['postcode']}}">
-        <input type="text" name="{{$config->get('id')}}_keyword" class="xe-form-control xu-form-group__control" placeholder="검색어를 입력해주세요" value="제주 첨단로"/>
+        <input type="text" name="{{$config->get('id')}}_keyword" class="xe-form-control xu-form-group__control" placeholder="검색어를 입력해주세요" value=""/>
         <input type="button" class="xe-btn xe-btn-default" onclick="{{$config->get('id')}}getAddr( '{{$address_key}}')" value="{{xe_trans('xe::findPostCode')}}" />
     </div>
     <div class="xe-form-inline">
