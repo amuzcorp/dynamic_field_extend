@@ -15,6 +15,7 @@
     $(document).on('click', '.config_list_remove', function(){
         var parentTag = $(this).closest("tr");
         parentTag.remove();
+        setToDOListColumn('{{$config->get('id')}}');
     });
     function setToDOListColumn(config_id) {
         var title_list = document.getElementsByName(config_id + "_title[]");
@@ -27,6 +28,7 @@
                 'checked' : title_check[i].checked
             });
         }
+        $('input[name=' + config_id + '_count]').val(list_column.length);
         $('input[name=' + config_id + '_columns]').val(JSON.stringify(list_column));
     }
 </script>
