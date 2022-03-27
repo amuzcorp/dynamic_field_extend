@@ -195,8 +195,13 @@
     }
 
     var mapContainer_{{ $config->get('id') }} = document.getElementById('map_{{ $config->get('id') }}'), // 지도를 표시할 div
+        default_lat = $('#lat_{{$config->get('id')}}').val();
+        default_lng = $('#lng_{{$config->get('id')}}').val();
+
+        if(default_lat === undefined || default_lat === '') default_lat = 33.450701;
+        if(default_lng === undefined || default_lng === '') default_lng = 126.570667;
         mapOption_{{ $config->get('id') }} = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(default_lat, default_lng), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
 
