@@ -27,21 +27,21 @@
 
 <script language="javascript">
     $(document).ready(function () {
-        setJsonParse();
+        setJsonParse("{{$config->get('id')}}");
         $("#{{$config->get('id')}}_dynamicJson").keyup(function() {
-            setJsonParse();
+            setJsonParse("{{$config->get('id')}}");
         })
     });
 
-    function setJsonParse() {
+    function setJsonParse(field_id) {
         try {
-            $("#{{$config->get('id')}}_dynamicJson-output").empty();
-            var o = $("#{{$config->get('id')}}_dynamicJson").val();
+            $("#"+field_id+"_dynamicJson-output").empty();
+            var o = $("#"+field_id+"_dynamicJson").val();
             if(is_json(o)) {
                 var processedObject = JSON.parse(o);
-                $("#{{$config->get('id')}}_dynamicJson-output").simpleJson({ jsonObject: processedObject });
+                $("#"+field_id+"_dynamicJson-output").simpleJson({ jsonObject: processedObject });
             } else {
-                document.getElementById("{{$config->get('id')}}_dynamicJson-output").innerHTML = "JSON 인코딩이 유효하지 않습니다.<br>코드를 확인해주세요";
+                document.getElementById(field_id+"_dynamicJson-output").innerHTML = "JSON 인코딩이 유효하지 않습니다.<br>코드를 확인해주세요";
             }
         } catch (ex) {
         }
