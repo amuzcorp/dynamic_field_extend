@@ -1,16 +1,70 @@
 <?php $code = Illuminate\Support\Str::random(16); ?>
-<script src="/assets/vendor/jqueryui/jquery-ui.min.js"></script>
-<script src="/assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-<script src="/assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js"></script>
 
-<div class="xe-form-group xe-dynamicField">
+{{ app('xe.frontend')->js([
+    '/assets/vendor/jqueryui/jquery-ui.min.js',
+    '/assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js',
+    '/assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js',
+])->load() }}
+
+{{ app('xe.frontend')->html('noneMediaLib.style')->content('
+<style>
+.noneMediaLib{
+    max-width:100%;
+}
+.noneMediaLib .d-none{
+display:none;
+}
+.noneMediaLib ul{
+    overflow-x: auto;
+    display:flex;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+.noneMediaLib ul li{
+    width:102px;
+    height:102px;
+    margin-right:10px;
+    border:1px solid #eee;
+    list-style:none;
+    position:relative;
+    border-radius:10px;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+.noneMediaLib button{
+    position:absolute;
+    right:10px;
+    top:10px;
+    background:transparent;
+    border:none;
+}
+.noneMediaLib ul li .addBox{
+    text-align:center;
+    line-height:100px;
+    width:100px;
+    height:100px;
+    background:#EEE;
+}
+</style>
+')->load() }}
+
+<div class="xe-form-group xe-dynamicField noneMediaLib">
     <input type="hidden" name="{{$config->get('id')}}_column" id="{{$code}}_{{$config->get('id')}}_column" value="null">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
-    <div class="mb-3">
-        <input class="form-control" type="file" accept="image/*" id="{{$config->get('id').'_uploader'}}">
+    <div class="d-none">
+        <input type="file" accept="image/*" id="{{$config->get('id').'_uploader'}}">
     </div>
 
-    <ul class="thumb_{{$config->get('id')}}" id="{{$code}}_thumb_{{$config->get('id')}}" style="padding-left: 0px;"></ul>
+    <ul class="thumb_{{$config->get('id')}}" id="{{$code}}_thumb_{{$config->get('id')}}" style="padding-left: 0;">
+        <li class="media_li" onclick="jQuery('#{{$config->get('id').'_uploader'}}').click()">
+            <div class="addBox">
+                <i class="xi-plus"></i> 추가
+            </div>
+        </li>
+    </ul>
 
     {{--<input type="hidden" name="{{$config->get('id').'_column'}}" id="{{$config->get('id').'_column'}}" value="{{$config->get('id')}}">--}}
 </div>
@@ -54,8 +108,7 @@
                                 if (over_chk == null) {
                                     var img_string = '';
                                     if (checkURL(mediaList[cnt]['file']['filename'])) {
-                                        img_string = `<li class="media_li" onclick="media_del(this, '${media_id}', '${code}', '${mediaList[cnt]['file']['id']}')">
-                                                            <img width=100px height=100px src="${mediaList[cnt]['file']['url']}">`;
+                                        img_string = `<li class="media_li" onclick="media_del(this, '${media_id}', '${code}', '${mediaList[cnt]['file']['id']}')" style="background-image:url('${mediaList[cnt]['file']['url']}')">`;
                                     } else {
                                         img_string = `<li class="media_li" onclick="media_del(this, '${media_id}', '${code}', '${mediaList[cnt]['file']['id']}')">${mediaList[cnt]['file']['clientname']}`;
                                     }
