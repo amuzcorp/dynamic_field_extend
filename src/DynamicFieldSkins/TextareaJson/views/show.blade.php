@@ -8,30 +8,52 @@
         padding: 10px;
         background-color: #f5f5f5;
         border: 1px solid #000;
+        word-break: break-all;
+    }
+    .text-blue {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
     }
 </style>
 
 <div class="xe-form-group xe-dynamicField">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
+    <a class="btn btn-info text-blue" onclick="viewJsonViewer('{{$config->get('id')}}')">JSON 뷰어로 보기</a>
+    <input type="hidden" name="{{$config->get('id')}}_viwer" value="N" />
     <div class="form-group json_parser">
-        <div class="json_parser_content" id="{{$config->get('id')}}_dynamicJson-output"></div>
+        <textarea id="{{$config->get('id')}}_dynamicJson"
+                  style="width: 700px;height: 400px;"
+                  readonly
+                  disabled
+                  placeholder="{{xe_trans($config->get('placeholder', ''))}}" >{{$data['text']}}</textarea><br />
+        <div class="json_parser_content" id="{{$config->get('id')}}_dynamicJson-output" style="display: none;"></div>
     </div>
 </div>
 
 <script language="javascript">
-    $(document).ready(function () {
-        setJsonParse();
-    });
+    function viewJsonViewer(field_id) {
+        if($('input[name='+field_id+'_viwer]').val() === 'N') {
+            $('input[name='+field_id+'_viwer]').val('Y');
+            document.getElementById(field_id+"_dynamicJson-output").style.display = 'block';
+            setJsonParse(field_id);
+        } else {
+            $('input[name='+field_id+'_viwer]').val('N');
+            document.getElementById(field_id+"_dynamicJson-output").style.display = 'none';
+            $("#"+field_id+"_dynamicJson-output").empty();
+        }
+        return false;
+    }
 
-    function setJsonParse() {
+    function setJsonParse(field_id) {
         try {
-            $("#{{$config->get('id')}}_dynamicJson-output").empty();
-            var o = @json($data['text']);
+            $("#"+field_id+"_dynamicJson-output").empty();
+            var o = $("#"+field_id+"_dynamicJson").val();
             if(is_json(o)) {
                 var processedObject = JSON.parse(o);
-                $("#{{$config->get('id')}}_dynamicJson-output").simpleJson({ jsonObject: processedObject });
+                $("#"+field_id+"_dynamicJson-output").simpleJson({ jsonObject: processedObject });
             } else {
-                document.getElementById("{{$config->get('id')}}_dynamicJson-output").innerHTML = "JSON 인코딩이 유효하지 않습니다.<br>코드를 확인해주세요";
+                document.getElementById(field_id+"_dynamicJson-output").innerHTML = "JSON 인코딩이 유효하지 않습니다.<br>코드를 확인해주세요";
             }
         } catch (ex) {
         }
