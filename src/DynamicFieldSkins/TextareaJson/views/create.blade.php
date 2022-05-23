@@ -7,6 +7,7 @@
         padding: 10px;
         background-color: #f5f5f5;
         border: 1px solid #000;
+        word-break: break-all;
     }
 </style>
 <div class="xe-form-group xe-dynamicField">
