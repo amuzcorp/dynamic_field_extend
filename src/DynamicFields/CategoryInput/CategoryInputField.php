@@ -156,7 +156,9 @@ class CategoryInputField extends AbstractType
             $key = $config->get('id') . '_' . $column->name;
             //var_dump($key);
             if (isset($args[$key]) == true) {
-                $my_data = json_encode($args[$key]);
+                if(is_array($args[$key])) $selected = json_enc($args[$key]);
+                else $selected = $args[$key];
+                $my_data = $selected;
                 $insertParam[$column->name] = $my_data;
                 //$insertParam[$column->name] = $args[$key];
             }
