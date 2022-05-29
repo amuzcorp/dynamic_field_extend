@@ -7,13 +7,20 @@
         padding: 10px;
         background-color: #f5f5f5;
         border: 1px solid #000;
+        word-break: break-all;
+    }
+    .text-blue {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
     }
 </style>
 
 <div class="xe-form-group xe-dynamicField">
-    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}} <small>{{$config->get('id')}}</small></label>
+    <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}} <small>{{$config->get('id')}}</small></label> <a class="text-blue" onclick="viewJsonViewer('{{$config->get('id')}}')">JSON 뷰어로 보기</a>
     <br />
     <label><small>json 포맷만 이용이 가능합니다</small></label>
+    <input type="hidden" name="{{$config->get('id')}}_viwer" value="N" />
     <div class="form-group json_parser">
         <textarea id="{{$config->get('id')}}_dynamicJson"
                   name="{{$key['text']}}"
@@ -21,17 +28,29 @@
                   placeholder="{{xe_trans($config->get('placeholder', ''))}}"
                   data-valid-name="{{ xe_trans($config->get('label')) }}"
         >{{$data['text']}}</textarea><br />
-        <div class="json_parser_content" id="{{$config->get('id')}}_dynamicJson-output"></div>
+        <div class="json_parser_content" id="{{$config->get('id')}}_dynamicJson-output" style="display: none;"></div>
     </div>
 </div>
 
 <script language="javascript">
-    $(document).ready(function () {
-        setJsonParse("{{$config->get('id')}}");
-        $("#{{$config->get('id')}}_dynamicJson").keyup(function() {
-            setJsonParse("{{$config->get('id')}}");
-        })
-    });
+    function viewJsonViewer(field_id) {
+        if($('input[name='+field_id+'_viwer]').val() === 'N') {
+            $('input[name='+field_id+'_viwer]').val('Y');
+            document.getElementById(field_id+"_dynamicJson-output").style.display = 'block';
+            setJsonParse(field_id);
+        } else {
+            $('input[name='+field_id+'_viwer]').val('N');
+            document.getElementById(field_id+"_dynamicJson-output").style.display = 'none';
+            $("#"+field_id+"_dynamicJson-output").empty();
+        }
+        return false;
+    }
+    {{--$(document).ready(function () {--}}
+    {{--    setJsonParse("{{$config->get('id')}}");--}}
+    {{--    $("#{{$config->get('id')}}_dynamicJson").keyup(function() {--}}
+    {{--        setJsonParse("{{$config->get('id')}}");--}}
+    {{--    })--}}
+    {{--});--}}
 
     function setJsonParse(field_id) {
         try {
