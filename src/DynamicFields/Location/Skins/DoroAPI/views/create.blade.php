@@ -60,7 +60,7 @@
                 $("#{{$config->get('id')}}_list").html("");									// 결과 출력 영역 초기화
                 var errCode = jsonStr.results.common.errorCode;
                 if(errCode != "0"){
-                    $("#"+configId+"_pageApi").html("");
+                    $("#{{$config->get('id')}}_pageApi").html("");
                     if(errCode ==  "E0001"){ alert("승인되지 않은 KEY입니다."); }
                     else if(errCode ==  "E0005"){ alert("검색어를 입력해주세요."); }
                     else if(errCode ==  "E0006"){ alert("시도명으로는 검색이 불가합니다."); }

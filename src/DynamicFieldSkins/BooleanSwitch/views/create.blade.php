@@ -49,7 +49,7 @@
         box-shadow: 1px 2px 3px #00000020;
     }
 </style>
-<div class="xe-form-group xe-dynamicField">
+<div class="xe-form-group xe-dynamicField" >
     <div class="xe-form-inline __xe-input-group">
         <label class="xe-label">
             <strong>{{ xe_trans($config->get('label')) }}</strong>
@@ -73,6 +73,5 @@
                 $('input[name={{$key['boolean']}}]').val(0);
             }
         });
-
     });
 </script>
