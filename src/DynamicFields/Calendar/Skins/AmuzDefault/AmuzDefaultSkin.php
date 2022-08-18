@@ -35,4 +35,42 @@ class AmuzDefaultSkin extends AbstractSkin
     {
         return [];
     }
+
+    /**
+     * 데이터 출력
+     *
+     * @param string $id   dynamic field name
+     * @param array  $args arguments
+     * @return string|null
+     */
+    public function output($id, array $args)
+    {
+        $data = [];
+
+        foreach ($this->getType()->getColumns() as $columnName => $columns) {
+            if($this->config->get('time_type') == 'single' && $columnName == 'end') {
+                continue;
+            }
+            $dataName = snake_case($id . '_' . $columnName);
+
+            if (isset($args[$dataName])) {
+                $data[$dataName] = $args[$dataName];
+            } else {
+                $data[$dataName] = '';
+            }
+        }
+
+
+        if (count($data) == 0) {
+            return null;
+        }
+
+        $output = implode($this->glue, $data);
+
+        if (trim($output) == '') {
+            return null;
+        }
+
+        return $output;
+    }
 }
