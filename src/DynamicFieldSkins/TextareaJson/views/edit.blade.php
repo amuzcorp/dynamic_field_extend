@@ -9,11 +9,6 @@
         border: 1px solid #000;
         word-break: break-all;
     }
-    .text-blue {
-        color: -webkit-link;
-        cursor: pointer;
-        text-decoration: underline;
-    }
 </style>
 
 <div class="xe-form-group xe-dynamicField">
@@ -21,13 +16,13 @@
     <br />
     <label><small>json 포맷만 이용이 가능합니다</small></label>
     <input type="hidden" name="{{$config->get('id')}}_viwer" value="N" />
-    <div class="form-group json_parser">
+    <div class="form-group json_parser" id="{{$config->get('id')}}_dynamicJsonParser" >
+        <a id="{{$config->get('id')}}_block" class="text-blue" onclick="viewsContent('{{$config->get('id')}}', 'block')">내용 펴기</a>
+        <a id="{{$config->get('id')}}_none" style="display: none;" class="text-blue" onclick="viewsContent('{{$config->get('id')}}', 'none')">내용 접기</a>
         <textarea id="{{$config->get('id')}}_dynamicJson"
                   name="{{$key['text']}}"
-                  style="width: 700px;height: 400px;"
-                  placeholder="{{xe_trans($config->get('placeholder', ''))}}"
-                  data-valid-name="{{ xe_trans($config->get('label')) }}"
-        >{{$data['text']}}</textarea><br />
+                  style="width: 700px;height: 400px; display: none;"
+                  placeholder="{{xe_trans($config->get('placeholder', ''))}}" >{{$data['text']}}</textarea><br />
         <div class="json_parser_content" id="{{$config->get('id')}}_dynamicJson-output" style="display: none;"></div>
     </div>
 </div>
@@ -44,6 +39,17 @@
             $("#"+field_id+"_dynamicJson-output").empty();
         }
         return false;
+    }
+
+    function viewsContent(field_id, type) {
+        if(type === 'block') {
+            document.getElementById(field_id+'_block').style.display = 'none';
+            document.getElementById(field_id+'_none').style.display = 'block';
+        } else {
+            document.getElementById(field_id+'_block').style.display = 'block';
+            document.getElementById(field_id+'_none').style.display = 'none';
+        }
+        document.getElementById(field_id+'_dynamicJson').style.display = type;
     }
     {{--$(document).ready(function () {--}}
     {{--    setJsonParse("{{$config->get('id')}}");--}}
