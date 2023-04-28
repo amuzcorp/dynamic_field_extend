@@ -55,7 +55,11 @@ display:none;
     <input type="hidden" name="{{$config->get('id')}}_column" id="{{$code}}_{{$config->get('id')}}_column" value="null">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
     <div class="d-none">
-        <input type="file" accept="image/*" id="{{$config->get('id').'_uploader'}}">
+        @if($config->get('file_only_option', 'all') == 'all')
+            <input type="file" id="{{$config->get('id').'_uploader'}}">
+        @else
+            <input type="file" accept="{{$config->get('file_only_option')}}" id="{{$config->get('id').'_uploader'}}">
+        @endif
     </div>
 
     <ul class="thumb_{{$config->get('id')}}" id="{{$code}}_thumb_{{$config->get('id')}}" style="padding-left: 0;">

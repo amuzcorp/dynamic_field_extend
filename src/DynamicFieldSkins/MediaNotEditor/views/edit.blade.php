@@ -21,6 +21,7 @@
     }
 
     .media_del_btn{
+        display: none;
         position: absolute;
         z-index: 5;
         right: 4px;
@@ -46,7 +47,14 @@
     <input type="hidden" name="{{$config->get('id')}}_column" id="{{$code}}_{{$config->get('id')}}_column" value="{{json_encode($media)}}">
     <label class="xu-form-group__label __xe_df __xe_df_text __xe_df_text_basic">{{xe_trans($config->get('label'))}}</label>
     <div class="mb-3">
-        <input class="form-control" type="file" accept="image/*" id="{{$config->get('id').'_uploader'}}">
+        <label for="{{$config->get('id').'_uploader'}}" class="btn btn-info">
+            File Upload
+        </label>
+        @if($config->get('file_only_option', 'all') == 'all')
+            <input type="file" id="{{$config->get('id').'_uploader'}}" style="display: none;">
+        @else
+            <input type="file" accept="{{$config->get('file_only_option')}}" id="{{$config->get('id').'_uploader'}}" style="display: none;">
+        @endif
     </div>
 
     <ul class="NotEditorThumb thumb_{{$config->get('id')}}" id="{{$code}}_thumb_{{$config->get('id')}}">
