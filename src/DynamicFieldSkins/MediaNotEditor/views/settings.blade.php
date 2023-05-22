@@ -8,5 +8,5 @@
     <option value=".hex" @if($config->get('file_only_option') == '.hex') selected @endif>Hex Only</option>
     <option value=".bin" @if($config->get('file_only_option') == '.bin') selected @endif>Bin Only</option>
     <option value=".pdf" @if($config->get('file_only_option') == '.pdf') selected @endif>PDF Only</option>
-    <option value=".hex,.h16,.h20,.bin" @if($config->get('file_only_option') == '.hex, .h16, .h20') selected @endif>JIG Files</option>
+    <option value=".hex,.h16,.h20,.bin" @if($config->get('file_only_option') == '.hex,.h16,.h20,.bin') selected @endif>JIG Files</option>
 </select>
