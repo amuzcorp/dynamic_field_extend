@@ -284,7 +284,7 @@ class CategoryInputField extends AbstractType
         $data = [];
         foreach ($type->getColumns() as $columnName => $columns) {
             $dataName = snake_case($id . '_' . $columnName);
-            if (isset($args[$dataName])) {
+            if (isset($args[$dataName]) && $args[$dataName] != '') {
                 $data[$dataName] = json_dec(array_get($args,$dataName));
             }
         }
