@@ -68,7 +68,8 @@ class Plugin extends AbstractPlugin
             Route::get('/', ['as' => 'manage.dynamic_field_extend.index', 'uses' => 'ManagerController@index']);
             Route::post('/', ['as' => 'manage.dynamic_field_extend.updateConfig', 'uses' => 'ManagerController@updateConfig']);
             //Route::get('/pointLog', ['as' => 'manage.dynamic_field_extendextend.point_log', 'uses' => 'ManagerController@pointLog']);
-
+            Route::post('/ajax/callDocumentList', ['as' => 'dynamic_field_extend.ajax.callDocumentList', 'uses' => 'Controller@CallDocumentList']);
+            Route::post('/ajax/CallQuestionField', ['as' => 'dynamic_field_extend.ajax.CallQuestionField', 'uses' => 'Controller@CallQuestionField']);
         }, ['namespace' => 'Amuz\XePlugin\DynamicFieldExtend\Controller']);
     }
 

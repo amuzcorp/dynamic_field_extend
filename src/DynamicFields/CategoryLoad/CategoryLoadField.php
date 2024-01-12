@@ -3,6 +3,8 @@
 namespace Amuz\XePlugin\DynamicFieldExtend\DynamicFields\CategoryLoad;
 
 use App\Facades\XeCategory;
+use Overcode\XePlugin\DynamicFactory\Models\CptDocument;
+use Xpressengine\Category\Models\CategoryItem;
 use Xpressengine\Config\ConfigEntity;
 use Xpressengine\DynamicField\AbstractType;
 use Xpressengine\DynamicField\ColumnEntity;
@@ -253,5 +255,35 @@ class CategoryLoadField extends AbstractType
     public function getRevisionTableName()
     {
         return 'field_revision_' . 'xpressengine_category';
+    }
+
+    /**
+     * 관리자 페이지 목록을 출력하기 위한 함수.
+     * CPT 목록에만 해당하며, 필드타입자체에 추가해주어야한다.
+     *
+     * @param string $id dynamic field name
+     * @param CptDocument $doc arguments
+     * @return string|null
+     */
+    public function getSettingListItem($id, CptDocument $doc){
+        $config = $this->config;
+        $type = $this->handler->getRegisterHandler()->getType($this->handler, $config->get('typeId'));
+
+        $args = $doc->getAttributes();
+        $data = [];
+
+
+        foreach ($type->getColumns() as $columnName => $columns) {
+            $dataName = snake_case($id . '_' . $columnName);
+            if (isset($args[$dataName])) {
+//                dd(app('overcode.df.taxonomyHandler')->getCategoryItemsTree(json_dec($args[$dataName])));
+                $data[$dataName] = xe_trans(CategoryItem::find(json_dec($args[$dataName]))->word);
+            }
+        }
+        if (count($data) == 0) {
+            return null;
+        }
+
+        return view('dynamic_field_extend::src/DynamicFields/CategoryInput/views/list-item',compact('id','data'));
     }
 }
