@@ -63,6 +63,12 @@
         <input type="hidden" name="{{$config->get('id')}}_columns_total_question" @if($question !== '') value="{{count(json_dec($question))}}" @else value="0" @endif>
         <div id="question_form">
             @if($question !== '')
+                @php
+                    $result = [];
+                    if($data['result'] != '') {
+                        $result = json_dec($data['result']);
+                    }
+                @endphp
                 @foreach(json_dec($question) as $key => $val)
 
                     <table class="table text-center question_form">
@@ -84,7 +90,7 @@
                                         @if($val->question_check_type === 1)
                                             <input type="radio"
                                                    name="{{$config->get('id')}}_columns_question_{{$key+1}}_radio"
-                                                   @if(json_dec($data['result'])->result[$key]->selected === ($question_key + 1))
+                                                   @if(isset($result->result[$key]) && $result->result[$key]->selected === ($question_key + 1))
                                                    checked=""
                                                    @endif
                                                    value="{{ $question_key + 1 }}" onchange="setQuestions('', {{$key+1}}, {{$question_key + 1}}, this )">
@@ -92,7 +98,7 @@
                                             <input type="checkbox"
                                                    id="customCheck{{$key+1}}_{{$question_key + 1}}"
                                                    name="{{$config->get('id')}}_columns_question_{{$key+1}}_radio"
-                                                   @if( isset(json_dec($data['result'])->result[$key]->checked[$question_key]) && json_dec($data['result'])->result[$key]->checked[$question_key])
+                                                   @if( isset($result->result[$key]->checked[$question_key]) && json_dec($data['result'])->result[$key]->checked[$question_key])
                                                    checked=""
                                                    @endif
                                                    data-parsley-multiple="groups"
