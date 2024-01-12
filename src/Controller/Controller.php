@@ -148,7 +148,8 @@ class Controller extends BaseController
         $cpt_id = $request->get('instance_id');
         $page = $request->get('page') ?: 1;
 
-        $documentList = CptDocument::division($cpt_id)->where('instance_id', $cpt_id)->orderBy('created_at', 'DESC')->
+        $getDocumentListIds = \XeDB::table('documents')->where('instance_id', $cpt_id)->pluck('id');
+        $documentList = CptDocument::division($cpt_id)->whereIn('id', $getDocumentListIds)->orderBy('created_at', 'DESC')->
         paginate(10, ['*'], 'page', $page);
 
         return XePresenter::makeApi(['error' => 0, 'message' => 'Complete', 'data' => $documentList]);
@@ -158,7 +159,7 @@ class Controller extends BaseController
         $cpt_id = $request->get('instance_id');
         $doc_id = $request->get('doc_id');
         $question_field = $request->get('question_field');
-        $documentData = CptDocument::division($cpt_id)->where('id', $doc_id)->first();
+        $documentData = CptDocument::division($cpt_id)->where('id', $doc_id)->where('instance_id', $cpt_id)->first();
         $documentData = (array) $documentData->getAttributes();
 
         if(!$documentData[$question_field]) return XePresenter::makeApi(['error' => -1, 'message' => '문제가 없습니다']);
